@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎀 แฟ้มสะสมงานของขนมชั้น 🎀</title>
+    <title>🎀 แฟ้มสะสมงานของ ศิรณตา พลเทกอง 🎀</title>
     <!-- Google Fonts for Cute Thai Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,9 +64,9 @@
             z-index: 1;
         }
 
-        /* Header Card */
+        /* Header & Profile Section */
         .header-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(10px);
             padding: 35px 25px;
             border-radius: 25px;
@@ -77,19 +77,36 @@
             animation: fadeInDown 1s ease-out;
         }
 
+        .profile-avatar-wrapper {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 15px auto;
+            position: relative;
+        }
+
+        .profile-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #ffb3c1;
+            box-shadow: 0 8px 20px rgba(255, 117, 143, 0.3);
+            transition: transform 0.4s ease;
+        }
+
+        .profile-avatar-wrapper:hover .profile-avatar {
+            transform: scale(1.05) rotate(3deg);
+        }
+
         .header-card h1 {
-            font-size: 2.3rem;
+            font-size: 2.1rem;
             color: #d84a75;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-shadow: 2px 2px 0px #ffe5ec;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
         }
 
         .header-card p {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #8b5e6a;
             font-weight: 500;
         }
@@ -98,15 +115,15 @@
             display: inline-block;
             background: #ffe5ec;
             color: #d84a75;
-            padding: 6px 16px;
+            padding: 6px 18px;
             border-radius: 20px;
             font-size: 0.95rem;
             font-weight: 600;
-            margin-top: 12px;
+            margin-top: 10px;
             border: 1.5px dashed #ffb3c1;
         }
 
-        /* Project Cards */
+        /* Project & Info Cards */
         .project-card {
             background: rgba(255, 255, 255, 0.95);
             padding: 25px;
@@ -141,10 +158,44 @@
         .project-title {
             font-size: 1.35rem;
             color: #c93b66;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        /* Personal Info List */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
+            font-family: 'Prompt', sans-serif;
+            margin-top: 10px;
+        }
+
+        .info-item {
+            background: #fff8f9;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border-left: 3.5px solid #ffb3c1;
+            font-size: 0.98rem;
+            color: #5c3d46;
+        }
+
+        .info-item strong {
+            color: #d84a75;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffe5ec 0%, #fff0f3 100%);
+            padding: 16px;
+            border-radius: 15px;
+            border: 2px dashed #ffb3c1;
+            margin-top: 15px;
+            font-family: 'Prompt', sans-serif;
+            font-size: 1rem;
+            color: #8c3b53;
+            line-height: 1.6;
         }
 
         .project-img-wrapper {
@@ -245,9 +296,10 @@
         @media (max-width: 600px) {
             body { padding: 20px 12px; }
             .header-card { padding: 25px 15px; }
-            .header-card h1 { font-size: 1.7rem; }
+            .header-card h1 { font-size: 1.6rem; }
             .project-card { padding: 18px; }
             .project-title { font-size: 1.15rem; }
+            .info-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -263,12 +315,34 @@
     </div>
 
     <div class="container">
-        <!-- Header -->
+        <!-- Header & Profile -->
         <header class="header-card">
-            <h1>✨ แฟ้มสะสมงาน ✨</h1>
-            <p>Portfolio รวบรวมผลงานและความทรงจำสุดพิเศษของขนมชั้น 🎀</p>
-            <div class="profile-badge">💗 Khanomchan's Gallery</div>
+            <!-- Profile Avatar (รูปโปรไฟล์เด่นๆ) -->
+            <div class="profile-avatar-wrapper">
+                <img src="Screenshot 2026-06-30 103336.png" alt="ศิรณตา พลเทกอง" class="profile-avatar">
+            </div>
+            <h1>✨ นางสาวศิรณตา พลเทกอง ✨</h1>
+            <p>Portfolio รวบรวมผลงาน ข้อมูลส่วนตัว และความทรงจำสุดพิเศษ 🎀</p>
+            <div class="profile-badge">💗 Siranata Phonthaekong</div>
         </header>
+
+        <!-- Personal Info Card -->
+        <div class="project-card">
+            <h2 class="project-title">🎀 ข้อมูลส่วนตัว (About Me)</h2>
+            
+            <div class="info-grid">
+                <div class="info-item">👤 <strong>ชื่อ-นามสกุล :</strong> นางสาวศิรณตา พลเทกอง</div>
+                <div class="info-item">🎂 <strong>วันเกิด :</strong> 13 พฤษภาคม 2552</div>
+                <div class="info-item">🎈 <strong>อายุ :</strong> 17 ปี</div>
+                <div class="info-item">🏫 <strong>โรงเรียน :</strong> บ้านบึงอุตสาหกรรมนุเคราะห์</div>
+                <div class="info-item">📚 <strong>แผนการเรียน :</strong> Gifted Program</div>
+            </div>
+
+            <!-- Future Career Interest -->
+            <div class="highlight-box">
+                🚚 <strong>ความสนใจศึกษาต่อ :</strong> มีความตั้งใจและสนใจเข้าศึกษาต่อในสาย <strong>โลจิสติกส์ (Logistics)</strong> เพื่อพัฒนาทักษะด้านการจัดการและการขนส่งในอนาคต ✨
+            </div>
+        </div>
 
         <!-- Project 1 -->
         <div class="project-card">
@@ -312,7 +386,7 @@
         </div>
 
         <footer>
-            <p>Made with 💖 by ขนมชั้น | GitHub Pages Portfolio</p>
+            <p>Made with 💖 by ศิรณตา พลเทกอง | GitHub Pages Portfolio</p>
         </footer>
     </div>
 
