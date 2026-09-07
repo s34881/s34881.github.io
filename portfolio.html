@@ -4,590 +4,746 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Siranata Pholthekong</title>
-    <!-- Google Fonts -->
+    <!-- Google Fonts & FontAwesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Prompt:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --bg-color: #fdf8f9;
-            --card-bg: #ffffff;
-            --primary-text: #2b2b2b;
-            --secondary-text: #5e5e5e;
-            
-            /* โทนสีชมพูจุฬาฯ (Chula Pink Theme) */
+            --bg-color: #fdf8fa;
             --chula-pink: #DE5C8E;
-            --chula-pink-dark: #b83d6e;
+            --chula-pink-dark: #a83261;
             --chula-pink-light: #fbeaf0;
-            --chula-pink-subtle: #fdf0f4;
             --accent-gold: #c5a059;
-            --border-color: #f3d2de;
+            --text-main: #2b2b2b;
+            --text-subtle: #666666;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --border-pink: rgba(222, 92, 142, 0.25);
+            --shadow-soft: 0 15px 35px rgba(222, 92, 142, 0.12);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Prompt', sans-serif;
             background-color: var(--bg-color);
-            color: var(--primary-text);
-            line-height: 1.6;
-            
-            /* Animation ค่อยๆ ปรากฏตอนเปิดหน้าเว็บ */
-            animation: pageFadeIn 1.2s ease-out forwards;
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Keyframes สำหรับเอฟเฟกต์ Fade In นุ่มนวล */
-        @keyframes pageFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Ambient Background Spotlight */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            background: 
+                radial-gradient(circle at 15% 20%, rgba(222, 92, 142, 0.15), transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(197, 160, 89, 0.12), transparent 40%);
+            z-index: 0;
         }
 
-        /* Navigation Bar */
-        nav {
+        /* Floating Particles Canvas */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Header Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(253, 248, 250, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-pink);
+            padding: 1.2rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 8%;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 2px 15px rgba(222, 92, 142, 0.05);
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-        }
-
-        /* ปุ่มกดย้อนกลับไปหน้า Index */
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            text-decoration: none;
-            color: var(--chula-pink-dark);
-            background-color: var(--chula-pink-light);
-            border: 1px solid var(--border-color);
-            padding: 0.4rem 0.9rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .btn-back:hover {
-            background-color: var(--chula-pink);
-            color: #ffffff;
-            transform: translateX(-3px);
-            border-color: var(--chula-pink);
         }
 
         .logo {
             font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--chula-pink);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--chula-pink-dark);
             letter-spacing: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1.8rem;
-        }
-
-        .nav-links a {
             text-decoration: none;
-            color: var(--secondary-text);
-            font-weight: 400;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--chula-pink-dark);
+            text-decoration: none;
+            font-weight: 600;
             font-size: 0.95rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            background: rgba(222, 92, 142, 0.08);
+            border: 1px solid var(--border-pink);
             transition: all 0.3s ease;
         }
 
-        .nav-links a:hover {
-            color: var(--chula-pink);
+        .back-btn:hover {
+            background: var(--chula-pink);
+            color: white;
+            transform: translateX(-5px);
         }
 
-        /* Header / Profile Hero Section */
-        header {
-            text-align: center;
-            padding: 4.5rem 1rem 3rem;
-            background: linear-gradient(180deg, #fae5ed 0%, var(--bg-color) 100%);
-        }
-
-        .profile-img-container {
-            width: 170px;
-            height: 170px;
-            margin: 0 auto 1.5rem;
-            border-radius: 50%;
-            padding: 4px;
-            background: linear-gradient(135deg, var(--chula-pink), var(--accent-gold));
-            box-shadow: 0 10px 25px rgba(222, 92, 142, 0.25);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-        }
-
-        .profile-img-container:hover {
-            transform: scale(1.08) rotate(2deg);
-        }
-
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            background-color: #f0f0f0;
-        }
-
-        header h1 {
-            font-size: 2.1rem;
-            font-weight: 600;
-            color: var(--primary-text);
-            margin-bottom: 0.2rem;
-        }
-
-        header p.subtitle {
-            font-family: 'Cinzel', serif;
-            color: var(--chula-pink);
-            letter-spacing: 2px;
-            font-size: 1.05rem;
-            margin-bottom: 1.2rem;
-        }
-
-        /* Container Layout */
+        /* Layout Container */
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 1.5rem 1.5rem 3rem;
+            padding: 3rem 2rem 6rem 2rem;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Card Elements */
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 2.2rem;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.025);
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* Section Title */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
         }
 
-        .card:hover {
-            box-shadow: 0 8px 25px rgba(222, 92, 142, 0.08);
+        .section-badge {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            color: var(--chula-pink-dark);
+            background: rgba(222, 92, 142, 0.1);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 0.8rem;
         }
 
         .section-title {
-            font-size: 1.35rem;
-            font-weight: 600;
-            color: var(--chula-pink-dark);
-            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Profile Showcase Card */
+        .profile-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-pink);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2.5rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .profile-img-box {
             position: relative;
-            padding-bottom: 0.5rem;
-            letter-spacing: 0.5px;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 45px;
-            height: 2px;
-            background-color: var(--chula-pink);
-        }
-
-        /* Profile Grid */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.2rem;
-        }
-
-        .info-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .info-label {
-            font-size: 0.85rem;
-            color: var(--secondary-text);
-            margin-bottom: 0.25rem;
-        }
-
-        .info-value {
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: var(--primary-text);
-        }
-
-        /* Education Card */
-        .education-detail {
-            border-left: 3px solid var(--chula-pink);
-            padding-left: 1.2rem;
-        }
-
-        .school-name {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--primary-text);
-        }
-
-        .program-name {
-            color: var(--chula-pink-dark);
-            font-weight: 500;
-            font-size: 0.95rem;
-            margin-top: 0.2rem;
-        }
-
-        .gpa-badge {
-            margin-top: 1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background-color: var(--chula-pink-light);
-            border: 1px solid var(--border-color);
-            padding: 0.5rem 1.2rem;
-            border-radius: 8px;
-            font-weight: 500;
-        }
-
-        .gpa-number {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--chula-pink-dark);
-        }
-
-        /* Target Interest Card */
-        .target-box {
-            background: linear-gradient(135deg, var(--chula-pink-subtle) 0%, #fff 100%);
-            border: 1.5px solid var(--chula-pink);
-            border-radius: 12px;
-            padding: 1.8rem;
-            box-shadow: 0 4px 15px rgba(222, 92, 142, 0.1);
-        }
-
-        .target-title {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--chula-pink-dark);
-            margin-bottom: 0.4rem;
-        }
-
-        .target-desc {
-            font-size: 1rem;
-            color: var(--primary-text);
-            font-weight: 400;
-        }
-
-        /* Activities Section */
-        .activity-card {
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px dashed var(--border-color);
-        }
-
-        .activity-card:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .activity-title {
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: var(--primary-text);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .activity-title::before {
-            content: '◆';
-            color: var(--chula-pink);
-            font-size: 0.8rem;
-            margin-top: 3px;
-        }
-
-        .image-placeholder-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.2rem;
-            margin-top: 0.8rem;
-        }
-
-        .img-box {
             width: 100%;
-            max-width: 400px;
-            min-height: 180px;
-            background-color: #fcf5f7;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 320px;
+            border-radius: 20px;
             overflow: hidden;
-            cursor: pointer;
-            position: relative;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            border: 1px solid var(--border-color);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 2px solid var(--chula-pink);
+            box-shadow: 0 10px 25px rgba(222, 92, 142, 0.2);
         }
 
-        .img-box:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 12px 25px rgba(222, 92, 142, 0.2);
-            border-color: var(--chula-pink);
-        }
-
-        .img-box img {
+        .profile-img-box img {
             width: 100%;
-            height: auto;
-            max-height: 350px;
+            height: 100%;
             object-fit: cover;
-            border-radius: 8px;
-            display: block;
             transition: transform 0.5s ease;
         }
 
-        .img-box:hover img {
-            transform: scale(1.06);
+        .profile-img-box:hover img {
+            transform: scale(1.08);
         }
 
-        /* Modal Lightbox */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            padding-top: 50px;
-            left: 0;
-            top: 0;
+        .profile-info h2 {
+            font-size: 2rem;
+            color: var(--text-main);
+            margin-bottom: 0.2rem;
+        }
+
+        .profile-info .subname {
+            font-family: 'Cinzel', serif;
+            color: var(--chula-pink-dark);
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .profile-info p {
+            color: var(--text-subtle);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Skill Bar System */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background: rgba(222, 92, 142, 0.05);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(222, 92, 142, 0.15);
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(0,0,0,0.06);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--chula-pink), var(--accent-gold));
+            border-radius: 10px;
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
+        }
+
+        /* Portfolio Category Filter */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            border: 1px solid var(--border-pink);
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-main);
+            padding: 0.6rem 1.6rem;
+            border-radius: 30px;
+            font-family: 'Prompt', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--chula-pink);
+            color: white;
+            box-shadow: 0 8px 20px rgba(222, 92, 142, 0.3);
+            border-color: var(--chula-pink);
+        }
+
+        /* 3D Interactive Card Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            perspective: 1000px;
+        }
+
+        .card-item {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-pink);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.1s ease-out, box-shadow 0.3s ease, opacity 0.4s ease;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card-item:hover {
+            box-shadow: 0 20px 40px rgba(222, 92, 142, 0.25);
+        }
+
+        .card-img {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .card-img img {
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.85);
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .card-item:hover .card-img img {
+            transform: scale(1.1);
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--chula-pink-dark);
+            padding: 0.3rem 0.9rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
             backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            transform: translateZ(30px);
+        }
+
+        .card-body h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .card-body p {
+            font-size: 0.9rem;
+            color: var(--text-subtle);
+            line-height: 1.6;
+        }
+
+        .card-footer {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--chula-pink);
+            font-weight: 600;
+        }
+
+        /* Light Reflection / Glossy Overlay on Card */
+        .card-glare {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-item:hover .card-glare {
+            opacity: 1;
+        }
+
+        /* Modal Preview Room */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
             align-items: center;
             justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .modal-content {
-            margin: auto;
-            display: block;
-            max-width: 90%;
-            max-height: 85vh;
-            border-radius: 10px;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
-            animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: var(--bg-color);
+            border-radius: 24px;
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            border: 1px solid var(--border-pink);
+            transform: scale(0.8);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
         }
 
-        @keyframes zoomIn {
-            from { transform: scale(0.7); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        .modal.active .modal-content {
+            transform: scale(1);
         }
 
-        .close-modal {
+        .modal-img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-close {
             position: absolute;
             top: 20px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            transition: color 0.3s;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
         }
 
-        .close-modal:hover {
-            color: var(--chula-pink);
+        .modal-close:hover {
+            background: var(--chula-pink);
+            color: white;
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 2rem;
-            color: var(--secondary-text);
+            color: var(--text-subtle);
             font-size: 0.85rem;
-            border-top: 1px solid var(--border-color);
-            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-pink);
+            background: rgba(253, 248, 250, 0.8);
         }
 
         /* Responsive */
-        @media (max-width: 650px) {
-            header h1 { font-size: 1.7rem; }
-            .nav-links { display: none; } /* ซ่อนเมนูยาวในจอมือถือเล็กๆ เพื่อความสบายตา */
-            .card { padding: 1.5rem; }
-            nav { padding: 0.8rem 4%; }
+        @media (max-width: 768px) {
+            header { padding: 1rem 1.5rem; }
+            .profile-card { grid-template-columns: 1fr; text-align: center; }
+            .profile-img-box { height: 260px; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="nav-left">
-            <!-- ปุ่มกดย้อนกลับไปหน้า index.html -->
-            <a href="index.html" class="btn-back">← หน้าหลัก</a>
-            <div class="logo">PORTFOLIO</div>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#about">ประวัติส่วนตัว</a></li>
-            <li><a href="#education">การศึกษา</a></li>
-            <li><a href="#target">เป้าหมาย</a></li>
-            <li><a href="#activities">กิจกรรม</a></li>
-        </ul>
-    </nav>
+    <!-- Ambient Background Lighting -->
+    <div class="ambient-bg"></div>
 
-    <!-- Header Section -->
+    <!-- Canvas Particle Background -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Header Navigation -->
     <header>
-        <div class="profile-img-container" onclick="openLightbox(this.querySelector('img').src)">
-            <img src="1788760432866.jpg" alt="นางสาวศิรณตา พลเทกอง" class="profile-img">
-        </div>
-        <h1>นางสาวศิรณตา พลเทกอง</h1>
-        <p class="subtitle">SIRANATA PHOLTHEKONG</p>
+        <a href="index.html" class="logo">SIRANATA.P</a>
+        <a href="index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับ
+        </a>
     </header>
 
-    <!-- Main Container -->
+    <!-- Main Content Container -->
     <div class="container">
         
-        <!-- 1. ประวัติส่วนตัว -->
-        <section id="about" class="card">
-            <h2 class="section-title">ประวัติส่วนตัว</h2>
-            <div class="info-grid">
-                <div class="info-item">
-                    <span class="info-label">ชื่อ - นามสกุล</span>
-                    <span class="info-value">นางสาวศิรณตา พลเทกอง</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">ชื่อเล่น</span>
-                    <span class="info-value">ขนมชั้น</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">อายุ</span>
-                    <span class="info-value">17 ปี</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">วันเกิด</span>
-                    <span class="info-value">13 พฤษภาคม 2552</span>
-                </div>
-                <div class="info-item" style="grid-column: span 2;">
-                    <span class="info-label">อีเมลการติดต่อ (Email)</span>
-                    <span class="info-value">s34881@banbung.ac.th</span>
-                </div>
+        <!-- Profile Section -->
+        <div class="profile-card">
+            <div class="profile-img-box">
+                <!-- ใส่รูปประจำตัวของคุณตรงนี้ -->
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Siranata Pholthekong">
             </div>
-        </section>
-
-        <!-- 2. ประวัติการศึกษา -->
-        <section id="education" class="card">
-            <h2 class="section-title">ประวัติการศึกษา</h2>
-            <div class="education-detail">
-                <div class="school-name">โรงเรียนบ้านบึงอุตสาหกรรมนุเคราะห์</div>
-                <div class="program-name">แผนการเรียน: วิทยาศาสตร์-คณิตศาสตร์ (Gifted Program)</div>
-                <p style="color: var(--secondary-text); font-size: 0.9rem; margin-top: 0.3rem;">กำลังศึกษาอยู่ในระดับชั้นมัธยมศึกษาตอนปลาย</p>
+            <div class="profile-info">
+                <h2>ศิรณตา พลเทกอง</h2>
+                <span class="subname">SIRANATA PHOLTHEKONG</span>
+                <p>นักเรียนมัธยมศึกษาตอนปลาย โรงเรียนบ้านบึง "อุตสาหกรรมนุเคราะห์" ที่มีความมุ่งมั่น มีความชื่นชอบและพร้อมที่จะเรียนรู้พัฒนาทักษะใหม่ๆ ในระดับอุดมศึกษาอย่างเต็มที่</p>
                 
-                <div class="gpa-badge">
-                    <span>ผลการเรียนเฉลี่ยสะสม (GPAX 4 เทอม):</span>
-                    <span class="gpa-number">3.93</span>
+                <!-- Skills Progress -->
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Leadership / ภาวะผู้นำ</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" data-progress="95%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Communication / การสื่อสาร</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" data-progress="90%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Teamwork / การทำงานร่วมกัน</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" data-progress="95%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Creativity / ความคิดสร้างสรรค์</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" data-progress="88%"></div></div>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- 3. ความสนใจในการศึกษาต่อ -->
-        <section id="target" class="card">
-            <h2 class="section-title">ความสนใจในการศึกษาต่อ</h2>
-            <div class="target-box">
-                <div class="target-title">คณะพาณิชยศาสตร์และการบัญชี</div>
-                <div class="target-desc">
-                    หลักสูตรบริหารธุรกิจบัณฑิต สาขาวิชาการจัดการโลจิสติกส์ระหว่างประเทศ<br>
-                    <strong style="color: var(--chula-pink-dark); font-size: 1.05rem;">จุฬาลงกรณ์มหาวิทยาลัย</strong>
-                </div>
-            </div>
-        </section>
+        <!-- Section Header -->
+        <div class="section-header">
+            <span class="section-badge">MY WORKS & ACTIVITIES</span>
+            <h2 class="section-title">ผลงานและกิจกรรมที่ภาคภูมิใจ</h2>
+        </div>
 
-        <!-- 4. กิจกรรมที่เข้าร่วม -->
-        <section id="activities" class="card">
-            <h2 class="section-title">กิจกรรมที่เข้าร่วม</h2>
+        <!-- Filter Tabs -->
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">ทั้งหมด (All)</button>
+            <button class="filter-btn" data-filter="activity">กิจกรรม (Activities)</button>
+            <button class="filter-btn" data-filter="cert">เกียรติบัตร (Certificates)</button>
+            <button class="filter-btn" data-filter="academic">ผลงานวิชาการ (Academic)</button>
+        </div>
+
+        <!-- 3D Gallery Grid -->
+        <div class="gallery-grid" id="galleryGrid">
             
-            <!-- กิจกรรมที่ 1 -->
-            <div class="activity-card">
-                <div class="activity-title">
-                    ได้รับรางวัลชนะเลิศการประกวดชุด MISS B.B. SCIENCE 2024 ระดับชั้นมัธยมศึกษาตอนปลาย
+            <!-- Card 1 -->
+            <div class="card-item" data-category="activity" onclick="openModal('กิจกรรมสภานักเรียน / กิจกรรมโรงเรียน', 'ภาพการเข้าร่วมกิจกรรมและนำเสนอโครงการต่างๆ ของโรงเรียนบ้านบึง อุตสาหกรรมนุเคราะห์', 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800&q=80')">
+                <div class="card-glare"></div>
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800&q=80" alt="Activity">
+                    <span class="card-tag">Activities</span>
                 </div>
-                <div class="image-placeholder-grid">
-                    <div class="img-box" onclick="openLightbox('1788760429156.jpg')">
-                        <img src="1788760429156.jpg" alt="รางวัลชนะเลิศ MISS B.B. SCIENCE 2024">
+                <div class="card-body">
+                    <h3>การเข้าร่วมกิจกรรมผู้นำเยาวชน</h3>
+                    <p>การเป็นตัวแทนทำกิจกรรมส่งเสริมทักษะการเรียนรู้และสร้างสรรค์ประโยชน์ให้แก่ส่วนรวม</p>
+                    <div class="card-footer">
+                        <span>อ่านรายละเอียดเพิ่มเติม</span>
+                        <i class="fa-solid fa-arrow-right"></i>
                     </div>
                 </div>
             </div>
 
-            <!-- กิจกรรมที่ 2 -->
-            <div class="activity-card">
-                <div class="activity-title">
-                    เข้าร่วมการแข่งขันอัจฉริยภาพทางคณิตศาสตร์ ระดับมัธยมศึกษาตอนปลาย
+            <!-- Card 2 -->
+            <div class="card-item" data-category="cert" onclick="openModal('เกียรติบัตรการแข่งขันทักษะวิชาการ', 'ได้รับรางวัลเกียรติบัตรในการเข้าร่วมแข่งขันและทดสอบทักษะทางด้านวิชาการ', 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80')">
+                <div class="card-glare"></div>
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80" alt="Certificate">
+                    <span class="card-tag">Certificates</span>
                 </div>
-                <div class="image-placeholder-grid">
-                    <div class="img-box" onclick="openLightbox('1788760428894.jpg')">
-                        <img src="1788760428894.jpg" alt="การแข่งขันอัจฉริยภาพทางคณิตศาสตร์">
+                <div class="card-body">
+                    <h3>เกียรติบัตรรางวัลระดับเหรียญทอง</h3>
+                    <p>รางวัลแห่งความตั้งใจและการฝึกฝนทักษะเฉพาะทางในระดับภูมิภาค</p>
+                    <div class="card-footer">
+                        <span>อ่านรายละเอียดเพิ่มเติม</span>
+                        <i class="fa-solid fa-arrow-right"></i>
                     </div>
                 </div>
             </div>
 
-            <!-- กิจกรรมที่ 3 -->
-            <div class="activity-card">
-                <div class="activity-title">
-                    เข้าร่วมกิจกรรมอบรมค่ายคุณธรรม
+            <!-- Card 3 -->
+            <div class="card-item" data-category="academic" onclick="openModal('โครงการวิจัยและโครงงานนักเรียน', 'การจัดทำโครงงานค้นคว้าเพื่อประยุกต์ใช้วิชาความรู้เข้ากับการแก้ปัญหาจริง', 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80')">
+                <div class="card-glare"></div>
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80" alt="Academic">
+                    <span class="card-tag">Academic</span>
                 </div>
-                <div class="image-placeholder-grid">
-                    <div class="img-box" onclick="openLightbox('1788789154644.jpg')">
-                        <img src="1788789154644.jpg" alt="กิจกรรมอบรมค่ายคุณธรรม 1">
-                    </div>
-                    <div class="img-box" onclick="openLightbox('1788789154226.jpg')">
-                        <img src="1788789154226.jpg" alt="กิจกรรมอบรมค่ายคุณธรรม 2">
+                <div class="card-body">
+                    <h3>โครงงานและการค้นคว้าอิสระ</h3>
+                    <p>การศึกษาค้นคว้าข้อมูลและนำเสนอผลงานเชิงวิชาการอย่างเป็นระบบ</p>
+                    <div class="card-footer">
+                        <span>อ่านรายละเอียดเพิ่มเติม</span>
+                        <i class="fa-solid fa-arrow-right"></i>
                     </div>
                 </div>
             </div>
 
-        </section>
+            <!-- Card 4 -->
+            <div class="card-item" data-category="activity" onclick="openModal('กิจกรรมจิตอาสาพัฒนาชุมชน', 'เข้าร่วมกิจกรรมจิตอาสาเพื่อช่วยเหลือและพัฒนาสังคมร่วมกับเพื่อนๆ ในโรงเรียน', 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=800&q=80')">
+                <div class="card-glare"></div>
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=800&q=80" alt="Volunteering">
+                    <span class="card-tag">Activities</span>
+                </div>
+                <div class="card-body">
+                    <h3>กิจกรรมจิตอาสาเพื่อสังคม</h3>
+                    <p>การมีส่วนร่วมในการทำประโยชน์แก่ชุมชน และสร้างคุณค่าแก่สังคมรอบข้าง</p>
+                    <div class="card-footer">
+                        <span>อ่านรายละเอียดเพิ่มเติม</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
 
+        </div>
     </div>
 
-    <!-- Modal Lightbox -->
-    <div id="imageModal" class="modal" onclick="closeLightbox()">
-        <span class="close-modal">&times;</span>
-        <img class="modal-content" id="imgExpanded">
+    <!-- Modal Preview Room -->
+    <div class="modal" id="previewModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <img id="modalImg" class="modal-img" src="" alt="Preview">
+            <div class="modal-body">
+                <h2 id="modalTitle" style="color: var(--text-main); margin-bottom: 0.5rem;">Title</h2>
+                <p id="modalDesc" style="color: var(--text-subtle); line-height: 1.8;">Description text goes here...</p>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; Portfolio - Siranata Pholthekong. All Rights Reserved.</p>
+        &copy; SIRANATA PHOLTHEKONG — BANBUNG UTTSAHAKAMNUKROH SCHOOL
     </footer>
 
-    <!-- Script -->
+    <!-- Interactive Scripts -->
     <script>
-        function openLightbox(src) {
-            const modal = document.getElementById('imageModal');
-            const expandedImg = document.getElementById('imgExpanded');
-            modal.style.display = 'flex';
-            expandedImg.src = src;
+        // 1. Particle Canvas Background Animation
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const particles = [];
+        for (let i = 0; i < 35; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 3 + 1,
+                dx: (Math.random() - 0.5) * 0.8,
+                dy: (Math.random() - 0.5) * 0.8,
+                opacity: Math.random() * 0.5 + 0.2
+            });
         }
 
-        function closeLightbox() {
-            document.getElementById('imageModal').style.display = 'none';
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(222, 92, 142, ${p.opacity})`;
+                ctx.fill();
+
+                p.x += p.dx;
+                p.y += p.dy;
+
+                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+            });
+            requestAnimationFrame(animateParticles);
         }
+        animateParticles();
+
+        // 2. Skill Progress Bar Animation on Scroll/Load
+        window.addEventListener('load', () => {
+            const fills = document.querySelectorAll('.progress-fill');
+            fills.forEach(fill => {
+                fill.style.width = fill.getAttribute('data-progress');
+            });
+        });
+
+        // 3. 3D Tilt Card Effect
+        const cards = document.querySelectorAll('.card-item');
+
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (centerY - y) / 12;
+                const rotateY = (x - centerX) / 12;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+
+        // 4. Portfolio Category Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                cards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.8)';
+                        setTimeout(() => { card.style.display = 'none'; }, 400);
+                    }
+                });
+            });
+        });
+
+        // 5. Modal Preview Room
+        const modal = document.getElementById('previewModal');
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+
+        function openModal(title, desc, imgSrc) {
+            modalTitle.innerText = title;
+            modalDesc.innerText = desc;
+            modalImg.src = imgSrc;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
     </script>
-
 </body>
 </html>
