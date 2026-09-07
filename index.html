@@ -11,14 +11,14 @@
     
     <style>
         :root {
-            --bg-color: #0d070b;
+            --bg-color: #fdf8fa;
             --chula-pink: #DE5C8E;
-            --chula-pink-bright: #ff69ab;
-            --chula-pink-dark: #b83d6e;
-            --accent-gold: #e5c158;
-            --text-light: #ffffff;
-            --text-subtle: #d6b8c5;
-            --border-glow: rgba(222, 92, 142, 0.35);
+            --chula-pink-dark: #a83261;
+            --chula-pink-light: #fbeaf0;
+            --accent-gold: #c5a059;
+            --text-main: #2b2b2b;
+            --text-subtle: #757575;
+            --border-pink: rgba(222, 92, 142, 0.3);
         }
 
         * {
@@ -30,7 +30,7 @@
         body {
             font-family: 'Prompt', sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-light);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -49,14 +49,14 @@
             height: 100vh;
             pointer-events: none;
             background: radial-gradient(
-                650px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                rgba(222, 92, 142, 0.2),
+                700px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(222, 92, 142, 0.18),
                 transparent 80%
             );
             z-index: 1;
         }
 
-        /* 2. Floating Particle Effect */
+        /* 2. Soft Floating Particles Layer */
         .particles-container {
             position: fixed;
             top: 0;
@@ -71,7 +71,7 @@
             position: absolute;
             background: var(--chula-pink);
             border-radius: 50%;
-            opacity: 0.6;
+            opacity: 0.35;
             animation: floatUp linear infinite;
         }
 
@@ -81,7 +81,7 @@
                 opacity: 0;
             }
             50% {
-                opacity: 0.8;
+                opacity: 0.5;
             }
             100% {
                 transform: translateY(-10vh) scale(1.2);
@@ -89,138 +89,137 @@
             }
         }
 
-        /* 3. Main Glassmorphism 3D Card */
-        .card-wrapper {
-            perspective: 1000px;
-            z-index: 10;
-            padding: 1.5rem;
-            width: 100%;
-            max-width: 620px;
-        }
-
-        .hero-card {
-            background: rgba(255, 255, 255, 0.035);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border-glow);
-            border-radius: 28px;
-            padding: 3.5rem 2.2rem;
-            text-align: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transform-style: preserve-3d;
-            transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+        /* 3. Main Content Container (ไร้กรอบ ไร้พื้นหลัง) */
+        .hero-container {
             position: relative;
-            overflow: hidden;
+            z-index: 10;
+            padding: 2rem;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
         }
 
-        /* Shimmer Lighting Line Pass */
-        .hero-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                rgba(255, 255, 255, 0.06),
-                transparent
-            );
-            transform: rotate(45deg);
-            animation: shimmerPass 6s infinite;
+        /* Keyframes สำหรับตัวหนังสือค่อยๆ ลอยขึ้นมาทีละบรรทัด */
+        @keyframes floatUpFade {
+            0% {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        @keyframes shimmerPass {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
+        .animate-item {
+            opacity: 0;
+            animation: floatUpFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
+        /* กำหนดเวลาลอยขึ้นเหลื่อมกัน (Stagger Delay) */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
 
         /* Badge Upper Title */
         .tag-badge {
             display: inline-block;
             font-family: 'Cinzel', serif;
             font-size: 0.85rem;
-            letter-spacing: 4px;
-            color: var(--chula-pink-bright);
+            letter-spacing: 5px;
+            color: var(--chula-pink-dark);
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            padding: 0.35rem 1.3rem;
-            background: rgba(222, 92, 142, 0.12);
-            border: 1px solid rgba(222, 92, 142, 0.35);
+            margin-bottom: 1.8rem;
+            padding: 0.4rem 1.4rem;
+            background: rgba(222, 92, 142, 0.08);
+            border: 1px solid var(--border-pink);
             border-radius: 30px;
-            box-shadow: 0 0 15px rgba(222, 92, 142, 0.2);
-            animation: pulseGlow 3s infinite alternate;
+            box-shadow: 0 4px 15px rgba(222, 92, 142, 0.08);
         }
 
-        @keyframes pulseGlow {
-            from { box-shadow: 0 0 10px rgba(222, 92, 142, 0.2); }
-            to { box-shadow: 0 0 25px rgba(255, 105, 171, 0.55); }
+        /* Name Section */
+        .name-container {
+            margin-bottom: 1.8rem;
         }
 
-        /* Glowing Name Title */
-        h1.name-title {
-            font-size: 2.2rem;
+        h1.name-th {
+            font-size: 2.8rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff 20%, var(--chula-pink-bright) 70%, var(--accent-gold) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(222, 92, 142, 0.3);
-            letter-spacing: 0.5px;
+            color: var(--text-main);
+            letter-spacing: 1px;
+            line-height: 1.2;
+            text-shadow: 0 5px 20px rgba(222, 92, 142, 0.1);
+        }
+
+        .name-en {
+            font-family: 'Cinzel', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--chula-pink-dark);
+            margin-top: 0.5rem;
+            display: block;
+            text-transform: uppercase;
         }
 
         /* School Name Section */
         .school-container {
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
             line-height: 1.7;
         }
 
-        .school-title {
-            font-size: 1.15rem;
+        .school-th {
+            font-size: 1.3rem;
             font-weight: 500;
-            color: var(--text-subtle);
+            color: var(--text-main);
             display: block;
-            margin-bottom: 0.2rem;
         }
 
         .school-highlight {
-            font-size: 1.25rem;
+            color: var(--chula-pink-dark);
             font-weight: 700;
-            color: #ffffff;
-            letter-spacing: 0.5px;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
             position: relative;
             display: inline-block;
         }
 
-        .quote-symbol {
-            color: var(--chula-pink-bright);
-            font-weight: 800;
-            text-shadow: 0 0 10px var(--chula-pink);
+        /* ขีดเส้นใต้เรืองแสงใต้ชื่อโรงเรียน */
+        .school-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--chula-pink), transparent);
         }
 
-        /* Futuristic Interactive Button */
+        .school-en {
+            font-size: 0.95rem;
+            color: var(--text-subtle);
+            letter-spacing: 1px;
+            display: block;
+            margin-top: 0.4rem;
+            font-style: italic;
+        }
+
+        /* Light Interactive Portal Button */
         .btn-portal {
             position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            padding: 1.1rem 2.8rem;
+            padding: 1.1rem 3rem;
             font-size: 1.05rem;
             font-weight: 600;
             color: #ffffff;
             text-decoration: none;
             background: linear-gradient(135deg, var(--chula-pink), var(--chula-pink-dark));
             border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 20px rgba(222, 92, 142, 0.4),
-                        0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(222, 92, 142, 0.35);
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 2;
         }
 
         .btn-portal::before {
@@ -239,10 +238,9 @@
         }
 
         .btn-portal:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 0 35px rgba(255, 105, 171, 0.85),
-                        0 15px 35px rgba(0, 0, 0, 0.6);
-            background: linear-gradient(135deg, var(--chula-pink-bright), var(--chula-pink));
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(222, 92, 142, 0.5);
+            background: linear-gradient(135deg, #e66898, var(--chula-pink-dark));
         }
 
         .btn-arrow {
@@ -257,53 +255,61 @@
         /* Footer */
         footer {
             position: absolute;
-            bottom: 20px;
-            color: rgba(255, 255, 255, 0.3);
+            bottom: 25px;
+            color: var(--text-subtle);
             font-size: 0.8rem;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             z-index: 10;
         }
 
         /* Responsive */
         @media (max-width: 600px) {
-            h1.name-title { font-size: 1.65rem; }
-            .school-title { font-size: 1rem; }
-            .school-highlight { font-size: 1.1rem; }
-            .hero-card { padding: 2.8rem 1.2rem; }
+            h1.name-th { font-size: 1.9rem; }
+            .name-en { font-size: 1rem; }
+            .school-th { font-size: 1.05rem; }
+            .school-en { font-size: 0.8rem; }
+            .hero-container { padding: 1.2rem; }
+            .btn-portal { padding: 0.9rem 2.2rem; font-size: 0.95rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Interactive Spotlight Background Layer -->
+    <!-- Light Interactive Spotlight Background Layer -->
     <div class="spotlight" id="spotlight"></div>
 
-    <!-- Particles Layer -->
+    <!-- Light Floating Particles Layer -->
     <div class="particles-container" id="particles"></div>
 
-    <!-- Main Card -->
-    <div class="card-wrapper">
-        <main class="hero-card" id="tiltCard">
-            
-            <div class="tag-badge">ELECTRONIC PORTFOLIO</div>
-            
-            <!-- ชื่อของคุณ -->
-            <h1 class="name-title">นางสาวศิรณตา พลเทกอง</h1>
-            
-            <!-- ชื่อโรงเรียน -->
-            <div class="school-container">
-                <span class="school-title">โรงเรียนบ้านบึง</span>
-                <span class="school-highlight"><span class="quote-symbol">“</span>อุตสาหกรรมนุเคราะห์<span class="quote-symbol">”</span></span>
-            </div>
+    <!-- Main Content Container (No Box Frame) -->
+    <main class="hero-container">
+        
+        <!-- Badge -->
+        <div class="animate-item delay-1">
+            <div class="tag-badge">PORTFOLIO</div>
+        </div>
+        
+        <!-- ชื่อภาษาไทยและภาษาอังกฤษ -->
+        <div class="name-container animate-item delay-2">
+            <h1 class="name-th">นางสาวศิรณตา พลเทกอง</h1>
+            <span class="name-en">Siranata Pholthekong</span>
+        </div>
+        
+        <!-- ชื่อโรงเรียนภาษาไทยและภาษาอังกฤษ -->
+        <div class="school-container animate-item delay-3">
+            <span class="school-th">โรงเรียนบ้านบึง <span class="school-highlight">“อุตสาหกรรมนุเคราะห์”</span></span>
+            <span class="school-en">Banbung Uttsahakamnukroh School</span>
+        </div>
 
-            <!-- ปุ่มวาร์ปไปหน้า Portfolio -->
+        <!-- ปุ่มข้ามไปหน้า Portfolio -->
+        <div class="animate-item delay-4">
             <a href="portfolio.html" class="btn-portal">
-                <span>ค้นพบเรื่องราวของฉัน</span>
+                <span>เข้าชมพอร์ตโฟลิโอ</span>
                 <span class="btn-arrow">➔</span>
             </a>
+        </div>
 
-        </main>
-    </div>
+    </main>
 
     <footer>
         &copy; SIRANATA PHOLTHEKONG — ALL RIGHTS RESERVED
@@ -311,45 +317,28 @@
 
     <!-- Interactive Scripts -->
     <script>
-        // Mouse Spotlight & 3D Tilt Effect
+        // Mouse Spotlight Effect
         const spotlight = document.getElementById('spotlight');
-        const card = document.getElementById('tiltCard');
 
         document.addEventListener('mousemove', (e) => {
-            // Spotlight Position
             spotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
             spotlight.style.setProperty('--mouse-y', `${e.clientY}px`);
-
-            // 3D Tilt Card
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-
-            const rotateX = (-y / rect.height) * 16;
-            const rotateY = (x / rect.width) * 16;
-
-            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-
-        // Reset Card when Mouse leaves
-        document.addEventListener('mouseleave', () => {
-            card.style.transform = `rotateX(0deg) rotateY(0deg)`;
         });
 
         // Floating Particles Effect
         const particlesContainer = document.getElementById('particles');
-        const particleCount = 25;
+        const particleCount = 22;
 
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.classList.add('particle');
             
-            const size = Math.random() * 4 + 2;
+            const size = Math.random() * 5 + 3;
             particle.style.width = `${size}px`;
             particle.style.height = `${size}px`;
             
             particle.style.left = `${Math.random() * 100}%`;
-            particle.style.animationDuration = `${Math.random() * 8 + 4}s`;
+            particle.style.animationDuration = `${Math.random() * 8 + 5}s`;
             particle.style.animationDelay = `${Math.random() * 5}s`;
             
             particlesContainer.appendChild(particle);
