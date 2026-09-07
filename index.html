@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Siranata | Official Portfolio</title>
 
-    <!-- Google Fonts: Cormorant Garamond (English Luxury) & Prompt (Thai High-End) -->
+    <!-- Google Fonts: Alex Brush (ตัวเขียนละมุนอ่อนช้อย) & Prompt (ภาษาไทยอ่านง่าย มีภูมิฐาน) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         .en-font {
-            font-family: 'Cormorant Garamond', serif !important;
-            font-style: italic;
-            font-weight: 600;
+            font-family: 'Alex Brush', cursive !important;
+            letter-spacing: 1.5px;
         }
 
         * {
@@ -25,43 +24,67 @@
 
         body {
             font-family: 'Prompt', sans-serif;
-            font-size: 1rem;
+            font-size: 1.05rem;
             
-            /* ดึงไฟล์ GIF หรือภาพพื้นหลังของคุณ */
+            /* ดึงไฟล์ GIF พื้นหลังของคุณ */
             background-image: url('8b1f2eb7b221c60e0caf5d1f31111518.gif');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            background-color: #0d0d0d;
+            background-color: #050505;
             color: #2b2b2b;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 40px 20px;
+            overflow-x: hidden;
         }
 
-        /* การ์ดทรงสูงเรียบหรู ครีมออฟไวท์ทึบ */
+        /* การ์ดเนียนทึบโทนชมพูโรสโกลด์อ่อน มีแอนิเมชันเคลื่อนไหวสมูท */
         .card {
-            background: #FAF8F5;
-            border-radius: 16px;
+            background: rgba(253, 248, 249, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 28px;
             box-shadow: 
-                0 20px 50px rgba(0, 0, 0, 0.6),
-                0 0 30px rgba(212, 163, 115, 0.2);
-            border: 1px solid #E6C594;
-            outline: 1px solid rgba(212, 163, 115, 0.4);
-            outline-offset: -8px;
+                0 20px 40px rgba(0, 0, 0, 0.6),
+                0 0 35px rgba(236, 172, 189, 0.25);
+            border: 1.5px solid rgba(244, 182, 198, 0.6);
+            outline: 1px dashed rgba(219, 140, 162, 0.4);
+            outline-offset: -9px;
             max-width: 480px;
             width: 100%;
-            padding: 45px 35px;
+            padding: 45px 32px;
             text-align: center;
             position: relative;
+            
+            /* Animation เปิดตัวการ์ด */
+            animation: smoothAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+                       gentleFloat 6s ease-in-out infinite 1.2s;
         }
 
+        @keyframes smoothAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.96);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* กรอบรูปโปรไฟล์แบบมีแสงเงานุ่มนวล */
         .profile-wrapper {
-            width: 130px;
-            height: 130px;
+            width: 135px;
+            height: 135px;
             margin: 0 auto 25px auto;
             position: relative;
         }
@@ -71,71 +94,84 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #D4A373;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border: 3px solid #ffffff;
+            box-shadow: 0 8px 25px rgba(200, 110, 135, 0.3);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card:hover .profile {
+            transform: scale(1.04) rotate(1.5deg);
         }
 
         h1 {
-            color: #1a1a1a;
-            font-size: 1.5rem;
+            color: #3d232a;
+            font-size: 1.4rem;
             font-weight: 500;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
             text-transform: uppercase;
         }
 
         p {
             line-height: 1.8;
-            color: #4a4a4a;
+            color: #593e45;
             font-weight: 300;
             margin-bottom: 15px;
         }
 
-        /* กรอบเน้นความสนใจ สไตล์มินิมอลหรูหรา */
+        /* กรอบเน้นความสนใจ ละมุนตาคุมโทน */
         .highlight-box {
-            background: #F3EDE2;
-            border: 1px solid #D4A373;
-            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(255, 240, 243, 0.8), rgba(248, 228, 233, 0.9));
+            border: 1px solid rgba(228, 150, 170, 0.5);
+            border-radius: 16px;
             padding: 20px;
             margin: 25px 0;
+            box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.8);
+            transition: transform 0.4s ease;
+        }
+
+        .highlight-box:hover {
+            transform: translateY(-2px);
         }
 
         .highlight-title {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #8C6239;
-            margin-bottom: 5px;
+            color: #9c5064;
+            margin-bottom: 6px;
             font-weight: 500;
         }
 
         .highlight-detail {
             font-size: 1.15rem;
             font-weight: 500;
-            color: #1a1a1a;
+            color: #3d232a;
         }
 
-        /* ปุ่มกดสไตล์ Luxury Classic */
+        /* ปุ่มกดดีไซน์ผู้ใหญ่ ตัวแม่สายสมูท */
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
             padding: 14px 28px;
-            background: #1a1a1a;
-            color: #FAF8F5;
+            background: linear-gradient(135deg, #4a2731, #2b141a);
+            color: #ffffff;
             text-decoration: none;
-            border-radius: 6px;
-            font-size: 1.25rem;
-            border: 1px solid #1a1a1a;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 50px;
+            font-size: 1.35rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 20px rgba(43, 20, 26, 0.35);
+            position: relative;
+            overflow: hidden;
         }
 
         .btn:hover {
-            background: #8C6239;
-            border-color: #8C6239;
-            color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(140, 98, 57, 0.3);
+            background: linear-gradient(135deg, #8a4355, #4a2731);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 28px rgba(138, 67, 85, 0.45);
         }
     </style>
 </head>
@@ -147,22 +183,22 @@
             <img src="Screenshot 2026-06-30 103336.png" alt="Profile" class="profile">
         </div>
 
-        <h1>PORTFOLIO</h1>
+        <h1>Welcome to My World</h1>
 
         <p>
-            Hello! my name is <strong style="font-weight: 600; color: #1a1a1a;">Siranata (<span class="en-font" style="font-size: 1.4rem;">Siranata</span>)</strong>
+            สวัสดีค่ะ ดิฉัน <strong style="font-weight: 600; color: #8a4355;">ศิรณตา (<span class="en-font" style="font-size: 1.75rem;">Siranata Pholthekong</span>)</strong>
         </p>
 
         <div class="highlight-box">
-            <div class="highlight-title">CURRENT INTEREST</div>
+            <div class="highlight-title">Interested in </div>
             <div class="highlight-detail">
-                บริหารโลจิสติกส์ <br>
-                <span class="en-font" style="font-size: 1.4rem; color: #8C6239;">Logistics Management</span>
+                Logistics Management<br>
+                <span class="en-font" style="font-size: 1.6rem; color: #8a4355;">Logistics Management</span>
             </div>
         </div>
 
         <a href="portfolio.html" class="btn">
-            <span class="en-font">EXPLORE PORTFOLIO</span>
+            <span class="en-font">View Portfolio</span>
         </a>
     </div>
 
