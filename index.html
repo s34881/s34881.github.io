@@ -25,7 +25,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none; /* ซ่อน Cursor ปกติเพื่อใช้ Custom Cursor */
         }
 
         body {
@@ -40,6 +39,7 @@
             overflow: hidden;
             position: relative;
             user-select: none;
+            cursor: pointer;
         }
 
         /* 1. Dynamic Interactive Spotlight Background */
@@ -83,45 +83,7 @@
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        /* 3. Custom Interactive Cursor Follower */
-        .custom-cursor {
-            position: fixed;
-            width: 90px;
-            height: 90px;
-            border: 1px solid var(--chula-pink);
-            background: rgba(222, 92, 142, 0.08);
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.1s ease-out, background 0.3s ease;
-            backdrop-filter: blur(2px);
-        }
-
-        .cursor-text {
-            font-family: 'Cinzel', serif;
-            font-size: 0.6rem;
-            letter-spacing: 2px;
-            color: var(--chula-pink-dark);
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .cursor-dot {
-            position: fixed;
-            width: 8px;
-            height: 8px;
-            background: var(--chula-pink-dark);
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-        }
-
-        /* 4. Main Content Container (ไร้กรอบ ไร้ปุ่ม) */
+        /* 3. Main Content Container */
         .hero-container {
             position: relative;
             z-index: 10;
@@ -228,7 +190,7 @@
             font-style: italic;
         }
 
-        /* Interactive Scroll / Tap Indicator (แทนปุ่ม) */
+        /* Interactive Scroll / Tap Indicator */
         .action-hint {
             display: inline-flex;
             flex-direction: column;
@@ -266,7 +228,7 @@
             100% { opacity: 0; transform: translate(-50%, 14px); }
         }
 
-        /* 5. CINEMATIC PORTAL OVERLAY TRANSITION */
+        /* 4. CINEMATIC PORTAL OVERLAY TRANSITION */
         .portal-overlay {
             position: fixed;
             top: 0;
@@ -324,8 +286,6 @@
 
         /* Responsive */
         @media (max-width: 600px) {
-            * { cursor: auto; } /* คืนค่า Cursor ปกติในมือถือ */
-            .custom-cursor, .cursor-dot { display: none; }
             h1.name-th { font-size: 1.9rem; }
             .name-en { font-size: 1rem; }
             .school-th { font-size: 1.05rem; }
@@ -341,12 +301,6 @@
 
     <!-- Light Floating Particles Layer -->
     <div class="particles-container" id="particles"></div>
-
-    <!-- Custom Cursor Follower -->
-    <div class="custom-cursor" id="customCursor">
-        <span class="cursor-text">CLICK OR<br>SCROLL</span>
-    </div>
-    <div class="cursor-dot" id="cursorDot"></div>
 
     <!-- Cinematic Portal Overlay Wipe Effect -->
     <div class="portal-overlay" id="portalOverlay">
@@ -373,7 +327,7 @@
             <span class="school-en">Banbung Uttsahakamnukroh School</span>
         </div>
 
-        <!-- Interactive Hint (ไม่มีปุ่ม ใช้การ Scroll / Tap แทน) -->
+        <!-- Interactive Hint -->
         <div class="animate-item delay-4">
             <div class="action-hint">
                 <div class="mouse-icon"><div class="mouse-wheel"></div></div>
@@ -389,19 +343,10 @@
 
     <!-- Interactive Scripts -->
     <script>
-        // Custom Cursor Follower Script
-        const customCursor = document.getElementById('customCursor');
-        const cursorDot = document.getElementById('cursorDot');
+        // Spotlight Movement Effect
         const spotlight = document.getElementById('spotlight');
 
         document.addEventListener('mousemove', (e) => {
-            // Cursor Follower
-            customCursor.style.left = `${e.clientX}px`;
-            customCursor.style.top = `${e.clientY}px`;
-            cursorDot.style.left = `${e.clientX}px`;
-            cursorDot.style.top = `${e.clientY}px`;
-
-            // Spotlight Position
             spotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
             spotlight.style.setProperty('--mouse-y', `${e.clientY}px`);
         });
