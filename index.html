@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome - Siranata Pholthekong</title>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #fdf8f9;
-            --card-bg: #ffffff;
-            --primary-text: #2b2b2b;
-            --secondary-text: #5e5e5e;
+            --bg-color: #0d070b;
             --chula-pink: #DE5C8E;
+            --chula-pink-bright: #ff69ab;
             --chula-pink-dark: #b83d6e;
-            --chula-pink-light: #fbeaf0;
-            --border-color: #f3d2de;
-            --accent-gold: #c5a059;
+            --accent-gold: #e5c158;
+            --text-light: #ffffff;
+            --text-subtle: #d6b8c5;
+            --border-glow: rgba(222, 92, 142, 0.35);
         }
 
         * {
@@ -30,152 +30,330 @@
         body {
             font-family: 'Prompt', sans-serif;
             background-color: var(--bg-color);
-            color: var(--primary-text);
+            color: var(--text-light);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            overflow-x: hidden;
-            background: radial-gradient(circle at 50% 30%, #fcecf2 0%, var(--bg-color) 70%);
-        }
-
-        /* Hero Container */
-        .welcome-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 3.5rem 2.5rem;
-            margin: auto 1.5rem;
-            max-width: 520px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(222, 92, 142, 0.08);
+            overflow: hidden;
             position: relative;
-            animation: fadeInUp 0.8s ease-out;
         }
 
-        /* Profile Image Frame */
-        .avatar-frame {
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 1.5rem;
-            border-radius: 50%;
-            padding: 4px;
-            background: linear-gradient(135deg, var(--chula-pink), var(--accent-gold));
-            box-shadow: 0 8px 20px rgba(222, 92, 142, 0.2);
-            transition: transform 0.4s ease;
+        /* 1. Dynamic Interactive Spotlight Background */
+        .spotlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            background: radial-gradient(
+                650px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(222, 92, 142, 0.2),
+                transparent 80%
+            );
+            z-index: 1;
         }
 
-        .avatar-frame:hover {
-            transform: scale(1.05) rotate(2deg);
-        }
-
-        .avatar-img {
+        /* 2. Floating Particle Effect */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--chula-pink);
             border-radius: 50%;
-            background-color: #f0f0f0;
+            opacity: 0.6;
+            animation: floatUp linear infinite;
         }
 
-        /* Typography */
-        .welcome-tag {
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* 3. Main Glassmorphism 3D Card */
+        .card-wrapper {
+            perspective: 1000px;
+            z-index: 10;
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 620px;
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.035);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glow);
+            border-radius: 28px;
+            padding: 3.5rem 2.2rem;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transform-style: preserve-3d;
+            transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Shimmer Lighting Line Pass */
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.06),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shimmerPass 6s infinite;
+        }
+
+        @keyframes shimmerPass {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        /* Badge Upper Title */
+        .tag-badge {
+            display: inline-block;
             font-family: 'Cinzel', serif;
-            color: var(--chula-pink);
-            letter-spacing: 3px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            color: var(--chula-pink-bright);
             text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding: 0.35rem 1.3rem;
+            background: rgba(222, 92, 142, 0.12);
+            border: 1px solid rgba(222, 92, 142, 0.35);
+            border-radius: 30px;
+            box-shadow: 0 0 15px rgba(222, 92, 142, 0.2);
+            animation: pulseGlow 3s infinite alternate;
         }
 
-        h1 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--primary-text);
-            margin-bottom: 0.3rem;
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 10px rgba(222, 92, 142, 0.2); }
+            to { box-shadow: 0 0 25px rgba(255, 105, 171, 0.55); }
         }
 
-        p.subtitle {
-            font-size: 1rem;
-            color: var(--secondary-text);
-            font-weight: 400;
-            margin-bottom: 2rem;
+        /* Glowing Name Title */
+        h1.name-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 20%, var(--chula-pink-bright) 70%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(222, 92, 142, 0.3);
+            letter-spacing: 0.5px;
         }
 
-        /* Action Button */
-        .btn-enter {
+        /* School Name Section */
+        .school-container {
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .school-title {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--text-subtle);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .school-highlight {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+
+        .quote-symbol {
+            color: var(--chula-pink-bright);
+            font-weight: 800;
+            text-shadow: 0 0 10px var(--chula-pink);
+        }
+
+        /* Futuristic Interactive Button */
+        .btn-portal {
+            position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--chula-pink), var(--chula-pink-dark));
+            gap: 12px;
+            padding: 1.1rem 2.8rem;
+            font-size: 1.05rem;
+            font-weight: 600;
             color: #ffffff;
             text-decoration: none;
-            padding: 0.9rem 2.2rem;
+            background: linear-gradient(135deg, var(--chula-pink), var(--chula-pink-dark));
             border-radius: 50px;
-            font-size: 1.05rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            box-shadow: 0 6px 20px rgba(222, 92, 142, 0.3);
-            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(222, 92, 142, 0.4),
+                        0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2;
         }
 
-        .btn-enter:hover {
-            background: linear-gradient(135deg, var(--chula-pink-dark), var(--chula-pink));
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(222, 92, 142, 0.45);
+        .btn-portal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
         }
 
-        .btn-enter span {
+        .btn-portal:hover::before {
+            left: 100%;
+        }
+
+        .btn-portal:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 0 35px rgba(255, 105, 171, 0.85),
+                        0 15px 35px rgba(0, 0, 0, 0.6);
+            background: linear-gradient(135deg, var(--chula-pink-bright), var(--chula-pink));
+        }
+
+        .btn-arrow {
+            display: inline-block;
             transition: transform 0.3s ease;
         }
 
-        .btn-enter:hover span {
-            transform: translateX(4px);
-        }
-
-        /* Animation Keyframes */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .btn-portal:hover .btn-arrow {
+            transform: translateX(6px) scale(1.2);
         }
 
         /* Footer */
         footer {
-            padding: 1.5rem;
-            color: var(--secondary-text);
-            font-size: 0.85rem;
-            text-align: center;
+            position: absolute;
+            bottom: 20px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1.name-title { font-size: 1.65rem; }
+            .school-title { font-size: 1rem; }
+            .school-highlight { font-size: 1.1rem; }
+            .hero-card { padding: 2.8rem 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <main class="welcome-card">
-        <div class="avatar-frame">
-            <img src="1788760432866.jpg" alt="นางสาวศิรณตา พลเทกอง" class="avatar-img">
-        </div>
-        
-        <div class="welcome-tag">Welcome to my world</div>
-        <h1>นางสาวศิรณตา พลเทกอง</h1>
-        <p class="subtitle">แฟ้มสะสมผลงานอิเล็กทรอนิกส์ (E-Portfolio)</p>
+    <!-- Interactive Spotlight Background Layer -->
+    <div class="spotlight" id="spotlight"></div>
 
-        <a href="portfolio.html" class="btn-enter">
-            เข้าชม Portfolio <span>→</span>
-        </a>
-    </main>
+    <!-- Particles Layer -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- Main Card -->
+    <div class="card-wrapper">
+        <main class="hero-card" id="tiltCard">
+            
+            <div class="tag-badge">ELECTRONIC PORTFOLIO</div>
+            
+            <!-- ชื่อของคุณ -->
+            <h1 class="name-title">นางสาวศิรณตา พลเทกอง</h1>
+            
+            <!-- ชื่อโรงเรียน -->
+            <div class="school-container">
+                <span class="school-title">โรงเรียนบ้านบึง</span>
+                <span class="school-highlight"><span class="quote-symbol">“</span>อุตสาหกรรมนุเคราะห์<span class="quote-symbol">”</span></span>
+            </div>
+
+            <!-- ปุ่มวาร์ปไปหน้า Portfolio -->
+            <a href="portfolio.html" class="btn-portal">
+                <span>ค้นพบเรื่องราวของฉัน</span>
+                <span class="btn-arrow">➔</span>
+            </a>
+
+        </main>
+    </div>
 
     <footer>
-        <p>&copy; Portfolio - Siranata Pholthekong. All Rights Reserved.</p>
+        &copy; SIRANATA PHOLTHEKONG — ALL RIGHTS RESERVED
     </footer>
 
+    <!-- Interactive Scripts -->
+    <script>
+        // Mouse Spotlight & 3D Tilt Effect
+        const spotlight = document.getElementById('spotlight');
+        const card = document.getElementById('tiltCard');
+
+        document.addEventListener('mousemove', (e) => {
+            // Spotlight Position
+            spotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
+            spotlight.style.setProperty('--mouse-y', `${e.clientY}px`);
+
+            // 3D Tilt Card
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            const rotateX = (-y / rect.height) * 16;
+            const rotateY = (x / rect.width) * 16;
+
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        // Reset Card when Mouse leaves
+        document.addEventListener('mouseleave', () => {
+            card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        });
+
+        // Floating Particles Effect
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 25;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const size = Math.random() * 4 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.animationDuration = `${Math.random() * 8 + 4}s`;
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+            
+            particlesContainer.appendChild(particle);
+        }
+    </script>
 </body>
 </html>
