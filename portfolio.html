@@ -269,14 +269,15 @@
 
         .image-placeholder-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin-top: 0.8rem;
         }
 
         .img-box {
             width: 100%;
-            height: 160px;
+            max-width: 400px;
+            min-height: 180px;
             background-color: #f7f5f4;
             border: 1px dashed var(--rose-gold);
             border-radius: 8px;
@@ -290,8 +291,11 @@
 
         .img-box img {
             width: 100%;
-            height: 100%;
+            height: auto;
+            max-height: 350px;
             object-fit: cover;
+            border-radius: 8px;
+            display: block;
         }
 
         /* Footer */
@@ -329,8 +333,8 @@
     <!-- Header Section -->
     <header>
         <div class="profile-img-container">
-            <!-- ใส่ URL รูปถ่ายหน้าตรง/ชุดนักเรียนของคุณขนมชั้นตรง src -->
-            <img src="1788760432866.jpg" alt="นางสาวศิรณตา พลเทกอง" class="profile-img">
+            <!-- สามารถใส่รูปโปรไฟล์ตรงนี้ได้ -->
+            <img src="https://via.placeholder.com/170" alt="นางสาวศิรณตา พลเทกอง" class="profile-img">
         </div>
         <h1>นางสาวศิรณตา พลเทกอง</h1>
         <p class="subtitle">SIRANATA PHOLTHEKONG</p>
@@ -339,7 +343,7 @@
     <!-- Main Container -->
     <div class="container">
         
-        <!-- 1. หน้าประวัติส่วนตัว -->
+        <!-- 1. ประวัติส่วนตัว -->
         <section id="about" class="card">
             <h2 class="section-title">ประวัติส่วนตัว</h2>
             <div class="info-grid">
@@ -366,7 +370,7 @@
             </div>
         </section>
 
-        <!-- 2. หน้าประวัติการศึกษา -->
+        <!-- 2. ประวัติการศึกษา -->
         <section id="education" class="card">
             <h2 class="section-title">ประวัติการศึกษา</h2>
             <div class="education-detail">
@@ -381,7 +385,7 @@
             </div>
         </section>
 
-        <!-- 3. หน้าความสนใจในการศึกษาต่อ -->
+        <!-- 3. ความสนใจในการศึกษาต่อ -->
         <section id="target" class="card">
             <h2 class="section-title">ความสนใจในการศึกษาต่อ</h2>
             <div class="target-box">
@@ -393,7 +397,7 @@
             </div>
         </section>
 
-        <!-- 4. หน้ากิจกรรมที่เข้าร่วม -->
+        <!-- 4. กิจกรรมที่เข้าร่วม -->
         <section id="activities" class="card">
             <h2 class="section-title">กิจกรรมที่เข้าร่วม</h2>
             
@@ -403,14 +407,8 @@
                     ได้รับรางวัลชนะเลิศการประกวดชุด MISS B.B. SCIENCE 2024 ระดับชั้นมัธยมศึกษาตอนปลาย
                 </div>
                 <div class="image-placeholder-grid">
-                    <!-- ใส่รูปกิจกรรมที่ 1 ตรงนี้ (เปลี่ยน src="...") -->
-                    <div class="img-box">
-                        <!-- <img src="URL_รูปภาพ_1.jpg" alt="MISS B.B. SCIENCE 2024"> -->
-                        [ ช่องสำหรับใส่รูปภาพกิจกรรม ]
-                    </div>
-                    <div class="img-box">
-                        <!-- <img src="URL_รูปภาพ_2.jpg" alt="MISS B.B. SCIENCE 2024"> -->
-                        [ ช่องสำหรับใส่รูปภาพกิจกรรม ]
+                    <div class="img-box" style="border: none;">
+                        <img src="1788760429156.jpg" alt="รางวัลชนะเลิศ MISS B.B. SCIENCE 2024">
                     </div>
                 </div>
             </div>
@@ -422,11 +420,6 @@
                 </div>
                 <div class="image-placeholder-grid">
                     <div class="img-box">
-                        <!-- <img src="URL_รูปภาพ_1.jpg" alt="แข่งอัจฉริยภาพคณิตศาสตร์"> -->
-                        [ ช่องสำหรับใส่รูปภาพกิจกรรม ]
-                    </div>
-                    <div class="img-box">
-                        <!-- <img src="URL_รูปภาพ_2.jpg" alt="แข่งอัจฉริยภาพคณิตศาสตร์"> -->
                         [ ช่องสำหรับใส่รูปภาพกิจกรรม ]
                     </div>
                 </div>
@@ -439,11 +432,6 @@
                 </div>
                 <div class="image-placeholder-grid">
                     <div class="img-box">
-                        <!-- <img src="URL_รูปภาพ_1.jpg" alt="ค่ายคุณธรรม"> -->
-                        [ ช่องสำหรับใส่รูปภาพกิจกรรม ]
-                    </div>
-                    <div class="img-box">
-                        <!-- <img src="URL_รูปภาพ_2.jpg" alt="ค่ายคุณธรรม"> -->
                         [ ช่องสำหรับใส่รูปภาพกิจกรรม ]
                     </div>
                 </div>
