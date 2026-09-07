@@ -37,6 +37,21 @@
             background-color: var(--bg-color);
             color: var(--primary-text);
             line-height: 1.6;
+            
+            /* Animation ค่อยๆ ปรากฏตอนเปิดหน้าเว็บ */
+            animation: pageFadeIn 1.2s ease-out forwards;
+        }
+
+        /* Keyframes สำหรับเอฟเฟกต์ Fade In นุ่มนวล */
+        @keyframes pageFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Navigation Bar */
@@ -44,7 +59,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 8%;
+            padding: 1rem 8%;
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             position: sticky;
@@ -54,9 +69,38 @@
             box-shadow: 0 2px 15px rgba(222, 92, 142, 0.05);
         }
 
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        /* ปุ่มกดย้อนกลับไปหน้า Index */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            color: var(--chula-pink-dark);
+            background-color: var(--chula-pink-light);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background-color: var(--chula-pink);
+            color: #ffffff;
+            transform: translateX(-3px);
+            border-color: var(--chula-pink);
+        }
+
         .logo {
             font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--chula-pink);
             letter-spacing: 2px;
@@ -229,7 +273,7 @@
             color: var(--chula-pink-dark);
         }
 
-        /* Target Interest Card (ไฮไลต์โทนสีชมพูจุฬาฯ) */
+        /* Target Interest Card */
         .target-box {
             background: linear-gradient(135deg, var(--chula-pink-subtle) 0%, #fff 100%);
             border: 1.5px solid var(--chula-pink);
@@ -288,7 +332,6 @@
             margin-top: 0.8rem;
         }
 
-        /* ลูกเล่นขยายรูปเมื่อชี้เม้าส์ (Hover Zoom Effect) */
         .img-box {
             width: 100%;
             max-width: 400px;
@@ -326,7 +369,7 @@
             transform: scale(1.06);
         }
 
-        /* Modal Lightbox สำหรับกดขยายรูปใหญ่ */
+        /* Modal Lightbox */
         .modal {
             display: none;
             position: fixed;
@@ -383,20 +426,23 @@
         }
 
         /* Responsive */
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
             header h1 { font-size: 1.7rem; }
-            .nav-links { gap: 1rem; font-size: 0.85rem; }
+            .nav-links { display: none; } /* ซ่อนเมนูยาวในจอมือถือเล็กๆ เพื่อความสบายตา */
             .card { padding: 1.5rem; }
-            nav { padding: 1rem 4%; }
+            nav { padding: 0.8rem 4%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
+    <!-- Navigation Bar -->
     <nav>
-        <!-- เปลี่ยนคำว่า SIRANATA เป็น PORTFOLIO ตามที่ขอเรียบร้อยแล้ว -->
-        <div class="logo">PORTFOLIO</div>
+        <div class="nav-left">
+            <!-- ปุ่มกดย้อนกลับไปหน้า index.html -->
+            <a href="index.html" class="btn-back">← หน้าหลัก</a>
+            <div class="logo">PORTFOLIO</div>
+        </div>
         <ul class="nav-links">
             <li><a href="#about">ประวัติส่วนตัว</a></li>
             <li><a href="#education">การศึกษา</a></li>
@@ -459,7 +505,7 @@
             </div>
         </section>
 
-        <!-- 3. ความสนใจในการศึกษาต่อ (ปรับเป็นโทนสีชมพูจุฬาฯ) -->
+        <!-- 3. ความสนใจในการศึกษาต่อ -->
         <section id="target" class="card">
             <h2 class="section-title">ความสนใจในการศึกษาต่อ</h2>
             <div class="target-box">
@@ -518,7 +564,7 @@
 
     </div>
 
-    <!-- Modal ป๊อปอัปขยายรูปใหญ่เมื่อกดที่รูป -->
+    <!-- Modal Lightbox -->
     <div id="imageModal" class="modal" onclick="closeLightbox()">
         <span class="close-modal">&times;</span>
         <img class="modal-content" id="imgExpanded">
@@ -529,7 +575,7 @@
         <p>&copy; Portfolio - Siranata Pholthekong. All Rights Reserved.</p>
     </footer>
 
-    <!-- Script ควบคุมลูกเล่นการเปิดดูรูปใหญ่ -->
+    <!-- Script -->
     <script>
         function openLightbox(src) {
             const modal = document.getElementById('imageModal');
