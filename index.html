@@ -3,200 +3,544 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siranata | Official Portfolio</title>
-
-    <!-- Google Fonts: Alex Brush, Great Vibes & Prompt -->
+    <title>Portfolio - Siranata Pholthekong</title>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Great+Vibes&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Prompt:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+    
     <style>
-        .en-font {
-            font-family: 'Alex Brush', cursive !important;
-            letter-spacing: 1px;
-        }
-
-        .en-font-fancy {
-            font-family: 'Great Vibes', cursive !important;
-            letter-spacing: 1.5px;
+        :root {
+            --bg-color: #fdf8f9;
+            --card-bg: #ffffff;
+            --primary-text: #2b2b2b;
+            --secondary-text: #5e5e5e;
+            
+            /* โทนสีชมพูจุฬาฯ (Chula Pink Theme) */
+            --chula-pink: #DE5C8E;
+            --chula-pink-dark: #b83d6e;
+            --chula-pink-light: #fbeaf0;
+            --chula-pink-subtle: #fdf0f4;
+            --accent-gold: #c5a059;
+            --border-color: #f3d2de;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Prompt', sans-serif;
-            font-size: 1.05rem;
-            
-            /* ดึงไฟล์ GIF พื้นหลัง */
-            background-image: url('8b1f2eb7b221c60e0caf5d1f31111518.gif');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-color: #050505;
-            color: #2b2b2b;
-            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        nav {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-            overflow-x: hidden;
+            padding: 1.2rem 8%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 15px rgba(222, 92, 142, 0.05);
         }
 
-        /* การ์ดสีขาวออฟไวท์ทึบ */
-        .card {
-            background: rgba(254, 250, 251, 0.96);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 32px;
-            box-shadow: 
-                0 20px 45px rgba(0, 0, 0, 0.6),
-                0 0 35px rgba(224, 160, 180, 0.3);
-            border: 1.5px solid #E2B0BE;
-            outline: 1px dashed #D4A373;
-            outline-offset: -10px;
-            max-width: 480px;
-            width: 100%;
-            padding: 50px 35px;
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--chula-pink);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary-text);
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--chula-pink);
+        }
+
+        /* Header / Profile Hero Section */
+        header {
             text-align: center;
-            position: relative;
-            
-            /* Animation เคลื่อนไหวลอยขึ้นสมูท */
-            animation: smoothAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-                       gentleFloat 6s ease-in-out infinite 1.2s;
+            padding: 4.5rem 1rem 3rem;
+            background: linear-gradient(180deg, #fae5ed 0%, var(--bg-color) 100%);
         }
 
-        @keyframes smoothAppear {
-            0% {
-                opacity: 0;
-                transform: translateY(30px) scale(0.96);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+        .profile-img-container {
+            width: 170px;
+            height: 170px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, var(--chula-pink), var(--accent-gold));
+            box-shadow: 0 10px 25px rgba(222, 92, 142, 0.25);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
         }
 
-        @keyframes gentleFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
+        .profile-img-container:hover {
+            transform: scale(1.08) rotate(2deg);
         }
 
-        .profile-wrapper {
-            width: 135px;
-            height: 135px;
-            margin: 0 auto 20px auto;
-            position: relative;
-        }
-
-        .profile {
+        .profile-img {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #ffffff;
-            box-shadow: 0 8px 25px rgba(212, 120, 145, 0.35);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 50%;
+            background-color: #f0f0f0;
         }
 
-        .card:hover .profile {
-            transform: scale(1.04) rotate(1.5deg);
+        header h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            color: var(--primary-text);
+            margin-bottom: 0.2rem;
         }
 
-        /* หัวข้อ Portfolio ตัวเขียนสีทองหรูหรา */
-        h1 {
-            color: #C28E5C;
-            font-size: 3.2rem;
-            font-weight: normal;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 10px rgba(194, 142, 92, 0.2);
+        header p.subtitle {
+            font-family: 'Cinzel', serif;
+            color: var(--chula-pink);
+            letter-spacing: 2px;
+            font-size: 1.05rem;
+            margin-bottom: 1.2rem;
         }
 
-        /* ข้อความลอยแบบไม่มีกรอบ */
-        .intro-text {
-            color: #4A3339;
-            font-weight: 300;
-            line-height: 1.8;
-            font-size: 1.1rem;
-            margin-bottom: 25px;
+        /* Container Layout */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1.5rem 1.5rem 3rem;
         }
 
-        .interest-section {
-            margin: 25px 0 35px 0;
+        /* Card Elements */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2.2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.025);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .interest-title {
+        .card:hover {
+            box-shadow: 0 8px 25px rgba(222, 92, 142, 0.08);
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--chula-pink-dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 45px;
+            height: 2px;
+            background-color: var(--chula-pink);
+        }
+
+        /* Profile Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: var(--secondary-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .info-value {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--primary-text);
+        }
+
+        /* Education Card */
+        .education-detail {
+            border-left: 3px solid var(--chula-pink);
+            padding-left: 1.2rem;
+        }
+
+        .school-name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--primary-text);
+        }
+
+        .program-name {
+            color: var(--chula-pink-dark);
+            font-weight: 500;
             font-size: 0.95rem;
-            color: #B56B7D;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
+            margin-top: 0.2rem;
+        }
+
+        .gpa-badge {
+            margin-top: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--chula-pink-light);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .gpa-number {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--chula-pink-dark);
+        }
+
+        /* Target Interest Card */
+        .target-box {
+            background: linear-gradient(135deg, var(--chula-pink-subtle) 0%, #fff 100%);
+            border: 1.5px solid var(--chula-pink);
+            border-radius: 12px;
+            padding: 1.8rem;
+            box-shadow: 0 4px 15px rgba(222, 92, 142, 0.1);
+        }
+
+        .target-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--chula-pink-dark);
+            margin-bottom: 0.4rem;
+        }
+
+        .target-desc {
+            font-size: 1rem;
+            color: var(--primary-text);
             font-weight: 400;
         }
 
-        .interest-detail {
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: #3D232A;
+        /* Activities Section */
+        .activity-card {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed var(--border-color);
         }
 
-        /* ปุ่มชมพูตัดขอบทอง */
-        .btn {
-            display: inline-flex;
+        .activity-card:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .activity-title {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--primary-text);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .activity-title::before {
+            content: '◆';
+            color: var(--chula-pink);
+            font-size: 0.8rem;
+            margin-top: 3px;
+        }
+
+        .image-placeholder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin-top: 0.8rem;
+        }
+
+        /* ลูกเล่นขยายรูปเมื่อชี้เม้าส์ */
+        .img-box {
+            width: 100%;
+            max-width: 400px;
+            min-height: 180px;
+            background-color: #fcf5f7;
+            border-radius: 10px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #B55B70, #8A3B4E);
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.6rem;
-            border: 1.5px solid #E8C197;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 8px 22px rgba(181, 91, 112, 0.35);
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        .btn:hover {
-            background: linear-gradient(135deg, #C86B80, #9B4B5E);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 28px rgba(181, 91, 112, 0.5);
-            border-color: #ffffff;
+        .img-box:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 12px 25px rgba(222, 92, 142, 0.2);
+            border-color: var(--chula-pink);
+        }
+
+        .img-box img {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .img-box:hover img {
+            transform: scale(1.06);
+        }
+
+        /* Modal Lightbox สำหรับกดขยายรูปใหญ่ */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 10px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+            animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--chula-pink);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--secondary-text);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.7rem; }
+            .nav-links { gap: 1rem; font-size: 0.85rem; }
+            .card { padding: 1.5rem; }
+            nav { padding: 1rem 4%; }
         }
     </style>
 </head>
-
 <body>
 
-    <div class="card">
-        <div class="profile-wrapper">
-            <img src="Screenshot 2026-06-30 103336.png" alt="Profile" class="profile">
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">PORTFOLIO</div>
+        <ul class="nav-links">
+            <li><a href="#about">ประวัติส่วนตัว</a></li>
+            <li><a href="#education">การศึกษา</a></li>
+            <li><a href="#target">เป้าหมาย</a></li>
+            <li><a href="#activities">กิจกรรม</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header Section -->
+    <header>
+        <div class="profile-img-container" onclick="openLightbox(this.querySelector('img').src)">
+            <img src="1788760432866.jpg" alt="นางสาวศิรณตา พลเทกอง" class="profile-img">
         </div>
+        <h1>นางสาวศิรณตา พลเทกอง</h1>
+        <p class="subtitle">SIRANATA PHOLTHEKONG</p>
+    </header>
 
-        <h1 class="en-font-fancy">Portfolio</h1>
-
-        <div class="intro-text">
-            สวัสดีค่ะ ดิฉัน <strong style="font-weight: 600; color: #B55B70;">ศิรณตา</strong> <br>
-            <span class="en-font" style="font-size: 1.8rem; color: #C28E5C;">(Siranata Pholthekong)</span>
-        </div>
-
-        <div class="interest-section">
-            <div class="interest-title">คณะที่สนใจ</div>
-            <div class="interest-detail">
-                บริหารโลจิสติกส์ <br>
-                <span class="en-font" style="font-size: 1.7rem; color: #B55B70;">Logistics Management</span>
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- 1. ประวัติส่วนตัว -->
+        <section id="about" class="card">
+            <h2 class="section-title">ประวัติส่วนตัว</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">ชื่อ - นามสกุล</span>
+                    <span class="info-value">นางสาวศิรณตา พลเทกอง</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">ชื่อเล่น</span>
+                    <span class="info-value">ขนมชั้น</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">อายุ</span>
+                    <span class="info-value">17 ปี</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">วันเกิด</span>
+                    <span class="info-value">13 พฤษภาคม 2552</span>
+                </div>
+                <div class="info-item" style="grid-column: span 2;">
+                    <span class="info-label">อีเมลการติดต่อ (Email)</span>
+                    <span class="info-value">s34881@banbung.ac.th</span>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <!-- เชื่อมต่อไปยังไฟล์ portfolio.html -->
-        <a href="portfolio.html" class="btn">
-            <span class="en-font-fancy">View Portfolio</span>
-        </a>
+        <!-- 2. ประวัติการศึกษา -->
+        <section id="education" class="card">
+            <h2 class="section-title">ประวัติการศึกษา</h2>
+            <div class="education-detail">
+                <div class="school-name">โรงเรียนบ้านบึงอุตสาหกรรมนุเคราะห์</div>
+                <div class="program-name">แผนการเรียน: วิทยาศาสตร์-คณิตศาสตร์ (Gifted Program)</div>
+                <p style="color: var(--secondary-text); font-size: 0.9rem; margin-top: 0.3rem;">กำลังศึกษาอยู่ในระดับชั้นมัธยมศึกษาตอนปลาย</p>
+                
+                <div class="gpa-badge">
+                    <span>ผลการเรียนเฉลี่ยสะสม (GPAX 4 เทอม):</span>
+                    <span class="gpa-number">3.93</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ความสนใจในการศึกษาต่อ -->
+        <section id="target" class="card">
+            <h2 class="section-title">ความสนใจในการศึกษาต่อ</h2>
+            <div class="target-box">
+                <div class="target-title">คณะพาณิชยศาสตร์และการบัญชี</div>
+                <div class="target-desc">
+                    หลักสูตรบริหารธุรกิจบัณฑิต สาขาวิชาการจัดการโลจิสติกส์ระหว่างประเทศ<br>
+                    <strong style="color: var(--chula-pink-dark); font-size: 1.05rem;">จุฬาลงกรณ์มหาวิทยาลัย</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. กิจกรรมที่เข้าร่วม -->
+        <section id="activities" class="card">
+            <h2 class="section-title">กิจกรรมที่เข้าร่วม</h2>
+            
+            <!-- กิจกรรมที่ 1 -->
+            <div class="activity-card">
+                <div class="activity-title">
+                    ได้รับรางวัลชนะเลิศการประกวดชุด MISS B.B. SCIENCE 2024 ระดับชั้นมัธยมศึกษาตอนปลาย
+                </div>
+                <div class="image-placeholder-grid">
+                    <div class="img-box" onclick="openLightbox('1788760429156.jpg')">
+                        <img src="1788760429156.jpg" alt="รางวัลชนะเลิศ MISS B.B. SCIENCE 2024">
+                    </div>
+                </div>
+            </div>
+
+            <!-- กิจกรรมที่ 2 -->
+            <div class="activity-card">
+                <div class="activity-title">
+                    เข้าร่วมการแข่งขันอัจฉริยภาพทางคณิตศาสตร์ ระดับมัธยมศึกษาตอนปลาย
+                </div>
+                <div class="image-placeholder-grid">
+                    <div class="img-box" onclick="openLightbox('1788760428894.jpg')">
+                        <img src="1788760428894.jpg" alt="การแข่งขันอัจฉริยภาพทางคณิตศาสตร์">
+                    </div>
+                </div>
+            </div>
+
+            <!-- กิจกรรมที่ 3 -->
+            <div class="activity-card">
+                <div class="activity-title">
+                    เข้าร่วมกิจกรรมอบรมค่ายคุณธรรม
+                </div>
+                <div class="image-placeholder-grid">
+                    <div class="img-box" onclick="openLightbox('1788789154644.jpg')">
+                        <img src="1788789154644.jpg" alt="กิจกรรมอบรมค่ายคุณธรรม 1">
+                    </div>
+                    <div class="img-box" onclick="openLightbox('1788789154226.jpg')">
+                        <img src="1788789154226.jpg" alt="กิจกรรมอบรมค่ายคุณธรรม 2">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
     </div>
+
+    <!-- Modal ป๊อปอัปขยายรูปใหญ่เมื่อกดที่รูป -->
+    <div id="imageModal" class="modal" onclick="closeLightbox()">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="imgExpanded">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; Portfolio - Siranata Pholthekong. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Script ควบคุมลูกเล่นการเปิดดูรูปใหญ่ -->
+    <script>
+        function openLightbox(src) {
+            const modal = document.getElementById('imageModal');
+            const expandedImg = document.getElementById('imgExpanded');
+            modal.style.display = 'flex';
+            expandedImg.src = src;
+        }
+
+        function closeLightbox() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>
