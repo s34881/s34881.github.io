@@ -7,7 +7,7 @@
     <!-- Google Fonts & FontAwesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -28,6 +28,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -39,7 +40,7 @@
             position: relative;
         }
 
-        /* Ambient Background Spotlight */
+        /* Ambient Dynamic Background Glow */
         .ambient-bg {
             position: fixed;
             top: 0;
@@ -48,12 +49,12 @@
             height: 100vh;
             pointer-events: none;
             background: 
-                radial-gradient(circle at 15% 20%, rgba(222, 92, 142, 0.15), transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(197, 160, 89, 0.12), transparent 40%);
+                radial-gradient(circle at 15% 20%, rgba(222, 92, 142, 0.12), transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(197, 160, 89, 0.1), transparent 45%);
             z-index: 0;
         }
 
-        /* Floating Particles Canvas */
+        /* Particle Canvas */
         #particleCanvas {
             position: fixed;
             top: 0;
@@ -64,27 +65,46 @@
             z-index: 0;
         }
 
-        /* Header Navigation */
+        /* Glassmorphism Header Bar */
         header {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(253, 248, 250, 0.8);
-            backdrop-filter: blur(12px);
+            background: rgba(253, 248, 250, 0.82);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-pink);
-            padding: 1.2rem 3rem;
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
         }
 
         .logo {
             font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 800;
             color: var(--chula-pink-dark);
             letter-spacing: 2px;
             text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-subtle);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--chula-pink);
         }
 
         .back-btn {
@@ -94,8 +114,8 @@
             color: var(--chula-pink-dark);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
-            padding: 0.5rem 1.2rem;
+            font-size: 0.9rem;
+            padding: 0.4rem 1.1rem;
             border-radius: 20px;
             background: rgba(222, 92, 142, 0.08);
             border: 1px solid var(--border-pink);
@@ -105,82 +125,61 @@
         .back-btn:hover {
             background: var(--chula-pink);
             color: white;
-            transform: translateX(-5px);
+            transform: translateX(-4px);
         }
 
         /* Layout Container */
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 3rem 2rem 6rem 2rem;
+            padding: 3rem 1.5rem 6rem 1.5rem;
             position: relative;
             z-index: 1;
         }
 
-        /* Section Title */
-        .section-header {
-            text-align: center;
-            margin-bottom: 3.5rem;
-        }
-
-        .section-badge {
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            letter-spacing: 4px;
-            color: var(--chula-pink-dark);
-            background: rgba(222, 92, 142, 0.1);
-            padding: 0.4rem 1.2rem;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 0.8rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        /* Profile Showcase Card */
-        .profile-card {
+        /* Hero / Profile Card */
+        .hero-card {
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             border: 1px solid var(--border-pink);
-            border-radius: 24px;
-            padding: 2.5rem;
+            border-radius: 28px;
+            padding: 3rem 2.5rem;
             box-shadow: var(--shadow-soft);
             display: grid;
             grid-template-columns: 280px 1fr;
-            gap: 2.5rem;
+            gap: 3rem;
             align-items: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3.5rem;
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
         }
 
         .profile-img-box {
             position: relative;
             width: 100%;
             height: 320px;
-            border-radius: 20px;
+            border-radius: 22px;
             overflow: hidden;
             border: 2px solid var(--chula-pink);
-            box-shadow: 0 10px 25px rgba(222, 92, 142, 0.2);
+            box-shadow: 0 12px 30px rgba(222, 92, 142, 0.25);
+            cursor: pointer;
         }
 
         .profile-img-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
         }
 
         .profile-img-box:hover img {
             transform: scale(1.08);
         }
 
-        .profile-info h2 {
-            font-size: 2rem;
+        .profile-info h1 {
+            font-size: 2.2rem;
             color: var(--text-main);
-            margin-bottom: 0.2rem;
+            font-weight: 700;
         }
 
         .profile-info .subname {
@@ -188,28 +187,116 @@
             color: var(--chula-pink-dark);
             font-weight: 700;
             letter-spacing: 2px;
-            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
             display: block;
         }
 
-        .profile-info p {
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .info-item {
+            background: rgba(222, 92, 142, 0.04);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(222, 92, 142, 0.1);
+        }
+
+        .info-label {
+            font-size: 0.8rem;
             color: var(--text-subtle);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        /* Cards Layout */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-pink);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 3rem;
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--chula-pink-dark);
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            color: var(--chula-pink);
+        }
+
+        /* Education & Target Section */
+        .target-box {
+            background: linear-gradient(135deg, var(--chula-pink-light) 0%, rgba(255,255,255,0.9) 100%);
+            border: 2px solid var(--chula-pink);
+            border-radius: 18px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .target-badge {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: var(--chula-pink);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .gpa-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 1.2rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-pink);
+        }
+
+        .gpa-num {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--chula-pink-dark);
         }
 
         /* Skill Bar System */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+            gap: 1.2rem;
+            margin-top: 1rem;
         }
 
         .skill-item {
-            background: rgba(222, 92, 142, 0.05);
-            padding: 0.8rem 1.2rem;
-            border-radius: 12px;
-            border: 1px solid rgba(222, 92, 142, 0.15);
+            background: rgba(222, 92, 142, 0.04);
+            padding: 1rem 1.2rem;
+            border-radius: 14px;
+            border: 1px solid rgba(222, 92, 142, 0.12);
         }
 
         .skill-info {
@@ -217,11 +304,11 @@
             justify-content: space-between;
             font-size: 0.88rem;
             font-weight: 600;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
         }
 
         .progress-bar {
-            height: 6px;
+            height: 8px;
             background: rgba(0,0,0,0.06);
             border-radius: 10px;
             overflow: hidden;
@@ -235,12 +322,12 @@
             transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
         }
 
-        /* Portfolio Category Filter */
+        /* Filter Tabs */
         .filter-container {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 2.5rem;
+            gap: 10px;
+            margin-bottom: 2rem;
             flex-wrap: wrap;
         }
 
@@ -248,130 +335,92 @@
             border: 1px solid var(--border-pink);
             background: rgba(255, 255, 255, 0.8);
             color: var(--text-main);
-            padding: 0.6rem 1.6rem;
+            padding: 0.6rem 1.4rem;
             border-radius: 30px;
             font-family: 'Prompt', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
-            backdrop-filter: blur(8px);
         }
 
         .filter-btn:hover, .filter-btn.active {
             background: var(--chula-pink);
             color: white;
-            box-shadow: 0 8px 20px rgba(222, 92, 142, 0.3);
+            box-shadow: 0 6px 18px rgba(222, 92, 142, 0.3);
             border-color: var(--chula-pink);
         }
 
-        /* 3D Interactive Card Gallery */
+        /* Activities Grid */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            perspective: 1000px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.8rem;
         }
 
-        .card-item {
-            background: var(--card-bg);
-            border-radius: 20px;
+        .activity-card {
+            background: #ffffff;
+            border-radius: 18px;
             overflow: hidden;
             border: 1px solid var(--border-pink);
-            box-shadow: var(--shadow-soft);
-            transition: transform 0.1s ease-out, box-shadow 0.3s ease, opacity 0.4s ease;
-            transform-style: preserve-3d;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
         }
 
-        .card-item:hover {
-            box-shadow: 0 20px 40px rgba(222, 92, 142, 0.25);
+        .activity-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(222, 92, 142, 0.2);
+            border-color: var(--chula-pink);
         }
 
-        .card-img {
+        .activity-img-box {
             position: relative;
-            height: 220px;
+            height: 200px;
             overflow: hidden;
         }
 
-        .card-img img {
+        .activity-img-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            transition: transform 0.5s ease;
         }
 
-        .card-item:hover .card-img img {
-            transform: scale(1.1);
+        .activity-card:hover .activity-img-box img {
+            transform: scale(1.08);
         }
 
-        .card-tag {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255, 255, 255, 0.9);
+        .activity-body {
+            padding: 1.3rem;
+        }
+
+        .activity-tag {
+            display: inline-block;
+            background: var(--chula-pink-light);
             color: var(--chula-pink-dark);
-            padding: 0.3rem 0.9rem;
-            border-radius: 15px;
+            padding: 0.2rem 0.8rem;
+            border-radius: 12px;
             font-size: 0.75rem;
-            font-weight: 700;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .card-body {
-            padding: 1.5rem;
-            transform: translateZ(30px);
-        }
-
-        .card-body h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-main);
-        }
-
-        .card-body p {
-            font-size: 0.9rem;
-            color: var(--text-subtle);
-            line-height: 1.6;
-        }
-
-        .card-footer {
-            margin-top: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: var(--chula-pink);
             font-weight: 600;
+            margin-bottom: 0.6rem;
         }
 
-        /* Light Reflection / Glossy Overlay on Card */
-        .card-glare {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 60%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .activity-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.5;
         }
 
-        .card-item:hover .card-glare {
-            opacity: 1;
-        }
-
-        /* Modal Preview Room */
+        /* Lightbox Modal */
         .modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(10px);
             z-index: 1000;
             display: flex;
@@ -391,13 +440,13 @@
         .modal-content {
             background: var(--bg-color);
             border-radius: 24px;
-            max-width: 800px;
+            max-width: 750px;
             width: 100%;
             overflow: hidden;
             box-shadow: 0 25px 50px rgba(0,0,0,0.3);
             border: 1px solid var(--border-pink);
-            transform: scale(0.8);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: scale(0.85);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
         }
 
@@ -407,21 +456,21 @@
 
         .modal-img {
             width: 100%;
-            max-height: 400px;
+            max-height: 450px;
             object-fit: cover;
         }
 
         .modal-body {
-            padding: 2rem;
+            padding: 1.8rem;
         }
 
         .modal-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.8);
+            top: 15px;
+            right: 15px;
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -429,7 +478,7 @@
             cursor: pointer;
             border: none;
             color: var(--text-main);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: background 0.3s ease;
         }
 
@@ -450,186 +499,219 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            header { padding: 1rem 1.5rem; }
-            .profile-card { grid-template-columns: 1fr; text-align: center; }
+            .nav-links { display: none; }
+            .hero-card { grid-template-columns: 1fr; text-align: center; padding: 2rem 1.5rem; }
             .profile-img-box { height: 260px; }
-            .skills-grid { grid-template-columns: 1fr; }
-            .gallery-grid { grid-template-columns: 1fr; }
+            .info-grid, .skills-grid { grid-template-columns: 1fr; }
+            .card { padding: 1.8rem 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Ambient Background Lighting -->
+    <!-- Ambient Glow Background -->
     <div class="ambient-bg"></div>
 
-    <!-- Canvas Particle Background -->
+    <!-- Canvas Particles Animation -->
     <canvas id="particleCanvas"></canvas>
 
-    <!-- Header Navigation -->
+    <!-- Header Navigation Bar -->
     <header>
-        <a href="index.html" class="logo">SIRANATA.P</a>
-        <a href="index.html" class="back-btn">
-            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับ
-        </a>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i> หน้าหลัก
+            </a>
+            <a href="#" class="logo">PORTFOLIO</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about">ประวัติส่วนตัว</a></li>
+            <li><a href="#education">การศึกษา</a></li>
+            <li><a href="#skills">ทักษะ</a></li>
+            <li><a href="#activities">ผลงาน & กิจกรรม</a></li>
+        </ul>
     </header>
 
     <!-- Main Content Container -->
     <div class="container">
-        
-        <!-- Profile Section -->
-        <div class="profile-card">
-            <div class="profile-img-box">
-                <!-- ใส่รูปประจำตัวของคุณตรงนี้ -->
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Siranata Pholthekong">
+
+        <!-- Hero Section / Personal Profile Card -->
+        <section id="about" class="hero-card tilt-card">
+            <div class="profile-img-box" onclick="openModal('นางสาวศิรณตา พลเทกอง', 'ภาพถ่ายประจำตัว', '1788760432866.jpg')">
+                <img src="1788760432866.jpg" alt="นางสาวศิรณตา พลเทกอง">
             </div>
             <div class="profile-info">
-                <h2>ศิรณตา พลเทกอง</h2>
+                <h1>นางสาวศิรณตา พลเทกอง</h1>
                 <span class="subname">SIRANATA PHOLTHEKONG</span>
-                <p>นักเรียนมัธยมศึกษาตอนปลาย โรงเรียนบ้านบึง "อุตสาหกรรมนุเคราะห์" ที่มีความมุ่งมั่น มีความชื่นชอบและพร้อมที่จะเรียนรู้พัฒนาทักษะใหม่ๆ ในระดับอุดมศึกษาอย่างเต็มที่</p>
                 
-                <!-- Skills Progress -->
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Leadership / ภาวะผู้นำ</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="progress-bar"><div class="progress-fill" data-progress="95%"></div></div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label"><i class="fa-solid fa-user"></i> ชื่อเล่น</span>
+                        <span class="info-value">ขนมชั้น</span>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Communication / การสื่อสาร</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="progress-bar"><div class="progress-fill" data-progress="90%"></div></div>
+                    <div class="info-item">
+                        <span class="info-label"><i class="fa-solid fa-cake-candles"></i> อายุ / วันเกิด</span>
+                        <span class="info-value">17 ปี (13 พ.ค. 2552)</span>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Teamwork / การทำงานร่วมกัน</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="progress-bar"><div class="progress-fill" data-progress="95%"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span>Creativity / ความคิดสร้างสรรค์</span>
-                            <span>88%</span>
-                        </div>
-                        <div class="progress-bar"><div class="progress-fill" data-progress="88%"></div></div>
+                    <div class="info-item" style="grid-column: span 2;">
+                        <span class="info-label"><i class="fa-solid fa-envelope"></i> อีเมลติดต่อ</span>
+                        <span class="info-value">s34881@banbung.ac.th</span>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Section Header -->
-        <div class="section-header">
-            <span class="section-badge">MY WORKS & ACTIVITIES</span>
-            <h2 class="section-title">ผลงานและกิจกรรมที่ภาคภูมิใจ</h2>
-        </div>
-
-        <!-- Filter Tabs -->
-        <div class="filter-container">
-            <button class="filter-btn active" data-filter="all">ทั้งหมด (All)</button>
-            <button class="filter-btn" data-filter="activity">กิจกรรม (Activities)</button>
-            <button class="filter-btn" data-filter="cert">เกียรติบัตร (Certificates)</button>
-            <button class="filter-btn" data-filter="academic">ผลงานวิชาการ (Academic)</button>
-        </div>
-
-        <!-- 3D Gallery Grid -->
-        <div class="gallery-grid" id="galleryGrid">
+        <!-- Education & Target Section -->
+        <section id="education" class="card tilt-card">
+            <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> ประวัติการศึกษา & เป้าหมาย</h2>
             
-            <!-- Card 1 -->
-            <div class="card-item" data-category="activity" onclick="openModal('กิจกรรมสภานักเรียน / กิจกรรมโรงเรียน', 'ภาพการเข้าร่วมกิจกรรมและนำเสนอโครงการต่างๆ ของโรงเรียนบ้านบึง อุตสาหกรรมนุเคราะห์', 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800&q=80')">
-                <div class="card-glare"></div>
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800&q=80" alt="Activity">
-                    <span class="card-tag">Activities</span>
-                </div>
-                <div class="card-body">
-                    <h3>การเข้าร่วมกิจกรรมผู้นำเยาวชน</h3>
-                    <p>การเป็นตัวแทนทำกิจกรรมส่งเสริมทักษะการเรียนรู้และสร้างสรรค์ประโยชน์ให้แก่ส่วนรวม</p>
-                    <div class="card-footer">
-                        <span>อ่านรายละเอียดเพิ่มเติม</span>
-                        <i class="fa-solid fa-arrow-right"></i>
+            <div class="target-box">
+                <span class="target-badge">เป้าหมายการศึกษาต่อ</span>
+                <h3 style="font-size: 1.3rem; color: var(--text-main); margin-bottom: 0.4rem;">จุฬาลงกรณ์มหาวิทยาลัย</h3>
+                <p style="color: var(--chula-pink-dark); font-weight: 600; font-size: 1.05rem; margin-bottom: 0.8rem;">
+                    คณะพาณิชยศาสตร์และการบัญชี
+                </p>
+                <p style="color: var(--text-subtle); font-size: 0.95rem;">
+                    หลักสูตรบริหารธุรกิจบัณฑิต สาขาวิชาการจัดการโลจิสติกส์ระหว่างประเทศ
+                </p>
+                
+                <hr style="border: none; border-top: 1px dashed var(--border-pink); margin: 1.2rem 0;">
+                
+                <p style="font-weight: 600; color: var(--text-main);">
+                    <i class="fa-solid fa-school" style="color: var(--chula-pink);"></i> โรงเรียนบ้านบึง "อุตสาหกรรมนุเคราะห์"
+                </p>
+                <p style="color: var(--text-subtle); font-size: 0.9rem;">
+                    แผนการเรียน: วิทยาศาสตร์ - คณิตศาสตร์ (Gifted Program)
+                </p>
+
+                <div class="gpa-counter">
+                    <i class="fa-solid fa-award" style="font-size: 1.8rem; color: var(--chula-pink);"></i>
+                    <div>
+                        <span style="font-size: 0.85rem; color: var(--text-subtle); display: block;">ผลการเรียนเฉลี่ยสะสม (GPAX 4 เทอม)</span>
+                        <div class="gpa-num" id="gpaText">0.00</div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Card 2 -->
-            <div class="card-item" data-category="cert" onclick="openModal('เกียรติบัตรการแข่งขันทักษะวิชาการ', 'ได้รับรางวัลเกียรติบัตรในการเข้าร่วมแข่งขันและทดสอบทักษะทางด้านวิชาการ', 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80')">
-                <div class="card-glare"></div>
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80" alt="Certificate">
-                    <span class="card-tag">Certificates</span>
-                </div>
-                <div class="card-body">
-                    <h3>เกียรติบัตรรางวัลระดับเหรียญทอง</h3>
-                    <p>รางวัลแห่งความตั้งใจและการฝึกฝนทักษะเฉพาะทางในระดับภูมิภาค</p>
-                    <div class="card-footer">
-                        <span>อ่านรายละเอียดเพิ่มเติม</span>
-                        <i class="fa-solid fa-arrow-right"></i>
+        <!-- Skill Progress System -->
+        <section id="skills" class="card tilt-card">
+            <h2 class="section-title"><i class="fa-solid fa-star"></i> ทักษะและความสามารถ (Skills)</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span><i class="fa-solid fa-users"></i> Leadership / ภาวะผู้นำ</span>
+                        <span>95%</span>
                     </div>
+                    <div class="progress-bar"><div class="progress-fill" data-progress="95%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span><i class="fa-solid fa-comments"></i> Communication / การสื่อสาร</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" data-progress="90%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span><i class="fa-solid fa-calculator"></i> Mathematics / อัจฉริยภาพคณิตศาสตร์</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" data-progress="92%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span><i class="fa-solid fa-lightbulb"></i> Creativity / ความคิดสร้างสรรค์</span>
+                        <span>88%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" data-progress="88%"></div></div>
                 </div>
             </div>
+        </section>
 
-            <!-- Card 3 -->
-            <div class="card-item" data-category="academic" onclick="openModal('โครงการวิจัยและโครงงานนักเรียน', 'การจัดทำโครงงานค้นคว้าเพื่อประยุกต์ใช้วิชาความรู้เข้ากับการแก้ปัญหาจริง', 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80')">
-                <div class="card-glare"></div>
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80" alt="Academic">
-                    <span class="card-tag">Academic</span>
-                </div>
-                <div class="card-body">
-                    <h3>โครงงานและการค้นคว้าอิสระ</h3>
-                    <p>การศึกษาค้นคว้าข้อมูลและนำเสนอผลงานเชิงวิชาการอย่างเป็นระบบ</p>
-                    <div class="card-footer">
-                        <span>อ่านรายละเอียดเพิ่มเติม</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </div>
-                </div>
+        <!-- Filterable Activities & Certificates Gallery -->
+        <section id="activities" class="card tilt-card">
+            <h2 class="section-title"><i class="fa-solid fa-images"></i> ผลงานและกิจกรรมที่เข้าร่วม</h2>
+
+            <!-- Filter Buttons -->
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">ทั้งหมด (All)</button>
+                <button class="filter-btn" data-filter="award">รางวัล (Awards)</button>
+                <button class="filter-btn" data-filter="academic">วิชาการ (Academic)</button>
+                <button class="filter-btn" data-filter="activity">กิจกรรม (Activities)</button>
             </div>
 
-            <!-- Card 4 -->
-            <div class="card-item" data-category="activity" onclick="openModal('กิจกรรมจิตอาสาพัฒนาชุมชน', 'เข้าร่วมกิจกรรมจิตอาสาเพื่อช่วยเหลือและพัฒนาสังคมร่วมกับเพื่อนๆ ในโรงเรียน', 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=800&q=80')">
-                <div class="card-glare"></div>
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=800&q=80" alt="Volunteering">
-                    <span class="card-tag">Activities</span>
-                </div>
-                <div class="card-body">
-                    <h3>กิจกรรมจิตอาสาเพื่อสังคม</h3>
-                    <p>การมีส่วนร่วมในการทำประโยชน์แก่ชุมชน และสร้างคุณค่าแก่สังคมรอบข้าง</p>
-                    <div class="card-footer">
-                        <span>อ่านรายละเอียดเพิ่มเติม</span>
-                        <i class="fa-solid fa-arrow-right"></i>
+            <!-- Activity Gallery Grid -->
+            <div class="gallery-grid">
+                
+                <!-- Item 1 -->
+                <div class="activity-card" data-category="award" onclick="openModal('MISS B.B. SCIENCE 2024', 'ได้รับรางวัลชนะเลิศการประกวดชุด MISS B.B. SCIENCE 2024 ระดับชั้นมัธยมศึกษาตอนปลาย', '1788760429156.jpg')">
+                    <div class="activity-img-box">
+                        <img src="1788760429156.jpg" alt="MISS B.B. SCIENCE 2024">
+                    </div>
+                    <div class="activity-body">
+                        <span class="activity-tag">รางวัลชนะเลิศ</span>
+                        <div class="activity-title">การประกวดชุด MISS B.B. SCIENCE 2024 ระดับชั้นมัธยมศึกษาตอนปลาย</div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+                <!-- Item 2 -->
+                <div class="activity-card" data-category="academic" onclick="openModal('การแข่งขันอัจฉริยภาพทางคณิตศาสตร์', 'เข้าร่วมการแข่งขันอัจฉริยภาพทางคณิตศาสตร์ ระดับชั้นมัธยมศึกษาตอนปลาย', '1788760428894.jpg')">
+                    <div class="activity-img-box">
+                        <img src="1788760428894.jpg" alt="อัจฉริยภาพทางคณิตศาสตร์">
+                    </div>
+                    <div class="activity-body">
+                        <span class="activity-tag">การแข่งขันวิชาการ</span>
+                        <div class="activity-title">เข้าร่วมการแข่งขันอัจฉริยภาพทางคณิตศาสตร์ ระดับมัธยมศึกษาตอนปลาย</div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="activity-card" data-category="activity" onclick="openModal('กิจกรรมอบรมค่ายคุณธรรม (ภาพที่ 1)', 'เข้าร่วมกิจกรรมอบรมค่ายคุณธรรม จริยธรรมนักเรียน', '1788789154644.jpg')">
+                    <div class="activity-img-box">
+                        <img src="1788789154644.jpg" alt="ค่ายคุณธรรม 1">
+                    </div>
+                    <div class="activity-body">
+                        <span class="activity-tag">กิจกรรมค่าย</span>
+                        <div class="activity-title">เข้าร่วมกิจกรรมอบรมค่ายคุณธรรม จริยธรรมนักเรียน (ภาพที่ 1)</div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="activity-card" data-category="activity" onclick="openModal('กิจกรรมอบรมค่ายคุณธรรม (ภาพที่ 2)', 'เข้าร่วมกิจกรรมอบรมค่ายคุณธรรม จริยธรรมนักเรียน', '1788789154226.jpg')">
+                    <div class="activity-img-box">
+                        <img src="1788789154226.jpg" alt="ค่ายคุณธรรม 2">
+                    </div>
+                    <div class="activity-body">
+                        <span class="activity-tag">กิจกรรมค่าย</span>
+                        <div class="activity-title">เข้าร่วมกิจกรรมอบรมค่ายคุณธรรม จริยธรรมนักเรียน (ภาพที่ 2)</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </div>
 
-    <!-- Modal Preview Room -->
+    <!-- Lightbox Modal -->
     <div class="modal" id="previewModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
             <img id="modalImg" class="modal-img" src="" alt="Preview">
             <div class="modal-body">
-                <h2 id="modalTitle" style="color: var(--text-main); margin-bottom: 0.5rem;">Title</h2>
-                <p id="modalDesc" style="color: var(--text-subtle); line-height: 1.8;">Description text goes here...</p>
+                <h3 id="modalTitle" style="color: var(--text-main); font-size: 1.2rem; margin-bottom: 0.4rem;">Title</h3>
+                <p id="modalDesc" style="color: var(--text-subtle); font-size: 0.95rem; line-height: 1.6;">Description text...</p>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        &copy; SIRANATA PHOLTHEKONG — BANBUNG UTTSAHAKAMNUKROH SCHOOL
+        &copy; Portfolio - Siranata Pholthekong. All Rights Reserved.
     </footer>
 
     <!-- Interactive Scripts -->
     <script>
-        // 1. Particle Canvas Background Animation
+        // 1. Canvas Particles Effect
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -641,13 +723,13 @@
         window.addEventListener('resize', resizeCanvas);
 
         const particles = [];
-        for (let i = 0; i < 35; i++) {
+        for (let i = 0; i < 30; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                radius: Math.random() * 3 + 1,
-                dx: (Math.random() - 0.5) * 0.8,
-                dy: (Math.random() - 0.5) * 0.8,
+                radius: Math.random() * 2.5 + 1,
+                dx: (Math.random() - 0.5) * 0.6,
+                dy: (Math.random() - 0.5) * 0.6,
                 opacity: Math.random() * 0.5 + 0.2
             });
         }
@@ -670,39 +752,50 @@
         }
         animateParticles();
 
-        // 2. Skill Progress Bar Animation on Scroll/Load
+        // 2. Skill Bar Animation
         window.addEventListener('load', () => {
             const fills = document.querySelectorAll('.progress-fill');
             fills.forEach(fill => {
                 fill.style.width = fill.getAttribute('data-progress');
             });
+
+            // 3. GPA Counter Animation
+            const targetGPA = 3.93;
+            let currentGPA = 0;
+            const gpaElem = document.getElementById('gpaText');
+            const interval = setInterval(() => {
+                currentGPA += 0.05;
+                if (currentGPA >= targetGPA) {
+                    currentGPA = targetGPA;
+                    clearInterval(interval);
+                }
+                gpaElem.innerText = currentGPA.toFixed(2);
+            }, 20);
         });
 
-        // 3. 3D Tilt Card Effect
-        const cards = document.querySelectorAll('.card-item');
-
+        // 4. 3D Tilt Card Effect
+        const cards = document.querySelectorAll('.tilt-card');
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
+                const rotateX = (centerY - y) / 25;
+                const rotateY = (x - centerX) / 25;
 
-                const rotateX = (centerY - y) / 12;
-                const rotateY = (x - centerX) / 12;
-
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
             });
 
             card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
             });
         });
 
-        // 4. Portfolio Category Filter
+        // 5. Category Filtering System
         const filterBtns = document.querySelectorAll('.filter-btn');
+        const activityCards = document.querySelectorAll('.activity-card');
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -711,20 +804,20 @@
 
                 const filter = btn.getAttribute('data-filter');
 
-                cards.forEach(card => {
+                activityCards.forEach(card => {
                     if (filter === 'all' || card.getAttribute('data-category') === filter) {
                         card.style.display = 'block';
                         setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50);
                     } else {
                         card.style.opacity = '0';
-                        card.style.transform = 'scale(0.8)';
-                        setTimeout(() => { card.style.display = 'none'; }, 400);
+                        card.style.transform = 'scale(0.85)';
+                        setTimeout(() => { card.style.display = 'none'; }, 300);
                     }
                 });
             });
         });
 
-        // 5. Modal Preview Room
+        // 6. Lightbox Modal Control
         const modal = document.getElementById('previewModal');
         const modalImg = document.getElementById('modalImg');
         const modalTitle = document.getElementById('modalTitle');
