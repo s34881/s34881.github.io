@@ -25,6 +25,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            cursor: none; /* ซ่อน Cursor ปกติเพื่อใช้ Custom Cursor */
         }
 
         body {
@@ -38,6 +39,7 @@
             align-items: center;
             overflow: hidden;
             position: relative;
+            user-select: none;
         }
 
         /* 1. Dynamic Interactive Spotlight Background */
@@ -76,20 +78,50 @@
         }
 
         @keyframes floatUp {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            50% {
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1.2);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        /* 3. Main Content Container (ไร้กรอบ ไร้พื้นหลัง) */
+        /* 3. Custom Interactive Cursor Follower */
+        .custom-cursor {
+            position: fixed;
+            width: 90px;
+            height: 90px;
+            border: 1px solid var(--chula-pink);
+            background: rgba(222, 92, 142, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s ease-out, background 0.3s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .cursor-text {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            color: var(--chula-pink-dark);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--chula-pink-dark);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+
+        /* 4. Main Content Container (ไร้กรอบ ไร้ปุ่ม) */
         .hero-container {
             position: relative;
             z-index: 10;
@@ -97,18 +129,13 @@
             width: 100%;
             max-width: 800px;
             text-align: center;
+            transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.8s ease, filter 0.8s ease;
         }
 
-        /* Keyframes สำหรับตัวหนังสือค่อยๆ ลอยขึ้นมาทีละบรรทัด */
+        /* Animation ตัวหนังสือลอยขึ้นมา */
         @keyframes floatUpFade {
-            0% {
-                opacity: 0;
-                transform: translateY(35px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(35px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .animate-item {
@@ -116,7 +143,6 @@
             animation: floatUpFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* กำหนดเวลาลอยขึ้นเหลื่อมกัน (Stagger Delay) */
         .delay-1 { animation-delay: 0.2s; }
         .delay-2 { animation-delay: 0.4s; }
         .delay-3 { animation-delay: 0.6s; }
@@ -165,7 +191,7 @@
 
         /* School Name Section */
         .school-container {
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             line-height: 1.7;
         }
 
@@ -183,7 +209,6 @@
             display: inline-block;
         }
 
-        /* ขีดเส้นใต้เรืองแสงใต้ชื่อโรงเรียน */
         .school-highlight::after {
             content: '';
             position: absolute;
@@ -203,53 +228,88 @@
             font-style: italic;
         }
 
-        /* Light Interactive Portal Button */
-        .btn-portal {
-            position: relative;
+        /* Interactive Scroll / Tap Indicator (แทนปุ่ม) */
+        .action-hint {
             display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: var(--chula-pink-dark);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .mouse-icon {
+            width: 24px;
+            height: 38px;
+            border: 2px solid var(--chula-pink);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .mouse-wheel {
+            width: 4px;
+            height: 8px;
+            background-color: var(--chula-pink-dark);
+            border-radius: 2px;
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollWheel 1.8s infinite;
+        }
+
+        @keyframes scrollWheel {
+            0% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, 14px); }
+        }
+
+        /* 5. CINEMATIC PORTAL OVERLAY TRANSITION */
+        .portal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle, var(--chula-pink-light) 0%, var(--bg-color) 60%, var(--chula-pink) 100%);
+            z-index: 9999;
+            clip-path: circle(0% at 50% 50%);
+            transition: clip-path 0.85s cubic-bezier(0.7, 0, 0.2, 1);
+            pointer-events: none;
+            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 1.1rem 3rem;
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: #ffffff;
-            text-decoration: none;
-            background: linear-gradient(135deg, var(--chula-pink), var(--chula-pink-dark));
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(222, 92, 142, 0.35);
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            flex-direction: column;
         }
 
-        .btn-portal::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: 0.5s;
+        .portal-overlay.active {
+            clip-path: circle(150% at 50% 50%);
         }
 
-        .btn-portal:hover::before {
-            left: 100%;
+        .portal-loader-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            letter-spacing: 6px;
+            color: var(--chula-pink-dark);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease 0.3s;
+            text-transform: uppercase;
+            font-weight: 700;
         }
 
-        .btn-portal:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(222, 92, 142, 0.5);
-            background: linear-gradient(135deg, #e66898, var(--chula-pink-dark));
+        .portal-overlay.active .portal-loader-text {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .btn-arrow {
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-
-        .btn-portal:hover .btn-arrow {
-            transform: translateX(6px) scale(1.2);
+        /* Warp out Animation */
+        .warp-out {
+            transform: scale(1.15) translateY(-25px);
+            opacity: 0;
+            filter: blur(8px);
         }
 
         /* Footer */
@@ -264,16 +324,17 @@
 
         /* Responsive */
         @media (max-width: 600px) {
+            * { cursor: auto; } /* คืนค่า Cursor ปกติในมือถือ */
+            .custom-cursor, .cursor-dot { display: none; }
             h1.name-th { font-size: 1.9rem; }
             .name-en { font-size: 1rem; }
             .school-th { font-size: 1.05rem; }
             .school-en { font-size: 0.8rem; }
             .hero-container { padding: 1.2rem; }
-            .btn-portal { padding: 0.9rem 2.2rem; font-size: 0.95rem; }
         }
     </style>
 </head>
-<body>
+<body onclick="triggerPortalTransition(event)">
 
     <!-- Light Interactive Spotlight Background Layer -->
     <div class="spotlight" id="spotlight"></div>
@@ -281,8 +342,19 @@
     <!-- Light Floating Particles Layer -->
     <div class="particles-container" id="particles"></div>
 
-    <!-- Main Content Container (No Box Frame) -->
-    <main class="hero-container">
+    <!-- Custom Cursor Follower -->
+    <div class="custom-cursor" id="customCursor">
+        <span class="cursor-text">CLICK OR<br>SCROLL</span>
+    </div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Cinematic Portal Overlay Wipe Effect -->
+    <div class="portal-overlay" id="portalOverlay">
+        <div class="portal-loader-text">Loading Portfolio...</div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="hero-container" id="heroContent">
         
         <!-- Badge -->
         <div class="animate-item delay-1">
@@ -301,12 +373,12 @@
             <span class="school-en">Banbung Uttsahakamnukroh School</span>
         </div>
 
-        <!-- ปุ่มข้ามไปหน้า Portfolio -->
+        <!-- Interactive Hint (ไม่มีปุ่ม ใช้การ Scroll / Tap แทน) -->
         <div class="animate-item delay-4">
-            <a href="portfolio.html" class="btn-portal">
-                <span>เข้าชมพอร์ตโฟลิโอ</span>
-                <span class="btn-arrow">➔</span>
-            </a>
+            <div class="action-hint">
+                <div class="mouse-icon"><div class="mouse-wheel"></div></div>
+                <span>Scroll Down or Click Anywhere</span>
+            </div>
         </div>
 
     </main>
@@ -317,10 +389,19 @@
 
     <!-- Interactive Scripts -->
     <script>
-        // Mouse Spotlight Effect
+        // Custom Cursor Follower Script
+        const customCursor = document.getElementById('customCursor');
+        const cursorDot = document.getElementById('cursorDot');
         const spotlight = document.getElementById('spotlight');
 
         document.addEventListener('mousemove', (e) => {
+            // Cursor Follower
+            customCursor.style.left = `${e.clientX}px`;
+            customCursor.style.top = `${e.clientY}px`;
+            cursorDot.style.left = `${e.clientX}px`;
+            cursorDot.style.top = `${e.clientY}px`;
+
+            // Spotlight Position
             spotlight.style.setProperty('--mouse-x', `${e.clientX}px`);
             spotlight.style.setProperty('--mouse-y', `${e.clientY}px`);
         });
@@ -343,6 +424,53 @@
             
             particlesContainer.appendChild(particle);
         }
+
+        // Trigger Transition State Guard
+        let isTransitioning = false;
+
+        function triggerPortalTransition(e) {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            const portalOverlay = document.getElementById('portalOverlay');
+            const heroContent = document.getElementById('heroContent');
+            
+            // ใช้ตำแหน่งที่คลิก หรือจุดศูนย์กลางหน้าจอถ้าเป็นกรณีการ Scroll
+            const clickX = e ? e.clientX : window.innerWidth / 2;
+            const clickY = e ? e.clientY : window.innerHeight / 2;
+
+            portalOverlay.style.clipPath = `circle(0% at ${clickX}px ${clickY}px)`;
+            heroContent.classList.add('warp-out');
+
+            setTimeout(() => {
+                portalOverlay.style.clipPath = `circle(150% at ${clickX}px ${clickY}px)`;
+                portalOverlay.classList.add('active');
+            }, 50);
+
+            setTimeout(() => {
+                window.location.href = 'portfolio.html';
+            }, 850);
+        }
+
+        // Scroll & Wheel Gesture Detector (เลื่อนเมาส์ลงเพื่อวาร์ป)
+        window.addEventListener('wheel', (e) => {
+            if (e.deltaY > 20) {
+                triggerPortalTransition(null);
+            }
+        });
+
+        // Mobile Touch Swipe Gesture Detector (รูดนิ้วขึ้นเพื่อวาร์ป)
+        let touchStartY = 0;
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        });
+
+        window.addEventListener('touchend', (e) => {
+            const touchEndY = e.changedTouches[0].clientY;
+            if (touchStartY - touchEndY > 40) { // รูดขึ้นมากกว่า 40px
+                triggerPortalTransition(null);
+            }
+        });
     </script>
 </body>
 </html>
