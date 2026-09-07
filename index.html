@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>✨ Welcome to Siranata's World ✨</title>
 
-    <!-- Google Fonts for Thai (Nithan) & Decorative Cursive English -->
+    <!-- Google Fonts: Mali & Great Vibes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nithan&family=Great+Vibes&family=Alex+Brush&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Mali:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* Custom English Font Definition with Fallbacks */
         .en-font {
-            font-family: 'Great Vibes', 'Alex Brush', cursive, sans-serif !important;
+            font-family: 'Great Vibes', cursive !important;
             letter-spacing: 1px;
         }
 
@@ -24,10 +23,11 @@
         }
 
         body {
-            font-family: 'Nithan', cursive, sans-serif;
-            font-size: 1.25rem;
-            /* ตั้งค่ารูปภาพพื้นหลังดาวเพชรสีดำ (เปลี่ยน background.jpg เป็นชื่อไฟล์รูปของคุณ) */
-            background-image: url('image.png');
+            font-family: 'Mali', cursive, sans-serif;
+            font-size: 1.1rem;
+            
+            /* เปลี่ยนชื่อไฟล์ภาพพื้นหลังเป็นชื่อรูปใน GitHub แล้ว */
+            background-image: url('1788762340483.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -39,44 +39,27 @@
             align-items: center;
             justify-content: center;
             padding: 30px 15px;
-            position: relative;
         }
 
-        /* Glassmorphism Dark Pink Card */
         .card {
-            background: rgba(30, 10, 20, 0.75);
+            background: rgba(25, 10, 18, 0.8);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-radius: 35px;
-            box-shadow: 
-                0 0 30px rgba(236, 72, 153, 0.3),
-                0 15px 35px rgba(0, 0, 0, 0.6),
-                inset 0 0 15px rgba(255, 192, 203, 0.2);
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.35), 0 15px 35px rgba(0, 0, 0, 0.7);
             border: 2px solid rgba(244, 114, 182, 0.6);
             outline: 2px dashed rgba(251, 207, 232, 0.5);
             outline-offset: -10px;
-            max-width: 520px;
+            max-width: 480px;
             width: 100%;
-            margin: 0 auto;
-            padding: 40px 30px;
+            padding: 35px 25px;
             text-align: center;
-            position: relative;
-            z-index: 1;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 
-                0 0 40px rgba(236, 72, 153, 0.5),
-                0 20px 40px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Profile Avatar Wrapper */
         .profile-wrapper {
-            width: 160px;
-            height: 160px;
-            margin: 0 auto 22px auto;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px auto;
             position: relative;
         }
 
@@ -86,76 +69,57 @@
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid #ffffff;
-            box-shadow: 
-                0 0 20px rgba(244, 114, 182, 0.6),
-                0 8px 20px rgba(0, 0, 0, 0.5);
-            transition: all 0.5s ease;
-        }
-
-        .profile-wrapper:hover .profile {
-            transform: scale(1.05) rotate(3deg);
-            box-shadow: 0 0 25px rgba(236, 72, 153, 0.8);
+            box-shadow: 0 0 20px rgba(244, 114, 182, 0.6);
         }
 
         .profile-wrapper::after {
             content: '✨👑✨';
             position: absolute;
-            top: -18px;
-            right: -10px;
-            font-size: 26px;
+            top: -15px;
+            right: -8px;
+            font-size: 22px;
         }
 
         h1 {
             color: #fbcfe8;
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             margin-bottom: 12px;
-            font-weight: normal;
             text-shadow: 0 0 10px rgba(244, 114, 182, 0.6);
         }
 
         p {
-            font-size: 1.3rem;
-            line-height: 1.8;
+            line-height: 1.6;
             color: #fce7f3;
-            margin-bottom: 14px;
-        }
-
-        p strong {
-            color: #f472b6;
-            text-shadow: 0 0 8px rgba(244, 114, 182, 0.4);
+            margin-bottom: 12px;
         }
 
         .highlight-box {
             background: rgba(244, 114, 182, 0.15);
             border: 2px dashed #f472b6;
             border-radius: 20px;
-            padding: 16px 20px;
-            margin: 20px 0 25px 0;
-            box-shadow: inset 0 0 15px rgba(244, 114, 182, 0.2);
+            padding: 15px;
+            margin: 20px 0;
         }
 
-        /* Pink Glowing Button */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-            padding: 12px 36px;
+            gap: 8px;
+            padding: 10px 30px;
             background: linear-gradient(45deg, #ec4899, #db2777);
             color: white;
             text-decoration: none;
             border-radius: 50px;
-            font-size: 1.3rem;
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
-            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.6);
             border: 2px solid #ffffff;
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
-            background: linear-gradient(45deg, #f472b6, #ec4899);
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 0 30px rgba(236, 72, 153, 0.9);
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(236, 72, 153, 0.9);
         }
     </style>
 </head>
@@ -163,23 +127,21 @@
 <body>
 
     <div class="card">
-        <!-- รูปโปรไฟล์ -->
         <div class="profile-wrapper">
-            <img src="Screenshot 2026-06-30 103336.png" alt="รูปโปรไฟล์ของศิรณตา" class="profile">
+            <img src="Screenshot 2026-06-30 103336.png" alt="Profile" class="profile">
         </div>
 
         <h1>✨ ยินดีต้อนรับสู่แฟ้มสะสมผลงานของฉัน ✨</h1>
 
-        <p>สวัสดีค่ะ! ฉันชื่อ <strong>ศิรณตา (<span class="en-font" style="font-size: 1.6rem;">Siranata</span>)</strong> 💖</p>
+        <p>สวัสดีค่ะ! ฉันชื่อ <strong style="color: #f472b6;">ศิรณตา (<span class="en-font" style="font-size: 1.5rem;">Siranata</span>)</strong> 💖</p>
 
         <div class="highlight-box">
             <p style="margin-bottom: 0;">
                 ขณะนี้กำลังสนใจด้าน <br>
-                <strong style="font-size: 1.4rem; color: #f472b6;">บริหารโลจิสติกส์ (<span class="en-font" style="font-size: 1.5rem;">Logistics Management</span>)</strong>
+                <strong style="font-size: 1.2rem; color: #f472b6;">บริหารโลจิสติกส์ (<span class="en-font" style="font-size: 1.4rem;">Logistics Management</span>)</strong>
             </p>
         </div>
 
-        <!-- ปุ่มไปหน้าถัดไป -->
         <a href="portfolio.html" class="btn">
             <span>✨</span>
             <span class="en-font">View Portfolio</span>
