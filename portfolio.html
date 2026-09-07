@@ -150,7 +150,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* ขยับยกขึ้นนิดหน่อยอย่างนุ่มนวล ไม่เอียง */
         .card:hover {
             transform: translateY(-6px);
             box-shadow: var(--shadow-hover);
@@ -178,7 +177,6 @@
             text-align: center;
         }
 
-        /* รูปโปรไฟล์วงกลมสมบูรณ์แบบ */
         .profile-img-box {
             position: relative;
             width: 190px;
@@ -290,25 +288,44 @@
             color: var(--chula-pink-dark);
         }
 
-        /* Target Card */
+        /* Target Card System */
+        .target-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
         .target-box {
-            background: linear-gradient(135deg, var(--chula-pink-light) 0%, rgba(255,255,255,0.9) 100%);
+            background: linear-gradient(135deg, var(--chula-pink-light) 0%, rgba(255,255,255,0.95) 100%);
             border: 2px solid var(--chula-pink);
             border-radius: 18px;
-            padding: 2rem;
+            padding: 1.8rem;
             position: relative;
+            box-shadow: 0 4px 15px rgba(222, 92, 142, 0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .target-box.secondary {
+            border-color: rgba(197, 160, 89, 0.6);
+            background: linear-gradient(135deg, rgba(197, 160, 89, 0.08) 0%, rgba(255,255,255,0.95) 100%);
         }
 
         .target-badge {
             position: absolute;
             top: 15px;
-            right: 20px;
+            right: 18px;
             background: var(--chula-pink);
             color: white;
-            padding: 0.3rem 1rem;
+            padding: 0.25rem 0.9rem;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
+        }
+
+        .target-badge.gold {
+            background: var(--accent-gold);
         }
 
         /* Skill Bar System */
@@ -526,7 +543,7 @@
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .info-grid, .skills-grid { grid-template-columns: 1fr; }
+            .info-grid, .skills-grid, .target-grid { grid-template-columns: 1fr; }
             .card { padding: 1.8rem 1.2rem; }
         }
     </style>
@@ -602,7 +619,7 @@
             </div>
         </section>
 
-        <!-- 2. ประวัติการศึกษา (Education Section) - แยกการ์ดเดี่ยว -->
+        <!-- 2. ประวัติการศึกษา (Education Section) -->
         <section id="education" class="card">
             <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> ประวัติการศึกษา</h2>
             <div class="edu-box">
@@ -620,22 +637,43 @@
             </div>
         </section>
 
-        <!-- 3. เป้าหมายการศึกษาต่อ (Target Section) - แยกการ์ดเดี่ยว -->
+        <!-- 3. เป้าหมายการศึกษาต่อ (Target Section - เพิ่มเป้าหมายอันดับ 1 และ 2) -->
         <section id="target" class="card">
             <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> เป้าหมายการศึกษาต่อ</h2>
-            <div class="target-box">
-                <span class="target-badge">เป้าหมายอันดับ 1</span>
-                <h3 style="font-size: 1.3rem; color: var(--text-main); margin-bottom: 0.3rem;">จุฬาลงกรณ์มหาวิทยาลัย</h3>
-                <p style="color: var(--chula-pink-dark); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.6rem;">
-                    คณะพาณิชยศาสตร์และการบัญชี
-                </p>
-                <p style="color: var(--text-main); font-size: 0.95rem; font-weight: 500;">
-                    หลักสูตรบริหารธุรกิจบัณฑิต สาขาวิชาการจัดการโลจิสติกส์ระหว่างประเทศ
-                </p>
+            <div class="target-grid">
+                
+                <!-- เป้าหมายอันดับ 1 -->
+                <div class="target-box">
+                    <span class="target-badge">เป้าหมายอันดับ 1</span>
+                    <div>
+                        <h3 style="font-size: 1.25rem; color: var(--text-main); margin-bottom: 0.3rem;">จุฬาลงกรณ์มหาวิทยาลัย</h3>
+                        <p style="color: var(--chula-pink-dark); font-weight: 700; font-size: 1.05rem; margin-bottom: 0.5rem;">
+                            คณะพาณิชยศาสตร์และการบัญชี
+                        </p>
+                        <p style="color: var(--text-main); font-size: 0.95rem; font-weight: 500;">
+                            หลักสูตรบริหารธุรกิจบัณฑิต สาขาวิชาการจัดการโลจิสติกส์ระหว่างประเทศ
+                        </p>
+                    </div>
+                </div>
+
+                <!-- เป้าหมายอันดับ 2 -->
+                <div class="target-box secondary">
+                    <span class="target-badge gold">เป้าหมายอันดับ 2</span>
+                    <div>
+                        <h3 style="font-size: 1.25rem; color: var(--text-main); margin-bottom: 0.3rem;">จุฬาลงกรณ์มหาวิทยาลัย</h3>
+                        <p style="color: var(--chula-pink-dark); font-weight: 700; font-size: 1.05rem; margin-bottom: 0.5rem;">
+                            คณะรัฐศาสตร์
+                        </p>
+                        <p style="color: var(--text-main); font-size: 0.95rem; font-weight: 500;">
+                            หลักสูตรรัฐศาสตรบัณฑิต สาขาวิชาความสัมพันธ์ระหว่างประเทศ
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <!-- 4. ทักษะและความสามารถ (Skills Section) -->
+        <!-- 4. ทักษะและความสามารถ (Skills Section - เพิ่มภาษาอังกฤษ 70%) -->
         <section id="skills" class="card">
             <h2 class="section-title"><i class="fa-solid fa-star"></i> ทักษะและความสามารถ (Skills)</h2>
             <div class="skills-grid">
@@ -645,6 +683,13 @@
                         <span>80%</span>
                     </div>
                     <div class="progress-bar"><div class="progress-fill" data-progress="80%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span><i class="fa-solid fa-language"></i> English / ความสามารถด้านภาษาอังกฤษ</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" data-progress="70%"></div></div>
                 </div>
                 <div class="skill-item">
                     <div class="skill-info">
@@ -660,7 +705,7 @@
                     </div>
                     <div class="progress-bar"><div class="progress-fill" data-progress="90%"></div></div>
                 </div>
-                <div class="skill-item">
+                <div class="skill-item" style="grid-column: span 2;">
                     <div class="skill-info">
                         <span><i class="fa-solid fa-lightbulb"></i> Creativity / ความคิดสร้างสรรค์</span>
                         <span>88%</span>
