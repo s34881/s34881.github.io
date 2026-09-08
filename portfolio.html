@@ -30,7 +30,6 @@ body {
     position: relative;
 }
 
-/* Ambient Background Dynamic Glow */
 .ambient-bg {
     position: fixed;
     top: 0;
@@ -44,7 +43,16 @@ body {
     z-index: 0;
 }
 
-/* Header Navbar */
+#particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
 header {
     position: sticky;
     top: 0;
@@ -70,7 +78,7 @@ header {
 
 .nav-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.2rem;
     list-style: none;
 }
 
@@ -80,14 +88,15 @@ header {
     font-size: 0.9rem;
     font-weight: 500;
     transition: color 0.3s ease;
+    padding: 0.3rem 0.6rem;
+    border-radius: 8px;
 }
 
 .nav-links a:hover, .nav-links a.active {
     color: var(--chula-pink);
-    font-weight: 600;
+    background: var(--chula-pink-light);
 }
 
-/* Container & Cards */
 .container {
     max-width: 1000px;
     margin: 0 auto;
@@ -122,11 +131,8 @@ header {
     gap: 12px;
 }
 
-.section-title i {
-    color: var(--chula-pink);
-}
+.section-title i { color: var(--chula-pink); }
 
-/* Profile Section Styles */
 .profile-hero {
     display: flex;
     flex-direction: column;
@@ -200,14 +206,23 @@ header {
     font-size: 1rem;
 }
 
-/* Education Styles */
 .edu-box {
     border-left: 4px solid var(--chula-pink);
     padding-left: 1.5rem;
 }
 
-.school-title { font-size: 1.25rem; font-weight: 700; color: var(--text-main); }
-.program-title { color: var(--chula-pink-dark); font-weight: 600; margin-top: 0.2rem; font-size: 1rem; }
+.school-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.program-title {
+    color: var(--chula-pink-dark);
+    font-weight: 600;
+    margin-top: 0.2rem;
+    font-size: 1rem;
+}
 
 .gpa-counter {
     display: inline-flex;
@@ -220,9 +235,12 @@ header {
     border: 1px solid var(--border-pink);
 }
 
-.gpa-num { font-size: 1.8rem; font-weight: 800; color: var(--chula-pink-dark); }
+.gpa-num {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--chula-pink-dark);
+}
 
-/* Target Styles */
 .target-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -277,7 +295,6 @@ header {
     background: rgba(255, 255, 255, 0.9);
 }
 
-/* Skills Styles */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -314,7 +331,6 @@ header {
     transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
 }
 
-/* Activities & Lightbox Styles */
 .filter-container {
     display: flex;
     justify-content: center;
@@ -418,7 +434,10 @@ header {
     padding: 2rem;
 }
 
-.modal.active { opacity: 1; pointer-events: auto; }
+.modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
 
 .modal-content {
     background: var(--bg-color);
@@ -434,7 +453,6 @@ header {
 }
 
 .modal.active .modal-content { transform: scale(1); }
-
 .modal-img { width: 100%; max-height: 450px; object-fit: cover; }
 .modal-body { padding: 1.8rem; }
 
@@ -456,7 +474,10 @@ header {
     transition: background 0.3s ease;
 }
 
-.modal-close:hover { background: var(--chula-pink); color: white; }
+.modal-close:hover {
+    background: var(--chula-pink);
+    color: white;
+}
 
 footer {
     text-align: center;
@@ -473,4 +494,3 @@ footer {
     .card { padding: 1.8rem 1.2rem; }
     .skill-item[style*="span 2"] { grid-column: span 1 !important; }
 }
-    
