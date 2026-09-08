@@ -1,950 +1,476 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Siranata Pholthekong</title>
-    <!-- Google Fonts & FontAwesome Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        :root {
-            --bg-color: #fdf8fa;
-            --chula-pink: #DE5C8E;
-            --chula-pink-dark: #a83261;
-            --chula-pink-light: #fbeaf0;
-            --accent-gold: #c5a059;
-            --accent-gold-dark: #8c6d33;
-            --accent-gold-light: #faf5e8;
-            --text-main: #2b2b2b;
-            --text-subtle: #666666;
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --border-pink: rgba(222, 92, 142, 0.25);
-            --shadow-soft: 0 10px 30px rgba(222, 92, 142, 0.1);
-            --shadow-hover: 0 15px 35px rgba(222, 92, 142, 0.2);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Prompt', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Ambient Dynamic Background Glow */
-        .ambient-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            background: 
-                radial-gradient(circle at 15% 20%, rgba(222, 92, 142, 0.12), transparent 45%),
-                radial-gradient(circle at 85% 80%, rgba(197, 160, 89, 0.1), transparent 45%);
-            z-index: 0;
-        }
-
-        /* Particle Canvas */
-        #particleCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Glassmorphism Header Bar */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(253, 248, 250, 0.85);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-pink);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-        }
-
-        .logo {
-            font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--chula-pink-dark);
-            letter-spacing: 2px;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-subtle);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--chula-pink);
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--chula-pink-dark);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            padding: 0.4rem 1.1rem;
-            border-radius: 20px;
-            background: rgba(222, 92, 142, 0.08);
-            border: 1px solid var(--border-pink);
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: var(--chula-pink);
-            color: white;
-            transform: translateX(-4px);
-        }
-
-        /* Layout Container */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 3rem 1.5rem 6rem 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Base Card Styling with Soft Hover Uplift */
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--border-pink);
-            border-radius: 24px;
-            padding: 2.5rem;
-            box-shadow: var(--shadow-soft);
-            margin-bottom: 2.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--chula-pink-dark);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .section-title i {
-            color: var(--chula-pink);
-        }
-
-        /* Hero / Profile Section */
-        .profile-hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .profile-img-box {
-            position: relative;
-            width: 190px;
-            height: 190px;
-            border-radius: 50%;
-            padding: 5px;
-            background: linear-gradient(135deg, var(--chula-pink), var(--accent-gold));
-            box-shadow: 0 10px 25px rgba(222, 92, 142, 0.25);
-            cursor: pointer;
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .profile-img-box:hover {
-            transform: scale(1.05);
-        }
-
-        .profile-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        .profile-info h1 {
-            font-size: 2.2rem;
-            color: var(--text-main);
-            font-weight: 700;
-        }
-
-        .profile-info .subname {
-            font-family: 'Cinzel', serif;
-            color: var(--chula-pink-dark);
-            font-weight: 700;
-            letter-spacing: 2px;
-            font-size: 1.05rem;
-            margin-bottom: 2rem;
-            display: block;
-        }
-
-        /* Profile Info Grid */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.2rem;
-            width: 100%;
-            text-align: left;
-        }
-
-        .info-item {
-            background: rgba(222, 92, 142, 0.04);
-            padding: 1rem 1.2rem;
-            border-radius: 14px;
-            border: 1px solid rgba(222, 92, 142, 0.12);
-        }
-
-        .info-label {
-            font-size: 0.8rem;
-            color: var(--text-subtle);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 0.3rem;
-        }
-
-        .info-label i {
-            color: var(--chula-pink);
-        }
-
-        .info-value {
-            font-weight: 600;
-            color: var(--text-main);
-            font-size: 1rem;
-        }
-
-        /* Education Card */
-        .edu-box {
-            border-left: 4px solid var(--chula-pink);
-            padding-left: 1.5rem;
-        }
-
-        .school-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .program-title {
-            color: var(--chula-pink-dark);
-            font-weight: 600;
-            margin-top: 0.2rem;
-            font-size: 1rem;
-        }
-
-        .gpa-counter {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            margin-top: 1.2rem;
-            background: var(--chula-pink-light);
-            padding: 0.8rem 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-pink);
-        }
-
-        .gpa-num {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--chula-pink-dark);
-        }
-
-        /* Target Card System */
-        .target-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .target-box {
-            background: linear-gradient(135deg, var(--chula-pink-light) 0%, rgba(255,255,255,0.95) 100%);
-            border: 2px solid var(--chula-pink);
-            border-radius: 18px;
-            padding: 1.8rem;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(222, 92, 142, 0.08);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .target-box.secondary {
-            border-color: rgba(197, 160, 89, 0.6);
-            background: linear-gradient(135deg, rgba(197, 160, 89, 0.08) 0%, rgba(255,255,255,0.95) 100%);
-        }
-
-        .target-badge {
-            position: absolute;
-            top: 15px;
-            right: 18px;
-            background: var(--chula-pink);
-            color: white;
-            padding: 0.25rem 0.9rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .target-badge.gold {
-            background: var(--accent-gold);
-        }
-
-        .target-reason {
-            margin-top: 1.2rem;
-            padding: 1rem 1.2rem;
-            background: rgba(255, 255, 255, 0.85);
-            border-left: 3px solid var(--chula-pink);
-            border-radius: 0 12px 12px 0;
-            font-size: 0.88rem;
-            color: var(--text-main);
-            line-height: 1.6;
-            font-style: italic;
-        }
-
-        .target-reason.gold {
-            border-left-color: var(--accent-gold);
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .target-reason i {
-            color: var(--chula-pink);
-            margin-right: 4px;
-        }
-
-        .target-reason.gold i {
-            color: var(--accent-gold);
-        }
-
-        /* Skill Bar System */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.2rem;
-        }
-
-        .skill-item {
-            background: rgba(222, 92, 142, 0.04);
-            padding: 1rem 1.2rem;
-            border-radius: 14px;
-            border: 1px solid rgba(222, 92, 142, 0.12);
-        }
-
-        .skill-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.88rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: rgba(0,0,0,0.06);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--chula-pink), var(--accent-gold));
-            border-radius: 10px;
-            width: 0%;
-            transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
-        }
-
-        /* Filter Tabs */
-        .filter-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            border: 1px solid var(--border-pink);
-            background: rgba(255, 255, 255, 0.8);
-            color: var(--text-main);
-            padding: 0.5rem 1.3rem;
-            border-radius: 30px;
-            font-family: 'Prompt', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--chula-pink);
-            color: white;
-            box-shadow: 0 6px 18px rgba(222, 92, 142, 0.3);
-            border-color: var(--chula-pink);
-        }
-
-        /* Activities Grid */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .activity-card {
-            background: #ffffff;
-            border-radius: 18px;
-            overflow: hidden;
-            border: 1px solid var(--border-pink);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.03);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .activity-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 25px rgba(222, 92, 142, 0.2);
-            border-color: var(--chula-pink);
-        }
-
-        .activity-img-box {
-            position: relative;
-            height: 190px;
-            overflow: hidden;
-        }
-
-        .activity-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .activity-card:hover .activity-img-box img {
-            transform: scale(1.08);
-        }
-
-        .activity-body {
-            padding: 1.2rem;
-        }
-
-        .activity-tag {
-            display: inline-block;
-            background: var(--chula-pink-light);
-            color: var(--chula-pink-dark);
-            padding: 0.2rem 0.8rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .activity-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text-main);
-            line-height: 1.5;
-        }
-
-        /* Lightbox Modal */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-            padding: 2rem;
-        }
-
-        .modal.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-content {
-            background: var(--bg-color);
-            border-radius: 24px;
-            max-width: 750px;
-            width: 100%;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-            border: 1px solid var(--border-pink);
-            transform: scale(0.85);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-        }
-
-        .modal.active .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-img {
-            width: 100%;
-            max-height: 450px;
-            object-fit: cover;
-        }
-
-        .modal-body {
-            padding: 1.8rem;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 38px;
-            height: 38px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border: none;
-            color: var(--text-main);
-            font-size: 1.1rem;
-            transition: background 0.3s ease;
-        }
-
-        .modal-close:hover {
-            background: var(--chula-pink);
-            color: white;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-subtle);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border-pink);
-            background: rgba(253, 248, 250, 0.8);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .info-grid, .skills-grid, .target-grid { grid-template-columns: 1fr; }
-            .card { padding: 1.8rem 1.2rem; }
-            .skill-item[style*="span 2"] { grid-column: span 1 !important; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Ambient Glow Background -->
-    <div class="ambient-bg"></div>
-
-    <!-- Canvas Particles Animation -->
-    <canvas id="particleCanvas"></canvas>
-
-    <!-- Header Navigation Bar -->
-    <header>
-        <div style="display: flex; align-items: center; gap: 1rem;">
-            <a href="index.html" class="back-btn">
-                <i class="fa-solid fa-arrow-left"></i> หน้าหลัก
-            </a>
-            <a href="#" class="logo">PORTFOLIO</a>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#about">ประวัติส่วนตัว</a></li>
-            <li><a href="#education">การศึกษา</a></li>
-            <li><a href="#target">เป้าหมาย</a></li>
-            <li><a href="#skills">ทักษะ</a></li>
-            <li><a href="#activities">ผลงาน & กิจกรรม</a></li>
-        </ul>
-    </header>
-
-    <!-- Main Content Container -->
-    <div class="container">
-
-        <!-- 1. ประวัติส่วนตัว (Personal Profile Section) -->
-        <section id="about" class="card">
-            <div class="profile-hero">
-                <!-- รูปโปรไฟล์วงกลม -->
-                <div class="profile-img-box" onclick="openModal('นางสาวศิรณตา พลเทกอง', 'ภาพถ่ายประจำตัว', '1788760432866.jpg')">
-                    <img src="1788760432866.jpg" alt="นางสาวศิรณตา พลเทกอง">
-                </div>
-                <div class="profile-info">
-                    <h1>นางสาวศิรณตา พลเทกอง</h1>
-                    <span class="subname">SIRANATA PHOLTHEKONG</span>
-                </div>
-            </div>
-
-            <h2 class="section-title"><i class="fa-solid fa-address-card"></i> ข้อมูลส่วนตัว</h2>
-            
-            <div class="info-grid">
-                <div class="info-item">
-                    <span class="info-label"><i class="fa-solid fa-user"></i> ชื่อ - นามสกุล</span>
-                    <span class="info-value">นางสาวศิรณตา พลเทกอง</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label"><i class="fa-solid fa-smile"></i> ชื่อเล่น</span>
-                    <span class="info-value">ขนมชั้น</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label"><i class="fa-solid fa-hourglass-half"></i> อายุ</span>
-                    <span class="info-value">17 ปี</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label"><i class="fa-solid fa-cake-candles"></i> วันเกิด</span>
-                    <span class="info-value">13 พฤษภาคม 2552</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label"><i class="fa-solid fa-music"></i> งานอดิเรก</span>
-                    <span class="info-value">เล่นดนตรี</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label"><i class="fa-solid fa-envelope"></i> อีเมลติดต่อ</span>
-                    <span class="info-value">s34881@banbung.ac.th</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. ประวัติการศึกษา (Education Section) -->
-        <section id="education" class="card">
-            <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> ประวัติการศึกษา</h2>
-            <div class="edu-box">
-                <div class="school-title">โรงเรียนบ้านบึง "อุตสาหกรรมนุเคราะห์"</div>
-                <div class="program-title">แผนการเรียน: วิทยาศาสตร์ - คณิตศาสตร์ (Gifted Program)</div>
-                <p style="color: var(--text-subtle); font-size: 0.9rem; margin-top: 0.3rem;">กำลังศึกษาอยู่ในระดับชั้นมัธยมศึกษาตอนปลาย</p>
-                
-                <div class="gpa-counter">
-                    <i class="fa-solid fa-award" style="font-size: 1.8rem; color: var(--chula-pink);"></i>
-                    <div>
-                        <span style="font-size: 0.8rem; color: var(--text-subtle); display: block;">ผลการเรียนเฉลี่ยสะสม (GPAX 4 เทอม)</span>
-                        <div class="gpa-num" id="gpaText">0.00</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. เป้าหมายการศึกษาต่อ (Target Section) -->
-        <section id="target" class="card">
-            <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> เป้าหมายการศึกษาต่อ</h2>
-            <div class="target-grid">
-                
-                <!-- เป้าหมายอันดับ 1 -->
-                <div class="target-box">
-                    <div>
-                        <span class="target-badge">เป้าหมายอันดับ 1</span>
-                        <h3 style="font-size: 1.25rem; color: var(--text-main); margin-bottom: 0.3rem;">จุฬาลงกรณ์มหาวิทยาลัย</h3>
-                        <p style="color: var(--chula-pink-dark); font-weight: 700; font-size: 1.05rem; margin-bottom: 0.5rem;">
-                            คณะพาณิชยศาสตร์และการบัญชี
-                        </p>
-                        <p style="color: var(--text-main); font-size: 0.95rem; font-weight: 500;">
-                            หลักสูตรบริหารธุรกิจบัณฑิต สาขาวิชาการจัดการโลจิสติกส์ระหว่างประเทศ
-                        </p>
-                    </div>
-
-                    <!-- เหตุผลการเลือกเรียนในเป้าหมายอันดับ 1 -->
-                    <div class="target-reason">
-                        <i class="fa-solid fa-quote-left"></i>
-                        เหตุผลหลักที่เลือกเรียนบริหารโลจิสติกระหว่างประเทศ เพราะมองว่าสาขานี้คือสะพานเชื่อมระหว่างความชอบส่วนตัวและเป้าหมายในอาชีพ ดิฉันมีความหลงใหลในวัฒนธรรมและสถาปัตยกรรมยุโรป รวมถึงอยากเปิดโลกทัศน์การทำงานในระดับสากล สายงานนี้เป็นงานที่มีเสน่ห์ ตื่นเต้น และไม่หยุดนิ่ง การได้เรียนรู้ระบบการค้าและซัพพลายเชนระดับโลก จะเป็นรากฐานสำคัญที่ช่วยพัฒนาทักษะความเป็นมืออาชีพ เพื่อพาตัวเองไปสู่เป้าหมายสูงสุดคือการได้เติบโตและทำงานในต่างประเทศอย่างที่ตั้งใจค่ะ
-                    </div>
-                </div>
-
-                <!-- เป้าหมายอันดับ 2 -->
-                <div class="target-box secondary">
-                    <div>
-                        <span class="target-badge gold">เป้าหมายอันดับ 2</span>
-                        <h3 style="font-size: 1.25rem; color: var(--text-main); margin-bottom: 0.3rem;">จุฬาลงกรณ์มหาวิทยาลัย</h3>
-                        <p style="color: var(--chula-pink-dark); font-weight: 700; font-size: 1.05rem; margin-bottom: 0.5rem;">
-                            คณะรัฐศาสตร์
-                        </p>
-                        <p style="color: var(--text-main); font-size: 0.95rem; font-weight: 500;">
-                            หลักสูตรรัฐศาสตรบัณฑิต สาขาวิชาความสัมพันธ์ระหว่างประเทศ
-                        </p>
-                    </div>
-
-                    <!-- เหตุผลการเลือกเรียนในเป้าหมายอันดับ 2 -->
-                    <div class="target-reason gold">
-                        <i class="fa-solid fa-quote-left"></i>
-                        เหตุผลที่เลือกเรียนความสัมพันธ์ระหว่างประเทศ เพราะต้องการสร้างรากฐานอาชีพที่มั่นคง มีเกียรติ และส่งผลกระทบในระดับสากล ดิฉันมีความหลงใหลในประวัติศาสตร์และวัฒนธรรมยุโรปเป็นทุนเดิม และมองว่า IR คือศาสตร์ที่จะช่วยแปลงความชอบนั้นให้กลายเป็นความเข้าใจเชิงลึกทางการเมืองและการทูต การได้เรียนรู้กลไกความสัมพันธ์ระหว่างประเทศจะเป็นสะพานสำคัญที่เปิดโอกาสให้ดิฉันได้ไปเติบโต ทำงาน และใช้ชีวิตในต่างประเทศ พร้อมกับบทบาทหน้าที่ที่มีความน่าเชื่อถือและเป็นเกียรติสำหรับดิฉันค่ะ
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- 4. ทักษะและความสามารถ (Skills Section) -->
-        <section id="skills" class="card">
-            <h2 class="section-title"><i class="fa-solid fa-star"></i> ทักษะและความสามารถ (Skills)</h2>
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span><i class="fa-solid fa-calculator"></i> Mathematics / ความสามารถทางคณิตศาสตร์</span>
-                        <span>80%</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" data-progress="80%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span><i class="fa-solid fa-language"></i> English / ความสามารถด้านภาษาอังกฤษ</span>
-                        <span>70%</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" data-progress="70%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span><i class="fa-solid fa-users"></i> Leadership / ภาวะผู้นำ</span>
-                        <span>95%</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" data-progress="95%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span><i class="fa-solid fa-comments"></i> Communication / การสื่อสาร</span>
-                        <span>90%</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" data-progress="90%"></div></div>
-                </div>
-                <div class="skill-item" style="grid-column: span 2;">
-                    <div class="skill-info">
-                        <span><i class="fa-solid fa-lightbulb"></i> Creativity / ความคิดสร้างสรรค์</span>
-                        <span>88%</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" data-progress="88%"></div></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. ผลงานและกิจกรรม (Activities Gallery) -->
-        <section id="activities" class="card">
-            <h2 class="section-title"><i class="fa-solid fa-images"></i> ผลงานและกิจกรรมที่เข้าร่วม</h2>
-
-            <!-- Filter Buttons -->
-            <div class="filter-container">
-                <button class="filter-btn active" data-filter="all">ทั้งหมด (All)</button>
-                <button class="filter-btn" data-filter="award">รางวัล (Awards)</button>
-                <button class="filter-btn" data-filter="academic">วิชาการ (Academic)</button>
-                <button class="filter-btn" data-filter="activity">กิจกรรม (Activities)</button>
-            </div>
-
-            <!-- Activity Gallery Grid -->
-            <div class="gallery-grid">
-                
-                <!-- Item 1 -->
-                <div class="activity-card" data-category="award" onclick="openModal('MISS B.B. SCIENCE 2024', 'ได้รับรางวัลชนะเลิศการประกวดชุด MISS B.B. SCIENCE 2024 ระดับชั้นมัธยมศึกษาตอนปลาย', '1788760429156.jpg')">
-                    <div class="activity-img-box">
-                        <img src="1788760429156.jpg" alt="MISS B.B. SCIENCE 2024">
-                    </div>
-                    <div class="activity-body">
-                        <span class="activity-tag">รางวัลชนะเลิศ</span>
-                        <div class="activity-title">การประกวดชุด MISS B.B. SCIENCE 2024 ระดับชั้นมัธยมศึกษาตอนปลาย</div>
-                    </div>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="activity-card" data-category="academic" onclick="openModal('การแข่งขันอัจฉริยภาพทางคณิตศาสตร์', 'เข้าร่วมการแข่งขันอัจฉริยภาพทางคณิตศาสตร์ ระดับชั้นมัธยมศึกษาตอนปลาย', '1788760428894.jpg')">
-                    <div class="activity-img-box">
-                        <img src="1788760428894.jpg" alt="อัจฉริยภาพทางคณิตศาสตร์">
-                    </div>
-                    <div class="activity-body">
-                        <span class="activity-tag">การแข่งขันวิชาการ</span>
-                        <div class="activity-title">เข้าร่วมการแข่งขันอัจฉริยภาพทางคณิตศาสตร์ ระดับมัธยมศึกษาตอนปลาย</div>
-                    </div>
-                </div>
-
-                <!-- Item 3 -->
-                <div class="activity-card" data-category="activity" onclick="openModal('กิจกรรมอบรมค่ายคุณธรรม (ภาพที่ 1)', 'เข้าร่วมกิจกรรมอบรมค่ายคุณธรรม จริยธรรมนักเรียน', '1788789154644.jpg')">
-                    <div class="activity-img-box">
-                        <img src="1788789154644.jpg" alt="ค่ายคุณธรรม 1">
-                    </div>
-                    <div class="activity-body">
-                        <span class="activity-tag">กิจกรรมค่าย</span>
-                        <div class="activity-title">เข้าร่วมกิจกรรมอบรมค่ายคุณธรรม จริยธรรมนักเรียน (ภาพที่ 1)</div>
-                    </div>
-                </div>
-
-                <!-- Item 4 -->
-                <div class="activity-card" data-category="activity" onclick="openModal('กิจกรรมอบรมค่ายคุณธรรม (ภาพที่ 2)', 'เข้าร่วมกิจกรรมอบรมค่ายคุณธรรม จริยธรรมนักเรียน', '1788789154226.jpg')">
-                    <div class="activity-img-box">
-                        <img src="1788789154226.jpg" alt="ค่ายคุณธรรม 2">
-                    </div>
-                    <div class="activity-body">
-                        <span class="activity-tag">กิจกรรมค่าย</span>
-                        <div class="activity-title">เข้าร่วมกิจกรรมอบรมค่ายคุณธรรม จริยธรรมนักเรียน (ภาพที่ 2)</div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-    </div>
-
-    <!-- Lightbox Modal -->
-    <div class="modal" id="previewModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-            <img id="modalImg" class="modal-img" src="" alt="Preview">
-            <div class="modal-body">
-                <h3 id="modalTitle" style="color: var(--text-main); font-size: 1.2rem; margin-bottom: 0.4rem;">Title</h3>
-                <p id="modalDesc" style="color: var(--text-subtle); font-size: 0.95rem; line-height: 1.6;">Description text...</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        &copy; Portfolio - Siranata Pholthekong. All Rights Reserved.
-    </footer>
-
-    <!-- Interactive Scripts -->
-    <script>
-        // 1. Canvas Particles Effect
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const particles = [];
-        for (let i = 0; i < 30; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 2.5 + 1,
-                dx: (Math.random() - 0.5) * 0.6,
-                dy: (Math.random() - 0.5) * 0.6,
-                opacity: Math.random() * 0.5 + 0.2
-            });
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(222, 92, 142, ${p.opacity})`;
-                ctx.fill();
-
-                p.x += p.dx;
-                p.y += p.dy;
-
-                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-
-        // 2. Skill Bar & GPA Counter Animation
-        window.addEventListener('load', () => {
-            const fills = document.querySelectorAll('.progress-fill');
-            fills.forEach(fill => {
-                fill.style.width = fill.getAttribute('data-progress');
-            });
-
-            // GPA Counter
-            const targetGPA = 3.93;
-            let currentGPA = 0;
-            const gpaElem = document.getElementById('gpaText');
-            const interval = setInterval(() => {
-                currentGPA += 0.05;
-                if (currentGPA >= targetGPA) {
-                    currentGPA = targetGPA;
-                    clearInterval(interval);
-                }
-                gpaElem.innerText = currentGPA.toFixed(2);
-            }, 20);
-        });
-
-        // 3. Category Filtering System
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const activityCards = document.querySelectorAll('.activity-card');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const filter = btn.getAttribute('data-filter');
-
-                activityCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'block';
-                        setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50);
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'scale(0.85)';
-                        setTimeout(() => { card.style.display = 'none'; }, 300);
-                    }
-                });
-            });
-        });
-
-        // 4. Lightbox Modal Control
-        const modal = document.getElementById('previewModal');
-        const modalImg = document.getElementById('modalImg');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalDesc = document.getElementById('modalDesc');
-
-        function openModal(title, desc, imgSrc) {
-            modalTitle.innerText = title;
-            modalDesc.innerText = desc;
-            modalImg.src = imgSrc;
-            modal.classList.add('active');
-        }
-
-        function closeModal() {
-            modal.classList.remove('active');
-        }
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-    </script>
-</body>
-</html>
+:root {
+    --bg-color: #fdf8fa;
+    --chula-pink: #DE5C8E;
+    --chula-pink-dark: #a83261;
+    --chula-pink-light: #fbeaf0;
+    --accent-gold: #c5a059;
+    --accent-gold-dark: #8c6d33;
+    --accent-gold-light: #faf5e8;
+    --text-main: #2b2b2b;
+    --text-subtle: #666666;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --border-pink: rgba(222, 92, 142, 0.25);
+    --shadow-soft: 0 10px 30px rgba(222, 92, 142, 0.1);
+    --shadow-hover: 0 15px 35px rgba(222, 92, 142, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Prompt', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Ambient Background Dynamic Glow */
+.ambient-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background: 
+        radial-gradient(circle at 15% 20%, rgba(222, 92, 142, 0.12), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(197, 160, 89, 0.1), transparent 45%);
+    z-index: 0;
+}
+
+/* Header Navbar */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(253, 248, 250, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-pink);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--chula-pink-dark);
+    letter-spacing: 2px;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-subtle);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--chula-pink);
+    font-weight: 600;
+}
+
+/* Container & Cards */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-pink);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 2.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+}
+
+.section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--chula-pink-dark);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-title i {
+    color: var(--chula-pink);
+}
+
+/* Profile Section Styles */
+.profile-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-img-box {
+    position: relative;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    padding: 5px;
+    background: linear-gradient(135deg, var(--chula-pink), var(--accent-gold));
+    box-shadow: 0 10px 25px rgba(222, 92, 142, 0.25);
+    margin-bottom: 1.5rem;
+}
+
+.profile-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-info h1 {
+    font-size: 2.2rem;
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.profile-info .subname {
+    font-family: 'Cinzel', serif;
+    color: var(--chula-pink-dark);
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+    width: 100%;
+    text-align: left;
+}
+
+.info-item {
+    background: rgba(222, 92, 142, 0.04);
+    padding: 1rem 1.2rem;
+    border-radius: 14px;
+    border: 1px solid rgba(222, 92, 142, 0.12);
+}
+
+.info-label {
+    font-size: 0.8rem;
+    color: var(--text-subtle);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 0.3rem;
+}
+
+.info-label i { color: var(--chula-pink); }
+
+.info-value {
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 1rem;
+}
+
+/* Education Styles */
+.edu-box {
+    border-left: 4px solid var(--chula-pink);
+    padding-left: 1.5rem;
+}
+
+.school-title { font-size: 1.25rem; font-weight: 700; color: var(--text-main); }
+.program-title { color: var(--chula-pink-dark); font-weight: 600; margin-top: 0.2rem; font-size: 1rem; }
+
+.gpa-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 1.2rem;
+    background: var(--chula-pink-light);
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-pink);
+}
+
+.gpa-num { font-size: 1.8rem; font-weight: 800; color: var(--chula-pink-dark); }
+
+/* Target Styles */
+.target-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.target-box {
+    background: linear-gradient(135deg, var(--chula-pink-light) 0%, rgba(255,255,255,0.95) 100%);
+    border: 2px solid var(--chula-pink);
+    border-radius: 18px;
+    padding: 1.8rem;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(222, 92, 142, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.target-box.secondary {
+    border-color: rgba(197, 160, 89, 0.6);
+    background: linear-gradient(135deg, rgba(197, 160, 89, 0.08) 0%, rgba(255,255,255,0.95) 100%);
+}
+
+.target-badge {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    background: var(--chula-pink);
+    color: white;
+    padding: 0.25rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.target-badge.gold { background: var(--accent-gold); }
+
+.target-reason {
+    margin-top: 1.2rem;
+    padding: 1rem 1.2rem;
+    background: rgba(255, 255, 255, 0.85);
+    border-left: 3px solid var(--chula-pink);
+    border-radius: 0 12px 12px 0;
+    font-size: 0.88rem;
+    color: var(--text-main);
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.target-reason.gold {
+    border-left-color: var(--accent-gold);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* Skills Styles */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+}
+
+.skill-item {
+    background: rgba(222, 92, 142, 0.04);
+    padding: 1rem 1.2rem;
+    border-radius: 14px;
+    border: 1px solid rgba(222, 92, 142, 0.12);
+}
+
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(0,0,0,0.06);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--chula-pink), var(--accent-gold));
+    border-radius: 10px;
+    width: 0%;
+    transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
+}
+
+/* Activities & Lightbox Styles */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    border: 1px solid var(--border-pink);
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--text-main);
+    padding: 0.5rem 1.3rem;
+    border-radius: 30px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: var(--chula-pink);
+    color: white;
+    box-shadow: 0 6px 18px rgba(222, 92, 142, 0.3);
+    border-color: var(--chula-pink);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.activity-card {
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--border-pink);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.activity-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(222, 92, 142, 0.2);
+    border-color: var(--chula-pink);
+}
+
+.activity-img-box {
+    position: relative;
+    height: 190px;
+    overflow: hidden;
+}
+
+.activity-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.activity-card:hover .activity-img-box img { transform: scale(1.08); }
+
+.activity-body { padding: 1.2rem; }
+
+.activity-tag {
+    display: inline-block;
+    background: var(--chula-pink-light);
+    color: var(--chula-pink-dark);
+    padding: 0.2rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.activity-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-main);
+    line-height: 1.5;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    padding: 2rem;
+}
+
+.modal.active { opacity: 1; pointer-events: auto; }
+
+.modal-content {
+    background: var(--bg-color);
+    border-radius: 24px;
+    max-width: 750px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    border: 1px solid var(--border-pink);
+    transform: scale(0.85);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+.modal.active .modal-content { transform: scale(1); }
+
+.modal-img { width: 100%; max-height: 450px; object-fit: cover; }
+.modal-body { padding: 1.8rem; }
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    color: var(--text-main);
+    font-size: 1.1rem;
+    transition: background 0.3s ease;
+}
+
+.modal-close:hover { background: var(--chula-pink); color: white; }
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-subtle);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border-pink);
+    background: rgba(253, 248, 250, 0.8);
+}
+
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .info-grid, .skills-grid, .target-grid { grid-template-columns: 1fr; }
+    .card { padding: 1.8rem 1.2rem; }
+    .skill-item[style*="span 2"] { grid-column: span 1 !important; }
+}
+    
