@@ -1,496 +1,71 @@
-:root {
-    --bg-color: #fdf8fa;
-    --chula-pink: #DE5C8E;
-    --chula-pink-dark: #a83261;
-    --chula-pink-light: #fbeaf0;
-    --accent-gold: #c5a059;
-    --accent-gold-dark: #8c6d33;
-    --accent-gold-light: #faf5e8;
-    --text-main: #2b2b2b;
-    --text-subtle: #666666;
-    --card-bg: rgba(255, 255, 255, 0.9);
-    --border-pink: rgba(222, 92, 142, 0.25);
-    --shadow-soft: 0 10px 30px rgba(222, 92, 142, 0.1);
-    --shadow-hover: 0 15px 35px rgba(222, 92, 142, 0.2);
-}
+<!DOCTYPE html> <html lang="th"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Portfolio - Siranata Pholthekong</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
 
-body {
-    font-family: 'Prompt', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
-}
+</head> <body> <div class="ambient-bg"></div> <canvas id="particleCanvas"></canvas> <header> <a href="index.html" class="logo">PORTFOLIO</a>
+<ul class="nav-links">
+    <li><a href="profile.html">ประวัติส่วนตัว</a></li>
+    <li><a href="education.html">การศึกษา</a></li>
+    <li><a href="target.html">เป้าหมาย</a></li>
+    <li><a href="skills.html">ทักษะ</a></li>
+    <li><a href="activities.html">ผลงาน & กิจกรรม</a></li>
+</ul>
 
-.ambient-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    background: 
-        radial-gradient(circle at 15% 20%, rgba(222, 92, 142, 0.12), transparent 45%),
-        radial-gradient(circle at 85% 80%, rgba(197, 160, 89, 0.1), transparent 45%);
-    z-index: 0;
-}
+</header> <div class="container">
+<section class="card home-hero">
 
-#particleCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-}
+    <div class="profile-img-box">
+        <img src="images/1788760432866.jpg" alt="นางสาวศิรณตา พลเทกอง">
+    </div>
 
-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(253, 248, 250, 0.85);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border-pink);
-    padding: 1rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-}
+    <h1>นางสาวศิรณตา พลเทกอง</h1>
 
-.logo {
-    font-family: 'Cinzel', serif;
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: var(--chula-pink-dark);
-    letter-spacing: 2px;
-    text-decoration: none;
-}
+    <span class="subname">
+        SIRANATA PHOLTHEKONG
+    </span>
 
-.nav-links {
-    display: flex;
-    gap: 1.2rem;
-    list-style: none;
-}
+    <p class="home-description">
+        PORTFOLIO
+    </p>
 
-.nav-links a {
-    text-decoration: none;
-    color: var(--text-subtle);
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    padding: 0.3rem 0.6rem;
-    border-radius: 8px;
-}
+    <p class="home-description">
+        แฟ้มสะสมผลงานเพื่อแนะนำประวัติ การศึกษา
+        ความสามารถ เป้าหมาย และกิจกรรมที่เข้าร่วม
+    </p>
 
-.nav-links a:hover, .nav-links a.active {
-    color: var(--chula-pink);
-    background: var(--chula-pink-light);
-}
+    <div class="home-buttons">
 
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 3rem 1.5rem 6rem 1.5rem;
-    position: relative;
-    z-index: 1;
-}
+        <a href="profile.html" class="main-btn">
+            <i class="fa-solid fa-user"></i>
+            ประวัติส่วนตัว
+        </a>
 
-.card {
-    background: var(--card-bg);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--border-pink);
-    border-radius: 24px;
-    padding: 2.5rem;
-    box-shadow: var(--shadow-soft);
-    margin-bottom: 2.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        <a href="education.html" class="main-btn">
+            <i class="fa-solid fa-graduation-cap"></i>
+            ประวัติการศึกษา
+        </a>
 
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-hover);
-}
+        <a href="target.html" class="main-btn">
+            <i class="fa-solid fa-bullseye"></i>
+            เป้าหมาย
+        </a>
 
-.section-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--chula-pink-dark);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+        <a href="skills.html" class="main-btn">
+            <i class="fa-solid fa-star"></i>
+            ทักษะ
+        </a>
 
-.section-title i { color: var(--chula-pink); }
+        <a href="activities.html" class="main-btn">
+            <i class="fa-solid fa-images"></i>
+            ผลงาน & กิจกรรม
+        </a>
 
-.profile-hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
+    </div>
 
-.profile-img-box {
-    position: relative;
-    width: 190px;
-    height: 190px;
-    border-radius: 50%;
-    padding: 5px;
-    background: linear-gradient(135deg, var(--chula-pink), var(--accent-gold));
-    box-shadow: 0 10px 25px rgba(222, 92, 142, 0.25);
-    margin-bottom: 1.5rem;
-}
+</section>
 
-.profile-img-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.profile-info h1 {
-    font-size: 2.2rem;
-    color: var(--text-main);
-    font-weight: 700;
-}
-
-.profile-info .subname {
-    font-family: 'Cinzel', serif;
-    color: var(--chula-pink-dark);
-    font-weight: 700;
-    letter-spacing: 2px;
-    font-size: 1.05rem;
-    margin-bottom: 2rem;
-    display: block;
-}
-
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.2rem;
-    width: 100%;
-    text-align: left;
-}
-
-.info-item {
-    background: rgba(222, 92, 142, 0.04);
-    padding: 1rem 1.2rem;
-    border-radius: 14px;
-    border: 1px solid rgba(222, 92, 142, 0.12);
-}
-
-.info-label {
-    font-size: 0.8rem;
-    color: var(--text-subtle);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 0.3rem;
-}
-
-.info-label i { color: var(--chula-pink); }
-
-.info-value {
-    font-weight: 600;
-    color: var(--text-main);
-    font-size: 1rem;
-}
-
-.edu-box {
-    border-left: 4px solid var(--chula-pink);
-    padding-left: 1.5rem;
-}
-
-.school-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-main);
-}
-
-.program-title {
-    color: var(--chula-pink-dark);
-    font-weight: 600;
-    margin-top: 0.2rem;
-    font-size: 1rem;
-}
-
-.gpa-counter {
-    display: inline-flex;
-    align-items: center;
-    gap: 15px;
-    margin-top: 1.2rem;
-    background: var(--chula-pink-light);
-    padding: 0.8rem 1.5rem;
-    border-radius: 12px;
-    border: 1px solid var(--border-pink);
-}
-
-.gpa-num {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--chula-pink-dark);
-}
-
-.target-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-}
-
-.target-box {
-    background: linear-gradient(135deg, var(--chula-pink-light) 0%, rgba(255,255,255,0.95) 100%);
-    border: 2px solid var(--chula-pink);
-    border-radius: 18px;
-    padding: 1.8rem;
-    position: relative;
-    box-shadow: 0 4px 15px rgba(222, 92, 142, 0.08);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.target-box.secondary {
-    border-color: rgba(197, 160, 89, 0.6);
-    background: linear-gradient(135deg, rgba(197, 160, 89, 0.08) 0%, rgba(255,255,255,0.95) 100%);
-}
-
-.target-badge {
-    position: absolute;
-    top: 15px;
-    right: 18px;
-    background: var(--chula-pink);
-    color: white;
-    padding: 0.25rem 0.9rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-.target-badge.gold { background: var(--accent-gold); }
-
-.target-reason {
-    margin-top: 1.2rem;
-    padding: 1rem 1.2rem;
-    background: rgba(255, 255, 255, 0.85);
-    border-left: 3px solid var(--chula-pink);
-    border-radius: 0 12px 12px 0;
-    font-size: 0.88rem;
-    color: var(--text-main);
-    line-height: 1.6;
-    font-style: italic;
-}
-
-.target-reason.gold {
-    border-left-color: var(--accent-gold);
-    background: rgba(255, 255, 255, 0.9);
-}
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-}
-
-.skill-item {
-    background: rgba(222, 92, 142, 0.04);
-    padding: 1rem 1.2rem;
-    border-radius: 14px;
-    border: 1px solid rgba(222, 92, 142, 0.12);
-}
-
-.skill-info {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.88rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.progress-bar {
-    height: 8px;
-    background: rgba(0,0,0,0.06);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--chula-pink), var(--accent-gold));
-    border-radius: 10px;
-    width: 0%;
-    transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
-}
-
-.filter-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-}
-
-.filter-btn {
-    border: 1px solid var(--border-pink);
-    background: rgba(255, 255, 255, 0.8);
-    color: var(--text-main);
-    padding: 0.5rem 1.3rem;
-    border-radius: 30px;
-    font-family: 'Prompt', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.filter-btn:hover, .filter-btn.active {
-    background: var(--chula-pink);
-    color: white;
-    box-shadow: 0 6px 18px rgba(222, 92, 142, 0.3);
-    border-color: var(--chula-pink);
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
-
-.activity-card {
-    background: #ffffff;
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid var(--border-pink);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.03);
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.activity-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 25px rgba(222, 92, 142, 0.2);
-    border-color: var(--chula-pink);
-}
-
-.activity-img-box {
-    position: relative;
-    height: 190px;
-    overflow: hidden;
-}
-
-.activity-img-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.activity-card:hover .activity-img-box img { transform: scale(1.08); }
-
-.activity-body { padding: 1.2rem; }
-
-.activity-tag {
-    display: inline-block;
-    background: var(--chula-pink-light);
-    color: var(--chula-pink-dark);
-    padding: 0.2rem 0.8rem;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.activity-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--text-main);
-    line-height: 1.5;
-}
-
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-    padding: 2rem;
-}
-
-.modal.active {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.modal-content {
-    background: var(--bg-color);
-    border-radius: 24px;
-    max-width: 750px;
-    width: 100%;
-    overflow: hidden;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-    border: 1px solid var(--border-pink);
-    transform: scale(0.85);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-}
-
-.modal.active .modal-content { transform: scale(1); }
-.modal-img { width: 100%; max-height: 450px; object-fit: cover; }
-.modal-body { padding: 1.8rem; }
-
-.modal-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 38px;
-    height: 38px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: none;
-    color: var(--text-main);
-    font-size: 1.1rem;
-    transition: background 0.3s ease;
-}
-
-.modal-close:hover {
-    background: var(--chula-pink);
-    color: white;
-}
-
-footer {
-    text-align: center;
-    padding: 2rem;
-    color: var(--text-subtle);
-    font-size: 0.85rem;
-    border-top: 1px solid var(--border-pink);
-    background: rgba(253, 248, 250, 0.8);
-}
-
-@media (max-width: 768px) {
-    .nav-links { display: none; }
-    .info-grid, .skills-grid, .target-grid { grid-template-columns: 1fr; }
-    .card { padding: 1.8rem 1.2rem; }
-    .skill-item[style*="span 2"] { grid-column: span 1 !important; }
-}
+</div> <footer> &copy; Portfolio - Siranata Pholthekong. All Rights Reserved. </footer> <script src="script.js"></script> </body> </html>
