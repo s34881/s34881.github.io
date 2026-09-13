@@ -3,28 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ประวัติการศึกษา - Portfolio</title>
+    <title>ประวัติการศึกษา - PORTFOLIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stlye.css">
 </head>
-<body class="detail-page">
-    <div class="ambient-glow"></div>
-    <header class="navbar">
-        <a href="portfolio.html" class="logo"><i class="fa-solid fa-arrow-left"></i> กลับหน้าเมนู</a>
-        <div class="nav-title">EDUCATION</div>
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <header>
+        <a href="index.html" class="brand-logo">PORTFOLIO</a>
+        <a href="portfolio.html" class="action-btn">สารบัญผลงาน</a>
     </header>
 
-    <main class="content-container">
-        <div class="detail-card">
-            <h2><i class="fa-solid fa-graduation-cap"></i> ประวัติการศึกษา</h2>
-            <hr class="divider">
-            <h3 class="school-title">โรงเรียนบ้านบึง “อุตสาหกรรมนุเคราะห์”</h3>
-            <p class="plan-tag">แผนการเรียน: วิทยาศาสตร์ - คณิตศาสตร์ (Gifted Program)</p>
-            <div class="gpax-highlight" style="margin-top: 1.5rem;">
-                <span>GPAX สะสม (4 เทอม)</span>
-                <span class="gpax-val">3.93</span>
+    <div class="main-wrapper">
+        <div class="page-container">
+            <a href="portfolio.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าสารบัญ</a>
+            
+            <div class="content-card-box">
+                <h2 style="color: var(--primary); margin-bottom: 20px; font-size: 1.6rem;">ประวัติการศึกษา (Education)</h2>
+                
+                <div style="border-left: 2px solid var(--primary); padding-left: 20px; margin-bottom: 20px;">
+                    <h3 style="font-size: 1.1rem; color: var(--primary);">ระดับมัธยมศึกษาตอนปลาย</h3>
+                    <p style="font-weight: 500;">โรงเรียนบ้านบึง "อุตสาหกรรมนุเคราะห์"</p>
+                </div>
+
+                <div style="border-left: 2px solid rgba(140, 36, 67, 0.2); padding-left: 20px;">
+                    <h3 style="font-size: 1.1rem; color: var(--text-muted);">ระดับมัธยมศึกษาตอนต้น</h3>
+                    <p>โรงเรียนบ้านบึง "อุตสาหกรรมนุเคราะห์"</p>
+                </div>
             </div>
         </div>
-    </main>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
+        class Particle {
+            constructor() { this.reset(); }
+            reset() { this.x = Math.random() * canvas.width; this.y = canvas.height + Math.random() * 100; this.radius = Math.random() * 2.5 + 1; this.speedY = Math.random() * 0.4 + 0.15; this.alpha = Math.random() * 0.5 + 0.2; }
+            update() { this.y -= this.speedY; if (this.y < -10) this.reset(); }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`; ctx.shadowBlur = 8; ctx.shadowColor = 'rgba(197, 160, 89, 0.4)'; ctx.fill(); }
+        }
+        for (let i = 0; i < 45; i++) particles.push(new Particle());
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        animate();
+    </script>
 </body>
 </html>
