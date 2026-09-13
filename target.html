@@ -3,42 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เป้าหมายการศึกษาต่อ - Portfolio</title>
+    <title>เป้าหมายการศึกษาต่อ - PORTFOLIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stlye.css">
 </head>
-<body class="detail-page">
-    <div class="ambient-glow"></div>
-    <header class="navbar">
-        <a href="portfolio.html" class="logo"><i class="fa-solid fa-arrow-left"></i> กลับหน้าเมนู</a>
-        <div class="nav-title">TARGETS</div>
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <header>
+        <a href="index.html" class="brand-logo">PORTFOLIO</a>
+        <a href="portfolio.html" class="action-btn">สารบัญผลงาน</a>
     </header>
 
-    <main class="content-container">
-        <div class="detail-card">
-            <h2><i class="fa-solid fa-bullseye"></i> เป้าหมายการศึกษาต่อ</h2>
-            <hr class="divider">
-            <div class="target-flex">
-                <div class="target-item target-primary">
-                    <span class="badge">อันดับ 1</span>
-                    <h4>จุฬาลงกรณ์มหาวิทยาลัย</h4>
-                    <p class="faculty">คณะพาณิชยศาสตร์และการบัญชี</p>
-                    <p class="major">สาขาวิชาการจัดการโลจิสติกส์ระหว่างประเทศ</p>
-                    <div class="reason-box">
-                        <strong>เหตุผลที่เลือก:</strong> สนใจระบบซัพพลายเชนระดับโลก และต้องการต่อยอดทักษะการทำงานในระดับสากล พร้อมเรียนรู้วัฒนธรรมยุโรปเพื่อเติบโตในสายงานต่างประเทศ
-                    </div>
-                </div>
-                <div class="target-item target-secondary">
-                    <span class="badge gold">อันดับ 2</span>
-                    <h4>จุฬาลงกรณ์มหาวิทยาลัย</h4>
-                    <p class="faculty gold">คณะรัฐศาสตร์</p>
-                    <p class="major">สาขาวิชาความสัมพันธ์ระหว่างประเทศ (IR)</p>
-                    <div class="reason-box">
-                        <strong>เหตุผลที่เลือก:</strong> เพื่อสร้างรากฐานความเข้าใจทางการเมือง การทูต และความสัมพันธ์ระหว่างประเทศ ปูทางสู่อาชีพที่มั่นคงและทรงเกียรติในระดับสากล
-                    </div>
-                </div>
+    <div class="main-wrapper">
+        <div class="page-container">
+            <a href="portfolio.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าสารบัญ</a>
+            
+            <div class="content-card-box">
+                <h2 style="color: var(--primary); margin-bottom: 15px; font-size: 1.6rem;">เป้าหมายการศึกษาต่อ (Educational Goals)</h2>
+                <p style="line-height: 1.7; color: var(--text-main);">
+                    มีความมุ่งมั่นตั้งใจที่จะศึกษาต่อในระดับอุดมศึกษา เพื่อนำทักษะความรู้ไปพัฒนาต่อยอดในวิชาชีพและสร้างประโยชน์ให้แก่สังคมต่อไป
+                </p>
             </div>
         </div>
-    </main>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
+        class Particle {
+            constructor() { this.reset(); }
+            reset() { this.x = Math.random() * canvas.width; this.y = canvas.height + Math.random() * 100; this.radius = Math.random() * 2.5 + 1; this.speedY = Math.random() * 0.4 + 0.15; this.alpha = Math.random() * 0.5 + 0.2; }
+            update() { this.y -= this.speedY; if (this.y < -10) this.reset(); }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`; ctx.shadowBlur = 8; ctx.shadowColor = 'rgba(197, 160, 89, 0.4)'; ctx.fill(); }
+        }
+        for (let i = 0; i < 45; i++) particles.push(new Particle());
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        animate();
+    </script>
 </body>
 </html>
