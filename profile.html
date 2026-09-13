@@ -3,30 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ประวัติส่วนตัว - Portfolio</title>
+    <title>ประวัติส่วนตัว - PORTFOLIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stlye.css">
 </head>
-<body class="detail-page">
-    <div class="ambient-glow"></div>
-    <header class="navbar">
-        <a href="portfolio.html" class="logo"><i class="fa-solid fa-arrow-left"></i> กลับหน้าเมนู</a>
-        <div class="nav-title">PROFILE</div>
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <header>
+        <a href="index.html" class="brand-logo">PORTFOLIO</a>
+        <a href="portfolio.html" class="action-btn">สารบัญผลงาน</a>
     </header>
 
-    <main class="content-container">
-        <div class="detail-card">
-            <h2><i class="fa-solid fa-user-graduate"></i> ประวัติส่วนตัว</h2>
-            <hr class="divider">
-            <div class="info-group">
-                <div class="info-row"><span>ชื่อ-นามสกุล:</span> <strong>นางสาวศิรณตา พลเทกอง</strong></div>
-                <div class="info-row"><span>ชื่อเล่น:</span> <strong>ขนมชั้น</strong></div>
-                <div class="info-row"><span>วันเกิด:</span> <strong>13 พฤษภาคม 2552</strong></div>
-                <div class="info-row"><span>อายุ:</span> <strong>17 ปี</strong></div>
-                <div class="info-row"><span>งานอดิเรก:</span> <strong>เล่นดนตรี</strong></div>
-                <div class="info-row"><span>อีเมล:</span> <strong>s34881@banbung.ac.th</strong></div>
+    <div class="main-wrapper">
+        <div class="page-container">
+            <a href="portfolio.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าสารบัญ</a>
+            
+            <div class="content-card-box">
+                <h2 style="color: var(--primary); margin-bottom: 20px; font-size: 1.6rem;">ประวัติส่วนตัว (Personal Info)</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">ชื่อ-นามสกุล (ภาษาไทย)</div>
+                        <div class="info-value">นางสาวศิรณตา พลเทกอง</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Name-Surname (EN)</div>
+                        <div class="info-value">Miss Siranata Pholthekong</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">โรงเรียน</div>
+                        <div class="info-value">โรงเรียนบ้านบึง "อุตสาหกรรมนุเคราะห์"</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">สัญชาติ / เชื้อชาติ</div>
+                        <div class="info-value">ไทย / ไทย</div>
+                    </div>
+                </div>
             </div>
         </div>
-    </main>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
+        class Particle {
+            constructor() { this.reset(); }
+            reset() { this.x = Math.random() * canvas.width; this.y = canvas.height + Math.random() * 100; this.radius = Math.random() * 2.5 + 1; this.speedY = Math.random() * 0.4 + 0.15; this.alpha = Math.random() * 0.5 + 0.2; }
+            update() { this.y -= this.speedY; if (this.y < -10) this.reset(); }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`; ctx.shadowBlur = 8; ctx.shadowColor = 'rgba(197, 160, 89, 0.4)'; ctx.fill(); }
+        }
+        for (let i = 0; i < 45; i++) particles.push(new Particle());
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        animate();
+    </script>
 </body>
 </html>
