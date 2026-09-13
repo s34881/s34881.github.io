@@ -7,65 +7,127 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="menu-page">
+
     <div class="ambient-glow"></div>
     <canvas id="particleCanvas"></canvas>
 
-    <header class="main-header">
-        <a href="index.html" class="logo">PORTFOLIO</a>
+    <header class="navbar">
+        <a href="index.html" class="logo"><i class="fa-solid fa-arrow-left"></i> กลับหน้าแรก</a>
+        <div class="nav-title">PORTFOLIO MENU</div>
     </header>
 
-    <main class="container">
-        <!-- โปรไฟล์ -->
-        <div class="profile-header-box fade-in">
-            <div class="profile-avatar-wrapper">
-                <img src="1788760432866.jpg" alt="นางสาวศิรณตา พลเทกอง">
-            </div>
-            <h1 class="profile-name">นางสาวศิรณตา พลเทกอง</h1>
-            <p class="profile-sub">โรงเรียนบ้านบึง “อุตสาหกรรมนุเคราะห์”</p>
+    <main class="menu-container">
+        <div class="menu-header fade-in">
+            <h2>เลือกหัวข้อที่ต้องการเข้าชม</h2>
+            <p>PORTFOLIO CATEGORIES</p>
         </div>
 
-        <!-- การ์ดเมนูไปยังหน้าย่อยต่างๆ -->
-        <div class="menu-grid fade-in">
-            <a href="profile.html" class="menu-card">
-                <div class="menu-icon"><i class="fa-solid fa-address-card"></i></div>
-                <h3 class="menu-title">ประวัติส่วนตัว</h3>
-                <p class="menu-desc">Personal Profile & Contact Information</p>
-                <div class="menu-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <!-- การ์ดเมนูที่กดคลิกเข้าไปยังหน้าย่อยๆ แต่ละหน้าได้ -->
+        <div class="menu-grid">
+            
+            <!-- การ์ด 1: ไปหน้า profile.html -->
+            <a href="profile.html" class="menu-card-link fade-in">
+                <div class="menu-card">
+                    <div class="menu-card-header">
+                        <i class="fa-solid fa-user-graduate card-icon"></i>
+                        <h3>ประวัติส่วนตัว</h3>
+                        <span class="sub-label">Personal Profile</span>
+                    </div>
+                    <p class="card-desc">ข้อมูลส่วนตัว งานอดิเรก และช่องทางการติดต่อ</p>
+                    <div class="card-arrow">เข้าชม <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="education.html" class="menu-card">
-                <div class="menu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                <h3 class="menu-title">ประวัติการศึกษา</h3>
-                <p class="menu-desc">Education History & Academic GPAX</p>
-                <div class="menu-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <!-- การ์ด 2: ไปหน้า education.html -->
+            <a href="education.html" class="menu-card-link fade-in">
+                <div class="menu-card">
+                    <div class="menu-card-header">
+                        <i class="fa-solid fa-graduation-cap card-icon"></i>
+                        <h3>ประวัติการศึกษา</h3>
+                        <span class="sub-label">Education History</span>
+                    </div>
+                    <p class="card-desc">ระดับการศึกษา แผนการเรียน Gifted Program และเกรดเฉลี่ย</p>
+                    <div class="card-arrow">เข้าชม <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="target.html" class="menu-card highlight-card">
-                <div class="menu-icon"><i class="fa-solid fa-bullseye"></i></div>
-                <h3 class="menu-title">เป้าหมายการศึกษาต่อ</h3>
-                <p class="menu-desc">Chulalongkorn University Targets</p>
-                <div class="menu-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <!-- การ์ด 3: ไปหน้า targets.html -->
+            <a href="targets.html" class="menu-card-link fade-in">
+                <div class="menu-card">
+                    <div class="menu-card-header">
+                        <i class="fa-solid fa-bullseye card-icon"></i>
+                        <h3>เป้าหมายการศึกษาต่อ</h3>
+                        <span class="sub-label">Academic Targets</span>
+                    </div>
+                    <p class="card-desc">คณะและสาขาที่ต้องการศึกษาต่อ ณ จุฬาลงกรณ์มหาวิทยาลัย</p>
+                    <div class="card-arrow">เข้าชม <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="skills.html" class="menu-card">
-                <div class="menu-icon"><i class="fa-solid fa-star"></i></div>
-                <h3 class="menu-title">ทักษะและความสามารถ</h3>
-                <p class="menu-desc">Skills, Leadership & Abilities</p>
-                <div class="menu-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <!-- การ์ด 4: ไปหน้า skills.html -->
+            <a href="skills.html" class="menu-card-link fade-in">
+                <div class="menu-card">
+                    <div class="menu-card-header">
+                        <i class="fa-solid fa-award card-icon"></i>
+                        <h3>ทักษะและความสามารถ</h3>
+                        <span class="sub-label">Skills & Abilities</span>
+                    </div>
+                    <p class="card-desc">ทักษะวิชาการ การสื่อสาร ภาษา และภาวะผู้นำ</p>
+                    <div class="card-arrow">เข้าชม <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
 
-            <a href="activities.html" class="menu-card">
-                <div class="menu-icon"><i class="fa-solid fa-images"></i></div>
-                <h3 class="menu-title">ผลงานและกิจกรรม</h3>
-                <p class="menu-desc">Awards, Certificates & Activities Gallery</p>
-                <div class="menu-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <!-- การ์ด 5: ไปหน้า activities.html -->
+            <a href="activities.html" class="menu-card-link fade-in full-width">
+                <div class="menu-card">
+                    <div class="menu-card-header">
+                        <i class="fa-solid fa-images card-icon"></i>
+                        <h3>ผลงานและกิจกรรม</h3>
+                        <span class="sub-label">Activities & Achievements</span>
+                    </div>
+                    <p class="card-desc">รางวัลการประกวด กิจกรรมการแข่งขันทางวิชาการ และการเข้าอบรมค่ายต่างๆ</p>
+                    <div class="card-arrow">เข้าชม <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
             </a>
+
         </div>
     </main>
 
-    <footer>© SIRANATA PHOLTHEKONG — ALL RIGHTS RESERVED</footer>
+    <footer>© SIRANATA PHOLTHEKONG — PORTFOLIO</footer>
 
-    <script src="script-bg.js"></script>
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const particles = [];
+        for (let i = 0; i < 40; i++) {
+            particles.push({
+                x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+                radius: Math.random() * 2 + 0.5, dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.4,
+                opacity: Math.random() * 0.6 + 0.2
+            });
+        }
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(222, 92, 142, ${p.opacity})`; ctx.fill();
+                p.x += p.dx; p.y += p.dy;
+                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+    </script>
 </body>
 </html>
