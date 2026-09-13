@@ -3,85 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Siranata Pholthekong</title>
+    <title>Portfolio - ศิรณตา พลเทกอง</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stlye.css">
 </head>
-<body class="index-body">
-
-    <!-- เอฟเฟกต์ไฟและละอองดาวฉากหลัง -->
-    <div class="ambient-glow"></div>
+<body>
     <canvas id="particleCanvas"></canvas>
 
-    <!-- หน้าแรกต้อนรับ (ไม่มีปุ่มกด ใช้วิธีเลื่อนเพื่อเปลี่ยนหน้า) -->
-    <section class="hero-screen">
-        <div class="hero-content">
-            <div class="hero-title-badge">PORTFOLIO</div>
-            <h1 class="hero-main-name">นางสาวศิรณตา พลเทกอง</h1>
-            <div class="hero-sub-name">SIRANATA PHOLTHEKONG</div>
-            
-            <div class="hero-school-card">
-                <div class="hero-school-th">โรงเรียนบ้านบึง <span>“อุตสาหกรรมนุเคราะห์”</span></div>
-                <div class="hero-school-en">BANBUNG UTTSAHAKAMNUKROH SCHOOL</div>
+    <header>
+        <a href="index.html" class="brand-logo">PORTFOLIO</a>
+        <a href="portfolio.html" class="action-btn">สำรวจผลงาน <i class="fa-solid fa-arrow-down"></i></a>
+    </header>
+
+    <div class="main-wrapper">
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-name-th">นางสาวศิรณตา พลเทกอง</h1>
+                <div class="hero-name-en">SIRANATA PHOLTHEKONG</div>
+                <div class="school-badge">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    โรงเรียนบ้านบึง "อุตสาหกรรมนุเคราะห์"
+                </div>
             </div>
-        </div>
 
-        <!-- สัญลักษณ์บอกให้เลื่อนลง -->
-        <div class="scroll-hint">
-            <span>SCROLL DOWN TO ENTER</span>
-            <i class="fa-solid fa-chevron-down"></i>
-        </div>
-    </section>
+            <a href="portfolio.html" class="scroll-down-hint">
+                <span>SCROLL DOWN TO PORTFOLIO</span>
+                <div class="scroll-down-icon">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </a>
+        </section>
+    </div>
 
-    <!-- Script สำหรับตรวจจับการ Scroll แล้วค่อยๆ เปลี่ยนหน้าไป portfolio.html -->
     <script>
-        // Canvas Particle Background
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
+        let particles = [];
         function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const particles = [];
-        for (let i = 0; i < 50; i++) {
-            particles.push({
-                x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-                radius: Math.random() * 2.5 + 0.5, dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.4,
-                opacity: Math.random() * 0.6 + 0.2
-            });
-        }
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(222, 92, 142, ${p.opacity})`; ctx.fill();
-                p.x += p.dx; p.y += p.dy;
-                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-
-        // ระบบเลื่อนแล้วค่อยๆ เปลี่ยนหน้าไป portfolio.html
-        let isRedirecting = false;
-        function handleScrollTransition() {
-            if (isRedirecting) return;
-            // เมื่อเลื่อนหน้าจอลงมามากกว่า 80px หรือหมุนเมาส์ลง
-            if (window.scrollY > 80) {
-                isRedirecting = true;
-                document.body.classList.add('fade-out');
-                setTimeout(() => {
-                    window.location.href = 'portfolio.html';
-                }, 600); // ค่อยๆ Fade Out 0.6 วินาทีก่อนเปลี่ยนหน้า
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.radius = Math.random() * 2.5 + 1;
+                this.speedY = Math.random() * 0.4 + 0.15;
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+            update() { this.y -= this.speedY; if (this.y < -10) this.reset(); }
+            draw() {
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+                ctx.shadowBlur = 8; ctx.shadowColor = 'rgba(197, 160, 89, 0.4)'; ctx.fill();
             }
         }
-
-        window.addEventListener('scroll', handleScrollTransition);
-        window.addEventListener('wheel', (e) => {
-            if (e.deltaY > 0) handleScrollTransition();
-        });
-        window.addEventListener('touchmove', handleScrollTransition);
+        for (let i = 0; i < 45; i++) particles.push(new Particle());
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        animate();
     </script>
 </body>
 </html>
