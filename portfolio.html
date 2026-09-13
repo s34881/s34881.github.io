@@ -3,263 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Siranata Pholthekong</title>
+    <title>Portfolio Menu - Siranata Pholthekong</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="ambient-glow"></div>
-    <canvas id="particleCanvas"></canvas>
 
     <header>
         <a href="index.html" class="logo">PORTFOLIO</a>
-        <ul class="nav-links">
-            <li><a href="#profile">ประวัติส่วนตัว</a></li>
-            <li><a href="#education">การศึกษา</a></li>
-            <li><a href="#target">เป้าหมาย</a></li>
-            <li><a href="#skills">ทักษะ</a></li>
-            <li><a href="#activities">ผลงาน & กิจกรรม</a></li>
-        </ul>
+        <a href="index.html" class="btn-back"><i class="fa-solid fa-house"></i> หน้าแรก</a>
     </header>
 
     <div class="container">
-        <!-- การ์ด 1: ประวัติส่วนตัว -->
-        <section class="card" id="profile">
-            <h2 class="section-title"><i class="fa-solid fa-address-card"></i> ข้อมูลส่วนตัว (Personal Profile)</h2>
-            <div class="info-grid">
-                <div class="info-item">
-                    <span class="info-label"><i class="fa-solid fa-user"></i> ชื่อ - นามสกุล</span>
-                    <span class="info-value">นางสาวศิรณตา พลเทกอง</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label"><i class="fa-solid fa-smile"></i> ชื่อเล่น</span>
-                    <span class="info-value">ขนมชั้น</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label"><i class="fa-solid fa-hourglass-half"></i> อายุ</span>
-                    <span class="info-value">17 ปี</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label"><i class="fa-solid fa-cake-candles"></i> วันเกิด</span>
-                    <span class="info-value">13 พฤษภาคม 2552</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label"><i class="fa-solid fa-music"></i> งานอดิเรก</span>
-                    <span class="info-value">เล่นดนตรี</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label"><i class="fa-solid fa-envelope"></i> อีเมลติดต่อ</span>
-                    <span class="info-value">s34881@banbung.ac.th</span>
-                </div>
+        <!-- ส่วนหัวแสดงรูปและชื่อ -->
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <div class="profile-img-box" style="margin: 0 auto 1.5rem auto;">
+                <img src="1788760432866.jpg" alt="นางสาวศิรณตา พลเทกอง">
             </div>
-        </section>
+            <h1 style="font-size: 2.2rem; font-weight: 700;">นางสาวศิรณตา พลเทกอง</h1>
+            <p style="color: var(--chula-pink); font-size: 1.05rem; margin-top: 0.4rem;">โรงเรียนบ้านบึง “อุตสาหกรรมนุเคราะห์”</p>
+        </div>
 
-        <!-- การ์ด 2: ประวัติการศึกษา -->
-        <section class="card" id="education">
-            <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> ประวัติการศึกษา (Education)</h2>
-            <div class="edu-box">
-                <div class="school-title">โรงเรียนบ้านบึง "อุตสาหกรรมนุเคราะห์"</div>
-                <div class="program-title">แผนการเรียน: วิทยาศาสตร์ - คณิตศาสตร์ (Gifted Program)</div>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.4rem;">กำลังศึกษาอยู่ในระดับชั้นมัธยมศึกษาตอนปลาย</p>
-                
-                <div class="gpa-counter">
-                    <i class="fa-solid fa-award" style="font-size: 2rem; color: var(--chula-pink);"></i>
-                    <div>
-                        <span style="font-size: 0.8rem; color: var(--text-muted); display: block;">ผลการเรียนเฉลี่ยสะสม (GPAX 4 เทอม)</span>
-                        <div class="gpa-num" id="gpaText">0.00</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- การ์ดเมนู 5 ใบสำหรับคลิกเข้าไปหน้าย่อยต่างๆ -->
+        <div class="menu-grid">
+            <a href="profile.html" class="menu-card">
+                <div class="menu-icon"><i class="fa-solid fa-address-card"></i></div>
+                <div class="menu-title">ประวัติส่วนตัว</div>
+                <div class="menu-desc">ข้อมูลทั่วไป วันเกิด งานอดิเรก และช่องทางการติดต่อ</div>
+                <i class="fa-solid fa-chevron-right menu-arrow"></i>
+            </a>
 
-        <!-- การ์ด 3: เป้าหมาย -->
-        <section class="card" id="target">
-            <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> เป้าหมายการศึกษาต่อ (Academic Target)</h2>
-            <div class="target-grid">
-                <div class="target-box">
-                    <div>
-                        <span class="target-badge">เป้าหมายอันดับ 1</span>
-                        <h3 style="font-size: 1.3rem; color: var(--text-primary); margin-bottom: 0.3rem;">จุฬาลงกรณ์มหาวิทยาลัย</h3>
-                        <p style="color: var(--chula-pink); font-weight: 600; font-size: 1.05rem; margin-bottom: 0.5rem;">คณะพาณิชยศาสตร์และการบัญชี</p>
-                        <p style="color: var(--text-secondary); font-size: 0.95rem;">หลักสูตรบริหารธุรกิจบัณฑิต สาขาวิชาการจัดการโลจิสติกส์ระหว่างประเทศ</p>
-                    </div>
-                    <div class="target-reason">
-                        <i class="fa-solid fa-quote-left"></i>
-                        เหตุผลหลักที่เลือกเรียนบริหารโลจิสติกระหว่างประเทศ เพราะมองว่าสาขานี้คือสะพานเชื่อมระหว่างความชอบส่วนตัวและเป้าหมายในอาชีพ ดิฉันมีความหลงใหลในวัฒนธรรมและสถาปัตยกรรมยุโรป รวมถึงอยากเปิดโลกทัศน์การทำงานในระดับสากล สายงานนี้เป็นงานที่มีเสน่ห์ ตื่นเต้น และไม่หยุดนิ่ง การได้เรียนรู้ระบบการค้าและซัพพลายเชนระดับโลก จะเป็นรากฐานสำคัญที่ช่วยพัฒนาทักษะความเป็นมืออาชีพ เพื่อพาตัวเองไปสู่เป้าหมายสูงสุดคือการได้เติบโตและทำงานในต่างประเทศอย่างที่ตั้งใจค่ะ
-                    </div>
-                </div>
+            <a href="education.html" class="menu-card">
+                <div class="menu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div class="menu-title">ประวัติการศึกษา</div>
+                <div class="menu-desc">ระดับชั้น สายการเรียน และผลการเรียนเฉลี่ยสะสม (GPAX)</div>
+                <i class="fa-solid fa-chevron-right menu-arrow"></i>
+            </a>
 
-                <div class="target-box secondary">
-                    <div>
-                        <span class="target-badge gold">เป้าหมายอันดับ 2</span>
-                        <h3 style="font-size: 1.3rem; color: var(--text-primary); margin-bottom: 0.3rem;">จุฬาลงกรณ์มหาวิทยาลัย</h3>
-                        <p style="color: var(--accent-gold); font-weight: 600; font-size: 1.05rem; margin-bottom: 0.5rem;">คณะรัฐศาสตร์</p>
-                        <p style="color: var(--text-secondary); font-size: 0.95rem;">หลักสูตรรัฐศาสตรบัณฑิต สาขาวิชาความสัมพันธ์ระหว่างประเทศ</p>
-                    </div>
-                    <div class="target-reason gold">
-                        <i class="fa-solid fa-quote-left"></i>
-                        เหตุผลที่เลือกเรียนความสัมพันธ์ระหว่างประเทศ เพราะต้องการสร้างรากฐานอาชีพที่มั่นคง มีเกียรติ และส่งผลกระทบในระดับสากล ดิฉันมีความหลงใหลในประวัติศาสตร์และวัฒนธรรมยุโรปเป็นทุนเดิม และมองว่า IR คือศาสตร์ที่จะช่วยแปลงความชอบนั้นให้กลายเป็นความเข้าใจเชิงลึกทางการเมืองและการทูต การได้เรียนรู้กลไกความสัมพันธ์ระหว่างประเทศจะเป็นสะพานสำคัญที่เปิดโอกาสให้ดิฉันได้ไปเติบโต ทำงาน และใช้ชีวิตในต่างประเทศ พร้อมกับบทบาทหน้าที่ที่มีความน่าเชื่อถือและเป็นเกียรติสำหรับดิฉันค่ะ
-                    </div>
-                </div>
-            </div>
-        </section>
+            <a href="target.html" class="menu-card">
+                <div class="menu-icon"><i class="fa-solid fa-bullseye"></i></div>
+                <div class="menu-title">เป้าหมายการศึกษา</div>
+                <div class="menu-desc">คณะและมหาวิทยาลัยที่ต้องการเข้าศึกษาต่อพร้อมเหตุผล</div>
+                <i class="fa-solid fa-chevron-right menu-arrow"></i>
+            </a>
 
-        <!-- การ์ด 4: ทักษะ -->
-        <section class="card" id="skills">
-            <h2 class="section-title"><i class="fa-solid fa-star"></i> ทักษะและความสามารถ (Skills)</h2>
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span><i class="fa-solid fa-calculator"></i> Mathematics / ความสามารถทางคณิตศาสตร์</span>
-                        <span>80%</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" data-progress="80%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span><i class="fa-solid fa-language"></i> English / ความสามารถด้านภาษาอังกฤษ</span>
-                        <span>70%</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" data-progress="70%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span><i class="fa-solid fa-users"></i> Leadership / ภาวะผู้นำ</span>
-                        <span>95%</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" data-progress="95%"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info">
-                        <span><i class="fa-solid fa-comments"></i> Communication / การสื่อสาร</span>
-                        <span>90%</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" data-progress="90%"></div></div>
-                </div>
-                <div class="skill-item" style="grid-column: span 2;">
-                    <div class="skill-info">
-                        <span><i class="fa-solid fa-lightbulb"></i> Creativity / ความคิดสร้างสรรค์</span>
-                        <span>88%</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" data-progress="88%"></div></div>
-                </div>
-            </div>
-        </section>
+            <a href="skills.html" class="menu-card">
+                <div class="menu-icon"><i class="fa-solid fa-star"></i></div>
+                <div class="menu-title">ทักษะและความสามารถ</div>
+                <div class="menu-desc">ทักษะทางวิชาการ ภาษา ภาวะผู้นำ และความคิดสร้างสรรค์</div>
+                <i class="fa-solid fa-chevron-right menu-arrow"></i>
+            </a>
 
-        <!-- การ์ด 5: ผลงานและกิจกรรม -->
-        <section class="card" id="activities">
-            <h2 class="section-title"><i class="fa-solid fa-images"></i> ผลงานและกิจกรรม (Activities & Awards)</h2>
-            <div class="gallery-grid">
-                <div class="activity-card" onclick="openModal('MISS B.B. SCIENCE 2024', 'ได้รับรางวัลชนะเลิศการประกวดชุด MISS B.B. SCIENCE 2024 ระดับชั้นมัธยมศึกษาตอนปลาย', '1788760429156.jpg')">
-                    <div class="activity-img-box"><img src="1788760429156.jpg" alt="MISS B.B. SCIENCE 2024"></div>
-                    <div class="activity-body">
-                        <span class="activity-tag">รางวัลชนะเลิศ</span>
-                        <div class="activity-title">การประกวดชุด MISS B.B. SCIENCE 2024 ระดับชั้นมัธยมศึกษาตอนปลาย</div>
-                    </div>
-                </div>
-                <div class="activity-card" onclick="openModal('การแข่งขันอัจฉริยภาพทางคณิตศาสตร์', 'เข้าร่วมการแข่งขันอัจฉริยภาพทางคณิตศาสตร์ ระดับชั้นมัธยมศึกษาตอนปลาย', '1788760428894.jpg')">
-                    <div class="activity-img-box"><img src="1788760428894.jpg" alt="อัจฉริยภาพทางคณิตศาสตร์"></div>
-                    <div class="activity-body">
-                        <span class="activity-tag">การแข่งขันวิชาการ</span>
-                        <div class="activity-title">เข้าร่วมการแข่งขันอัจฉริยภาพทางคณิตศาสตร์ ระดับมัธยมศึกษาตอนปลาย</div>
-                    </div>
-                </div>
-                <div class="activity-card" onclick="openModal('กิจกรรมอบรมค่ายคุณธรรม (ภาพที่ 1)', 'เข้าร่วมกิจกรรมอบรมค่ายคุณธรรม จริยธรรมนักเรียน', '1788789154644.jpg')">
-                    <div class="activity-img-box"><img src="1788789154644.jpg" alt="ค่ายคุณธรรม 1"></div>
-                    <div class="activity-body">
-                        <span class="activity-tag">กิจกรรมค่าย</span>
-                        <div class="activity-title">เข้าร่วมกิจกรรมอบรมค่ายคุณธรรม จริยธรรมนักเรียน (ภาพที่ 1)</div>
-                    </div>
-                </div>
-                <div class="activity-card" onclick="openModal('กิจกรรมอบรมค่ายคุณธรรม (ภาพที่ 2)', 'เข้าร่วมกิจกรรมอบรมค่ายคุณธรรม จริยธรรมนักเรียน', '1788789154226.jpg')">
-                    <div class="activity-img-box"><img src="1788789154226.jpg" alt="ค่ายคุณธรรม 2"></div>
-                    <div class="activity-body">
-                        <span class="activity-tag">กิจกรรมค่าย</span>
-                        <div class="activity-title">เข้าร่วมกิจกรรมอบรมค่ายคุณธรรม จริยธรรมนักเรียน (ภาพที่ 2)</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Modal Pop-up รูปภาพ -->
-    <div class="modal" id="previewModal" onclick="if(event.target === this) closeModal()">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-            <img id="modalImg" class="modal-img" src="" alt="Preview">
-            <div class="modal-body">
-                <h3 id="modalTitle" style="color: var(--text-primary); font-size: 1.2rem; margin-bottom: 0.4rem;">Title</h3>
-                <p id="modalDesc" style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Description text...</p>
-            </div>
+            <a href="activities.html" class="menu-card">
+                <div class="menu-icon"><i class="fa-solid fa-images"></i></div>
+                <div class="menu-title">ผลงาน & กิจกรรม</div>
+                <div class="menu-desc">การแข่งขัน เกียรติบัตร และกิจกรรมเข้าร่วมต่าง ๆ</div>
+                <i class="fa-solid fa-chevron-right menu-arrow"></i>
+            </a>
         </div>
     </div>
 
     <footer>© SIRANATA PHOLTHEKONG — ALL RIGHTS RESERVED</footer>
-
-    <script>
-        // GPA Counter Animation
-        window.addEventListener('load', () => {
-            const gpaTarget = 3.85;
-            const gpaElement = document.getElementById('gpaText');
-            let currentGpa = 0.0;
-            const duration = 1500;
-            const startTime = performance.now();
-
-            function updateGPA(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                currentGpa = progress * gpaTarget;
-                gpaElement.textContent = currentGpa.toFixed(2);
-                if (progress < 1) requestAnimationFrame(updateGPA);
-            }
-            requestAnimationFrame(updateGPA);
-
-            // Skills Bar Fill
-            const fills = document.querySelectorAll('.progress-fill');
-            fills.forEach(fill => {
-                const target = fill.getAttribute('data-progress');
-                fill.style.width = target;
-            });
-        });
-
-        // Modal Functionality
-        function openModal(title, desc, imgSrc) {
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalDesc').textContent = desc;
-            document.getElementById('modalImg').src = imgSrc;
-            document.getElementById('previewModal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('previewModal').classList.remove('active');
-        }
-
-        // Background Particles
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-        const particles = [];
-        for (let i = 0; i < 40; i++) {
-            particles.push({
-                x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-                radius: Math.random() * 2 + 0.5, dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.4,
-                opacity: Math.random() * 0.6 + 0.2
-            });
-        }
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(222, 92, 142, ${p.opacity})`; ctx.fill();
-                p.x += p.dx; p.y += p.dy;
-                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-    </script>
 </body>
 </html>
