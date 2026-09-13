@@ -3,67 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Menu - Siranata Pholthekong</title>
+    <title>เมนูหลัก - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="ambient-glow"></div>
+    <canvas id="particleCanvas"></canvas>
 
-    <header>
+    <header class="main-header">
         <a href="index.html" class="logo">PORTFOLIO</a>
-        <a href="index.html" class="btn-back"><i class="fa-solid fa-house"></i> หน้าแรก</a>
     </header>
 
-    <div class="container">
-        <!-- ส่วนหัวแสดงรูปและชื่อ -->
-        <div style="text-align: center; margin-bottom: 3rem;">
-            <div class="profile-img-box" style="margin: 0 auto 1.5rem auto;">
+    <main class="container">
+        <!-- โปรไฟล์ -->
+        <div class="profile-header-box fade-in">
+            <div class="profile-avatar-wrapper">
                 <img src="1788760432866.jpg" alt="นางสาวศิรณตา พลเทกอง">
             </div>
-            <h1 style="font-size: 2.2rem; font-weight: 700;">นางสาวศิรณตา พลเทกอง</h1>
-            <p style="color: var(--chula-pink); font-size: 1.05rem; margin-top: 0.4rem;">โรงเรียนบ้านบึง “อุตสาหกรรมนุเคราะห์”</p>
+            <h1 class="profile-name">นางสาวศิรณตา พลเทกอง</h1>
+            <p class="profile-sub">โรงเรียนบ้านบึง “อุตสาหกรรมนุเคราะห์”</p>
         </div>
 
-        <!-- การ์ดเมนู 5 ใบสำหรับคลิกเข้าไปหน้าย่อยต่างๆ -->
-        <div class="menu-grid">
+        <!-- การ์ดเมนูไปยังหน้าย่อยต่างๆ -->
+        <div class="menu-grid fade-in">
             <a href="profile.html" class="menu-card">
                 <div class="menu-icon"><i class="fa-solid fa-address-card"></i></div>
-                <div class="menu-title">ประวัติส่วนตัว</div>
-                <div class="menu-desc">ข้อมูลทั่วไป วันเกิด งานอดิเรก และช่องทางการติดต่อ</div>
-                <i class="fa-solid fa-chevron-right menu-arrow"></i>
+                <h3 class="menu-title">ประวัติส่วนตัว</h3>
+                <p class="menu-desc">Personal Profile & Contact Information</p>
+                <div class="menu-arrow"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
             <a href="education.html" class="menu-card">
                 <div class="menu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                <div class="menu-title">ประวัติการศึกษา</div>
-                <div class="menu-desc">ระดับชั้น สายการเรียน และผลการเรียนเฉลี่ยสะสม (GPAX)</div>
-                <i class="fa-solid fa-chevron-right menu-arrow"></i>
+                <h3 class="menu-title">ประวัติการศึกษา</h3>
+                <p class="menu-desc">Education History & Academic GPAX</p>
+                <div class="menu-arrow"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
-            <a href="target.html" class="menu-card">
+            <a href="target.html" class="menu-card highlight-card">
                 <div class="menu-icon"><i class="fa-solid fa-bullseye"></i></div>
-                <div class="menu-title">เป้าหมายการศึกษา</div>
-                <div class="menu-desc">คณะและมหาวิทยาลัยที่ต้องการเข้าศึกษาต่อพร้อมเหตุผล</div>
-                <i class="fa-solid fa-chevron-right menu-arrow"></i>
+                <h3 class="menu-title">เป้าหมายการศึกษาต่อ</h3>
+                <p class="menu-desc">Chulalongkorn University Targets</p>
+                <div class="menu-arrow"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
             <a href="skills.html" class="menu-card">
                 <div class="menu-icon"><i class="fa-solid fa-star"></i></div>
-                <div class="menu-title">ทักษะและความสามารถ</div>
-                <div class="menu-desc">ทักษะทางวิชาการ ภาษา ภาวะผู้นำ และความคิดสร้างสรรค์</div>
-                <i class="fa-solid fa-chevron-right menu-arrow"></i>
+                <h3 class="menu-title">ทักษะและความสามารถ</h3>
+                <p class="menu-desc">Skills, Leadership & Abilities</p>
+                <div class="menu-arrow"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
             <a href="activities.html" class="menu-card">
                 <div class="menu-icon"><i class="fa-solid fa-images"></i></div>
-                <div class="menu-title">ผลงาน & กิจกรรม</div>
-                <div class="menu-desc">การแข่งขัน เกียรติบัตร และกิจกรรมเข้าร่วมต่าง ๆ</div>
-                <i class="fa-solid fa-chevron-right menu-arrow"></i>
+                <h3 class="menu-title">ผลงานและกิจกรรม</h3>
+                <p class="menu-desc">Awards, Certificates & Activities Gallery</p>
+                <div class="menu-arrow"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
         </div>
-    </div>
+    </main>
 
     <footer>© SIRANATA PHOLTHEKONG — ALL RIGHTS RESERVED</footer>
+
+    <script src="script-bg.js"></script>
 </body>
 </html>
